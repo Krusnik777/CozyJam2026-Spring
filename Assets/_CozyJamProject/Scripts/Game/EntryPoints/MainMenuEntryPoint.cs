@@ -1,12 +1,19 @@
+using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.EntryPoints
 {
     public class MainMenuEntryPoint : EntryPoint
     {
-        public override void Run()
+        private Subject<string> _onEnd;
+
+        public override Observable<string> Run()
         {
             Debug.Log("ENTRY POINT: Main Menu");
+
+            _onEnd = new();
+
+            return _onEnd;
         }
     }
 }

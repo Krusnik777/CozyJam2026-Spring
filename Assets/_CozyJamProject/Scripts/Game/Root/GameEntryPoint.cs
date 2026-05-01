@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using CozySpringJam.Utils;
 using CozySpringJam.Game.EntryPoints;
+using R3;
 
 namespace CozySpringJam.Game.Root
 {
@@ -73,7 +74,17 @@ namespace CozySpringJam.Game.Root
             // Loading Saves for scene if has
 
             var sceneEntryPoint = Object.FindFirstObjectByType<EntryPoint>();
-            sceneEntryPoint.Run(/*Some Params*//*And Exit Func*/);
+            sceneEntryPoint.Run(/*Some Params*/).Subscribe(exitTag =>
+            {
+                if (exitTag == "FINISH")
+                {
+                    //Application.Quit();
+                    _coroutines.StartCoroutine(LoadAndStartGameplay());
+                    return;
+                }
+
+                _coroutines.StartCoroutine(LoadAndStartMainMenu());
+            });
 
             //_uiRoot.HideLoadingScreen();
         }
@@ -91,7 +102,11 @@ namespace CozySpringJam.Game.Root
             // Loading Saves for scene if has and is needed
 
             var sceneEntryPoint = Object.FindFirstObjectByType<EntryPoint>();
-            sceneEntryPoint.Run(/*Some Params*//*And Exit Func*/);
+            sceneEntryPoint.Run(/*Some Params*/).Subscribe(exitTag =>
+            {
+                if (exitTag == Scenes.GAMEPLAY) _coroutines.StartCoroutine(LoadAndStartGameplay());
+                //else Application.Quit();
+            });
 
             //_uiRoot.HideLoadingScreen();
         }

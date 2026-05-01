@@ -1,9 +1,10 @@
+using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.EntryPoints
 {
     public abstract class EntryPoint : MonoBehaviour
     {
-        public abstract void Run(/*Some Params*//*And Exit Func*/);
+        public abstract Observable<string> Run(/*Some Params*/);
     }
 }

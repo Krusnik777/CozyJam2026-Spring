@@ -14,6 +14,8 @@ namespace CozySpringJam.Game.Player
         private Vector3 directionControl;
         public Vector3 DirectionControl => directionControl;
 
+        public void SetIsometricMovement(bool isIsometric) => m_doIsometricMovement = isIsometric;
+
         public void SetMoveDirection(Vector3 moveDirection)
         {
             directionControl = moveDirection;
