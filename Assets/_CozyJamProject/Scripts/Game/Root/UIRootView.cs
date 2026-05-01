@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CozySpringJam.UI;
+using UnityEngine;
 
 namespace CozySpringJam.Game.Root
 {
@@ -6,6 +7,7 @@ namespace CozySpringJam.Game.Root
     {
         [SerializeField] private GameObject _loadingScreen;
         [SerializeField] private Transform _uiSceneContainer;
+        [field: SerializeField] public UIMessagePanelView UIMessagePanelView { get; private set; }
 
         private void Awake()
         {

@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using CozySpringJam.Utils;
 using CozySpringJam.Game.EntryPoints;
 using R3;
+using DI;
+using CozySpringJam.Game.Services;
 
 namespace CozySpringJam.Game.Root
 {
@@ -13,6 +15,9 @@ namespace CozySpringJam.Game.Root
 
         private Coroutines _coroutines;
         private UIRootView _uiRoot;
+
+        private readonly DIContainer _rootContainer = new();
+        private DIContainer _cachedSceneContainer;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void AutostartGame()
@@ -32,6 +37,10 @@ namespace CozySpringJam.Game.Root
             var prefabUIRoot = Resources.Load<UIRootView>("UIRoot");
             _uiRoot = Object.Instantiate(prefabUIRoot);
             Object.DontDestroyOnLoad(_uiRoot.gameObject);
+            _rootContainer.RegisterInstance(_uiRoot);
+
+            var messageService = new MessageService(_uiRoot.UIMessagePanelView);
+            _rootContainer.RegisterInstance(messageService);
         }
 
         private /*async*/ void RunGame()
@@ -69,7 +78,7 @@ namespace CozySpringJam.Game.Root
         private IEnumerator LoadAndStartGameplay(/*GameplayEnterParams enterParams*/)
         {
             _uiRoot.ShowLoadingScreen();
-            //_cachedSceneContainer?.Dispose(); // Or any other cleanup
+            _cachedSceneContainer?.Dispose(); // Or any other cleanup
 
             yield return LoadScene(Scenes.BOOTSTRAP);
             yield return LoadScene(Scenes.GAMEPLAY);
@@ -79,7 +88,8 @@ namespace CozySpringJam.Game.Root
             // Loading Saves for scene if has any
 
             var sceneEntryPoint = Object.FindFirstObjectByType<EntryPoint>();
-            sceneEntryPoint.Run(_uiRoot).Subscribe(exitTag =>
+            var sceneContainer = _cachedSceneContainer = new DIContainer(_rootContainer);
+            sceneEntryPoint.Run(sceneContainer).Subscribe(exitTag =>
             {
                 if (exitTag == "FINISH")
                 {
@@ -97,7 +107,7 @@ namespace CozySpringJam.Game.Root
         private IEnumerator LoadAndStartMainMenu(/*MainMenuEnterParams enterParams = null*/)
         {
             _uiRoot.ShowLoadingScreen();
-            //_cachedSceneContainer?.Dispose();
+            _cachedSceneContainer?.Dispose();
 
             yield return LoadScene(Scenes.BOOTSTRAP);
             yield return LoadScene(Scenes.MAIN_MENU);
@@ -107,7 +117,8 @@ namespace CozySpringJam.Game.Root
             // Loading Saves for scene if has any and is needed
 
             var sceneEntryPoint = Object.FindFirstObjectByType<EntryPoint>();
-            sceneEntryPoint.Run(_uiRoot).Subscribe(exitTag =>
+            var sceneContainer = _cachedSceneContainer = new DIContainer(_rootContainer);
+            sceneEntryPoint.Run(sceneContainer).Subscribe(exitTag =>
             {
                 if (exitTag == Scenes.GAMEPLAY) _coroutines.StartCoroutine(LoadAndStartGameplay());
                 //else Application.Quit();

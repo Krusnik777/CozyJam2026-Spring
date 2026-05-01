@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CozySpringJam.Game.Services;
 using R3;
 
 namespace CozySpringJam.Game.GameCycle
@@ -9,6 +10,7 @@ namespace CozySpringJam.Game.GameCycle
         public Subject<Unit> OnFinish = new();
         
         private readonly GameCycleControllerView _view;
+        private readonly MessageService _messageService;
 
         private Dictionary<int, PuzzleZone> _puzzleZonesMap;
 
@@ -23,9 +25,10 @@ namespace CozySpringJam.Game.GameCycle
         public Subject<Unit> HideSignal => _picturesHideSignal;
         private  Subject<Unit> _picturesHideSignal = new();
 
-        public GameCycleController(GameCycleControllerView view)
+        public GameCycleController(GameCycleControllerView view, MessageService messageService)
         {
             _view = view;
+            _messageService = messageService;
 
             Init();
         }
@@ -97,7 +100,7 @@ namespace CozySpringJam.Game.GameCycle
                 {
                     _puzzleZoneListenerDisposables?.Dispose();
 
-                    // Message "Now time to rest"
+                    _messageService.ShowMessage(new("started_final_segment", "Now Time to Rest..."));
 
                     _finalSegmentDisposable = _view.FinalEnterTrigger.OnEnter.Subscribe(_ => OnFinalSegmentEnd());
                 }

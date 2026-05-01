@@ -1,6 +1,8 @@
 using CozySpringJam.Game.GameCycle;
 using CozySpringJam.Game.Root;
+using CozySpringJam.Game.Services;
 using CozySpringJam.UI;
+using DI;
 using R3;
 using UnityEngine;
 
@@ -17,15 +19,16 @@ namespace CozySpringJam.Game.EntryPoints
 
         private System.IDisposable _gameCycleFinishListener;
 
-        public override Observable<string> Run(UIRootView uiRoot)
+        public override Observable<string> Run(DIContainer sceneContainer)
         {
             Debug.Log("ENTRY POINT: Started Gameplay");
 
-            var uiScene = Instantiate(m_sceneUIRootPrefab);
-            uiRoot.AttachSceneUI(uiScene.gameObject);
+            var uiRoot = sceneContainer.Resolve<UIRootView>();
+            var uiSceneRoot = Instantiate(m_sceneUIRootPrefab);
+            uiRoot.AttachSceneUI(uiSceneRoot.gameObject);
 
-            _gameCycleController = new GameCycleController(m_gameCycleControllerView);
-            uiScene.Construct(_gameCycleController);
+            _gameCycleController = new GameCycleController(m_gameCycleControllerView, sceneContainer.Resolve<MessageService>());
+            uiSceneRoot.Construct(_gameCycleController);
 
             _onEnd = new();
 
