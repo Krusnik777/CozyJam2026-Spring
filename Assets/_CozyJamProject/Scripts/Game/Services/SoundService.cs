@@ -33,6 +33,10 @@ namespace CozySpringJam.Game.Services
             int step = Random.Range(1, 5);
             Play($"Footstep_{step}");
         }
+        public void PlaySadMeow()
+        {
+            Play($"SadMeow");
+        }
         
         public void PlayMoveObject()
         {

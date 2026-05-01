@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.SO.ParticleCollections
   particles:
   - type: 0
-    prefab: {fileID: 0}
+    prefab: {fileID: 6826670075753951476, guid: 65405ede60dba61409466a4338f12a9e, type: 3}
+  - type: 1
+    prefab: {fileID: 6826670075753951476, guid: 1004647a36917ce49ba8cdca2688f7b9, type: 3}

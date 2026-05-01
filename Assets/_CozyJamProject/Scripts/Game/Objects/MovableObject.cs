@@ -1,4 +1,5 @@
 using CozySpringJam.Game.Services;
+using CozySpringJam.Game.SO;
 using DG.Tweening;
 using R3;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace CozySpringJam.Game.Objects
         private float _baseScale;
         private Vector3 _direction = Vector3.zero;
         private bool _isMoving = false;
+        private bool _isFailedMoving = false;
         private CompositeDisposable  _disposables = new();
 
         private void Start()
@@ -27,21 +29,25 @@ namespace CozySpringJam.Game.Objects
             {
                 ChangeDirectionMove(new Vector2(2, 0));
                 Interact();
+                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _leftTrigger.transform.position + new Vector3(2, -0.35f, 0), Quaternion.identity);
             }));
             _disposables.Add(_rightTrigger.OnEnter.Subscribe(_ =>
             {
                 ChangeDirectionMove(new Vector2(-2, 0));
                 Interact();
+                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _rightTrigger.transform.position + new Vector3(-2, -0.35f, 0), Quaternion.identity);
             }));
             _disposables.Add(_upTrigger.OnEnter.Subscribe(_ =>
             {
                 ChangeDirectionMove(new Vector2(0, -2));
                 Interact();
+                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _upTrigger.transform.position + new Vector3(0, -0.35f, -2), Quaternion.identity);
             }));
             _disposables.Add(_downTrigger.OnEnter.Subscribe(_ =>
             {
                 ChangeDirectionMove(new Vector2(0, 2));
                 Interact();
+                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _downTrigger.transform.position + new Vector3(0, -0.35f, 2), Quaternion.identity);
             }));
             
             _baseScale = transform.localScale.x;
@@ -49,8 +55,10 @@ namespace CozySpringJam.Game.Objects
         
         public void Interact()
         {
-            if(TryMoveToDirection())
+            if (TryMoveToDirection())
                 Move();
+            else
+                FailedMove();
         }
         
         private void ChangeDirectionMove(Vector2 direction)
@@ -88,10 +96,18 @@ namespace CozySpringJam.Game.Objects
             transform.DOMove(targetPosition, _moveDuration).SetEase(Ease.InFlash).OnComplete(FinishMove);
             MoveAnimation();
         }
+
+        private void FailedMove()
+        {
+            if(_isFailedMoving) return;
+            _isFailedMoving = true;
+            FailedMoveAnimation();
+            SoundService.Instance.PlaySadMeow();
+        }
         
         private void MoveAnimation()
         {
-            var seq = DOTween.Sequence();
+            var seq = DOTween.Sequence().SetLink(gameObject);
             if (_direction.x != 0)
             {
                 seq.Append(transform.DOScaleX(_scalePowerAnimation, _moveDuration / 2)
@@ -124,6 +140,45 @@ namespace CozySpringJam.Game.Objects
                 seq.Join(transform.DOScaleX(_baseScale, _moveDuration / 2)
                     .SetEase(Ease.OutQuad));
             }
+        }
+
+        private void FailedMoveAnimation()
+        {
+            var seq = DOTween.Sequence().SetLink(gameObject);
+            if (_direction.x != 0)
+            {
+                seq.Append(transform.DOScaleZ(_scalePowerAnimation, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                seq.Join(transform.DOScaleY(_scalePowerAnimation, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                seq.Join(transform.DOScaleX(_baseScale - (_scalePowerAnimation - _baseScale), _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                
+                seq.Append(transform.DOScaleZ(_baseScale, _moveDuration / 2)
+                    .SetEase(Ease.InQuad));
+                seq.Join(transform.DOScaleY(_baseScale, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                seq.Join(transform.DOScaleX(_baseScale, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+            }
+            else
+            {
+                
+                seq.Append(transform.DOScaleX(_scalePowerAnimation, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                seq.Join(transform.DOScaleY(_scalePowerAnimation, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                seq.Join(transform.DOScaleZ(_baseScale - (_scalePowerAnimation - _baseScale), _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                
+                seq.Append(transform.DOScaleX(_baseScale, _moveDuration / 2)
+                    .SetEase(Ease.InQuad));
+                seq.Join(transform.DOScaleY(_baseScale, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+                seq.Join(transform.DOScaleZ(_baseScale, _moveDuration / 2)
+                    .SetEase(Ease.OutQuad));
+            }
+            seq.OnComplete((() => _isFailedMoving = false));
         }
         
         private void FinishMove()

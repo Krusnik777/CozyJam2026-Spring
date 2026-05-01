@@ -37,6 +37,7 @@ namespace CozySpringJam.Game.SO
     
     public enum ParticleType
     {
-        Dust = 0,
+        StepDust = 0,
+        BoxDust = 1,
     }
 }
