@@ -1,4 +1,3 @@
-using CozySpringJam.Game.Services;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Player
@@ -20,11 +19,6 @@ namespace CozySpringJam.Game.Player
         public void Interact()
         {
             m_animator.SetTrigger(_OnInteract);
-        }
-
-        public void OnStep()
-        {
-            SoundService.Instance.PlayFootstep();
         }
     }
 }

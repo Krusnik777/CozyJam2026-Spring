@@ -17,7 +17,7 @@ namespace CozySpringJam.UI
             _disposables?.Dispose();
         }
 
-        public void Setup(IUIScreenInfluencer<PicturesScreenSettings> screenInfluencer)
+        public void Setup(IUIScreenInfluencer<PicturesScreenSettings, Unit> screenInfluencer)
         {
             _disposables = new();
 
@@ -44,6 +44,5 @@ namespace CozySpringJam.UI
             m_upperPictureView.Hide();
             m_lowerPictureView.Hide();
         }
-
     }
 }

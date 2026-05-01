@@ -46,13 +46,18 @@ namespace CozySpringJam.Game.Root
             
             ParticleCollections collections = Resources.Load<ParticleCollections>("ParticleCollection");
             ParticleService particleService = new ParticleService(collections);
+            _rootContainer.RegisterInstance(particleService);
 
             AudioSource audioSource = _coroutines.AddComponent<AudioSource>();
             AudioSource backgroundMusic = new GameObject("[BACKGROUND_MUSIC]").AddComponent<AudioSource>();
             Object.DontDestroyOnLoad(backgroundMusic);
-            SoundService soundService = new SoundService(audioSource, backgroundMusic);
             
-            soundService.PlayBackgroundMusic();
+            SoundService soundService = new SoundService(audioSource, backgroundMusic);
+            _rootContainer.RegisterInstance(soundService);
+
+            var cutscenesScreenSettings = Resources.Load<CutscenesScreenSettings>("CutscenesScreenSettings");
+            var cutsceneService = new CutsceneService(cutscenesScreenSettings);
+            _rootContainer.RegisterInstance(cutsceneService);
         }
 
         private /*async*/ void RunGame()
@@ -90,7 +95,7 @@ namespace CozySpringJam.Game.Root
         private IEnumerator LoadAndStartGameplay(/*GameplayEnterParams enterParams*/)
         {
             _uiRoot.ShowLoadingScreen();
-            _cachedSceneContainer?.Dispose(); // Or any other cleanup
+            _cachedSceneContainer?.Dispose();
 
             yield return LoadScene(Scenes.BOOTSTRAP);
             yield return LoadScene(Scenes.GAMEPLAY);

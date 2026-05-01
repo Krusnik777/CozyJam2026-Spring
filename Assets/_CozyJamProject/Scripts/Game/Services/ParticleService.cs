@@ -12,12 +12,9 @@ namespace CozySpringJam.Game.Services
         private Dictionary<ParticleType, Transform> _particlePrefabs = new Dictionary<ParticleType, Transform>();
         private readonly HashSet<Transform> _activeParticles = new(1000);
         private ParticleCollections _particleCollections;
-        public static ParticleService Instance { get; private set; }
 
         public ParticleService(ParticleCollections particleCollections)
-        {
-            Instance = this;
-            
+        {           
             _particleCollections = particleCollections;
             
             _particlePrefabs.Clear();

@@ -16,6 +16,8 @@ namespace CozySpringJam.Game.Player
 
         public void SetIsometricMovement(bool isIsometric) => m_doIsometricMovement = isIsometric;
 
+        public void Reset() => m_characterController.Move(Vector3.zero);
+
         public void SetMoveDirection(Vector3 moveDirection)
         {
             directionControl = moveDirection;

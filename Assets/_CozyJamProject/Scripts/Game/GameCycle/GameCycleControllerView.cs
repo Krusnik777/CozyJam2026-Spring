@@ -11,13 +11,15 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public PlayerAvatarAnimator PlayerAnimator { get; private set; } 
         [field: SerializeField] public PlayerAvatarInput PlayerInput { get; private set; } 
         [field: SerializeField] public PlayerAvatarMovement PlayerMovement { get; private set; } 
+        [field: SerializeField] public EventCollector EventCollector { get; private set; } 
         [field: Header("Camera")]
         [field: SerializeField] public Transform PlayerCameraTransform { get; private set; } 
+        [field: Header("Start Segment")]
+        [field: SerializeField] public CutsceneSettings EntryCutsceneSettings { get; private set; } 
         [field: Header("Puzzle Zones")]
         [field: SerializeField] public PuzzleZoneView[] PuzzleZones { get; private set; }  
-        // First Cutscene
         [field: Header("Final Segment")]
         [field: SerializeField] public EnterTrigger FinalEnterTrigger { get; private set; }
-        // Final Cutscene
+        [field: SerializeField] public CutsceneSettings FinalCutsceneSettings { get; private set; } 
     }
 }

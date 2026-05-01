@@ -25,10 +25,11 @@ namespace CozySpringJam.Game.Objects
         private float _baseScale;
         private Vector3 _direction = Vector3.zero;
         private bool _isMoving = false;
+        private bool _isFailedMoving = false;
 
         private MovableObjectData _bindedMovableObjectData;
 
-        private bool _isFailedMoving = false;
+        private SoundService _soundService;
 
         private CompositeDisposable _disposables = new();
 
@@ -58,31 +59,33 @@ namespace CozySpringJam.Game.Objects
             return _bindedMovableObjectData;
         }
 
-        private void Start()
+        public void Initialize(ParticleService particleService, SoundService soundService)
         {
+            _soundService = soundService;
+
             _disposables.Add(_leftTrigger.OnEnter.Subscribe(_ =>
             {
                 ChangeDirectionMove(new Vector2(2, 0));
                 Interact();
-                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _leftTrigger.transform.position + new Vector3(2, -0.35f, 0), Quaternion.identity);
+                particleService.PlayParticle(ParticleType.BoxDust, _leftTrigger.transform.position + new Vector3(2, -0.35f, 0), Quaternion.identity);
             }));
             _disposables.Add(_rightTrigger.OnEnter.Subscribe(_ =>
             {
                 ChangeDirectionMove(new Vector2(-2, 0));
                 Interact();
-                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _rightTrigger.transform.position + new Vector3(-2, -0.35f, 0), Quaternion.identity);
+                particleService.PlayParticle(ParticleType.BoxDust, _rightTrigger.transform.position + new Vector3(-2, -0.35f, 0), Quaternion.identity);
             }));
             _disposables.Add(_upTrigger.OnEnter.Subscribe(_ =>
             {
                 ChangeDirectionMove(new Vector2(0, -2));
                 Interact();
-                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _upTrigger.transform.position + new Vector3(0, -0.35f, -2), Quaternion.identity);
+                particleService.PlayParticle(ParticleType.BoxDust, _upTrigger.transform.position + new Vector3(0, -0.35f, -2), Quaternion.identity);
             }));
             _disposables.Add(_downTrigger.OnEnter.Subscribe(_ =>
             {
                 ChangeDirectionMove(new Vector2(0, 2));
                 Interact();
-                ParticleService.Instance.PlayParticle(ParticleType.BoxDust, _downTrigger.transform.position + new Vector3(0, -0.35f, 2), Quaternion.identity);
+                particleService.PlayParticle(ParticleType.BoxDust, _downTrigger.transform.position + new Vector3(0, -0.35f, 2), Quaternion.identity);
             }));
 
             _baseScale = transform.localScale.x;
@@ -133,7 +136,7 @@ namespace CozySpringJam.Game.Objects
         {
             _isMoving = true;
             Vector3 targetPosition = transform.position + _direction;
-            SoundService.Instance.PlayMoveObject();
+            _soundService.PlayMoveObject();
             transform.DOMove(targetPosition, _moveDuration).SetEase(Ease.InFlash).OnComplete(FinishMove);
             MoveAnimation();
         }
@@ -143,7 +146,7 @@ namespace CozySpringJam.Game.Objects
             if(_isFailedMoving) return;
             _isFailedMoving = true;
             FailedMoveAnimation();
-            SoundService.Instance.PlaySadMeow();
+            _soundService.PlaySadMeow();
         }
 
         private void MoveAnimation()

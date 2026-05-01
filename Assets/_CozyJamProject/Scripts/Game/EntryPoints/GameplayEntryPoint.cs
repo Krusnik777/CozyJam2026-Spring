@@ -27,8 +27,10 @@ namespace CozySpringJam.Game.EntryPoints
             var uiSceneRoot = Instantiate(m_sceneUIRootPrefab);
             uiRoot.AttachSceneUI(uiSceneRoot.gameObject);
 
-            _gameCycleController = new GameCycleController(m_gameCycleControllerView, sceneContainer.Resolve<MessageService>());
-            uiSceneRoot.Construct(_gameCycleController);
+            uiSceneRoot.BindScreen(sceneContainer.Resolve<CutsceneService>());
+
+            _gameCycleController = new GameCycleController(sceneContainer, m_gameCycleControllerView);
+            uiSceneRoot.BindScreen(_gameCycleController);
 
             _onEnd = new();
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CozySpringJam.Game.Objects;
+using CozySpringJam.Game.Services;
 using R3;
 using UnityEngine;
 
@@ -19,12 +20,12 @@ namespace CozySpringJam.Game.GameCycle
 
         private CompositeDisposable _disposables;
 
-        public PuzzleZone(int id, PuzzleZoneView view)
+        public PuzzleZone(int id, PuzzleZoneView view, SoundService soundService, ParticleService particleService)
         {
             _uniqueId = id;
             _view = view;
 
-            Init();
+            Init(soundService, particleService);
         }
 
         public void Dispose()
@@ -32,7 +33,7 @@ namespace CozySpringJam.Game.GameCycle
             _disposables?.Dispose();
         }
 
-        private void Init()
+        private void Init(SoundService soundService, ParticleService particleService)
         {
             _disposables = new();
             _movableObjectsList = new();
@@ -43,6 +44,7 @@ namespace CozySpringJam.Game.GameCycle
             for (int i = 0; i < _view.MovableObjects.Length; i++)
             {
                 var movable = _view.MovableObjects[i];
+                movable.Initialize(particleService, soundService);
                 var data = movable.CreateAndBindData();
                 _movableObjectsList.Add(data);
 

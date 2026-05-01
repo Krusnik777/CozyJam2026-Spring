@@ -325,8 +325,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4275218821554670433, guid: 08feae6ce4b071649922f572c1f2c2f0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 399847828321904924}
   m_SourcePrefab: {fileID: 100100000, guid: 08feae6ce4b071649922f572c1f2c2f0, type: 3}
+--- !u!1 &3787176183384755648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4275218821554670433, guid: 08feae6ce4b071649922f572c1f2c2f0, type: 3}
+  m_PrefabInstance: {fileID: 1142331496416364193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &399847828321904924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3787176183384755648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b4e0fd4fc25cf4fa580dace610483f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Player.EventCollector
 --- !u!4 &4595096591060670330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3467613870366183899, guid: 08feae6ce4b071649922f572c1f2c2f0, type: 3}

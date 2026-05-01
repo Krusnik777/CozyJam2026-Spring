@@ -6,11 +6,9 @@ namespace CozySpringJam.Game.Services
     {
         private readonly AudioSource _audioSource;
         private readonly AudioSource _backgroundSource;
-        public static SoundService Instance { get; private set; }
 
         public SoundService(AudioSource audioSource, AudioSource backgroundSource)
         {
-            Instance = this;
             _audioSource = audioSource;
             _backgroundSource = backgroundSource;
         }
@@ -54,7 +52,7 @@ namespace CozySpringJam.Game.Services
             }
             _backgroundSource.loop = true;
             _backgroundSource.clip = clip;
-            _backgroundSource.volume = 0.1f;
+            _backgroundSource.volume = 0.05f;
             _backgroundSource.Play();
         }
         
