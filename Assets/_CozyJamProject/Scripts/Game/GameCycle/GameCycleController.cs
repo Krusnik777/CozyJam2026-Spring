@@ -4,7 +4,7 @@ using R3;
 
 namespace CozySpringJam.Game.GameCycle
 {
-    public class GameCycleController : IDisposable
+    public class GameCycleController : IDisposable, IUIScreenInfluencer<PicturesScreenSettings>
     {
         public Subject<Unit> OnFinish = new();
         
@@ -16,6 +16,12 @@ namespace CozySpringJam.Game.GameCycle
 
         private IDisposable _finalSegmentDisposable;
         private CompositeDisposable _puzzleZoneListenerDisposables;
+
+        public Subject<PicturesScreenSettings> ShowSignal => _picturesShowSignal;
+        private Subject<PicturesScreenSettings> _picturesShowSignal = new();
+
+        public Subject<Unit> HideSignal => _picturesHideSignal;
+        private  Subject<Unit> _picturesHideSignal = new();
 
         public GameCycleController(GameCycleControllerView view)
         {
@@ -72,6 +78,9 @@ namespace CozySpringJam.Game.GameCycle
             _view.PlayerCameraTransform.gameObject.SetActive(!isEnter);
 
             _view.PlayerMovement.SetIsometricMovement(!isEnter);
+
+            if (isEnter) _picturesShowSignal.OnNext(puzzleZoneView.PicturesScreenSettings);
+            else _picturesHideSignal.OnNext(Unit.Default);
         }
 
         private void HandlePuzzleZoneFinish((int, PuzzleZoneView) puzzleZoneData)

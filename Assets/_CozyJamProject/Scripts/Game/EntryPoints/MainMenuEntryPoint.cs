@@ -1,3 +1,4 @@
+using CozySpringJam.Game.Root;
 using R3;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace CozySpringJam.Game.EntryPoints
     {
         private Subject<string> _onEnd;
 
-        public override Observable<string> Run()
+        public override Observable<string> Run(UIRootView uiRoot)
         {
             Debug.Log("ENTRY POINT: Main Menu");
 

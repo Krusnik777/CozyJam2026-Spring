@@ -11,7 +11,8 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public MovableObjectData[] PuzzleSolution { get; private set; }
         [field: SerializeField] public MovableObject[] MovableObjects { get; private set; }
         [SerializeField] private ChangebleEnvironment m_changeableEnvironment;
-
+        [field: SerializeField] public PicturesScreenSettings PicturesScreenSettings { get; private set; } 
+        
         public void HandleEnvironmentChange(System.Action onEnd = null)
         {
             for (int i = 0; i < m_changeableEnvironment.objectsToEnable.Length; i++)

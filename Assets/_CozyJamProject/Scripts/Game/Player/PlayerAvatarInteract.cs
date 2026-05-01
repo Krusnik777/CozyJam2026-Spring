@@ -6,13 +6,17 @@ namespace CozySpringJam.Game.Player
     public class PlayerAvatarInteract : MonoBehaviour
     {
         [SerializeField] private Transform _view;
+        [SerializeField] private PlayerAvatarAnimator _playerAvatarAnimator;
 
         public void CheckEnvironment()
         {
             if (ShootRay(_view.forward, 2f, out RaycastHit hit))
             {
                 if (hit.collider.TryGetComponent(out IInteractable interactableObject))
+                {
                     interactableObject.Interact();
+                    _playerAvatarAnimator.Interact();
+                } 
             }
         }
 

@@ -12,12 +12,13 @@ namespace CozySpringJam.Game.Root
         private static GameEntryPoint _instance;
 
         private Coroutines _coroutines;
+        private UIRootView _uiRoot;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void AutostartGame()
         {
-            //Application.targetFrameRate = 60;
-            //Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            Application.targetFrameRate = 60;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
             _instance = new GameEntryPoint();
             _instance.RunGame();
@@ -27,6 +28,10 @@ namespace CozySpringJam.Game.Root
         {
             _coroutines = new GameObject("[COROUTINES]").AddComponent<Coroutines>();
             Object.DontDestroyOnLoad(_coroutines.gameObject);
+
+            var prefabUIRoot = Resources.Load<UIRootView>("UIRoot");
+            _uiRoot = Object.Instantiate(prefabUIRoot);
+            Object.DontDestroyOnLoad(_uiRoot.gameObject);
         }
 
         private /*async*/ void RunGame()
@@ -63,7 +68,7 @@ namespace CozySpringJam.Game.Root
 
         private IEnumerator LoadAndStartGameplay(/*GameplayEnterParams enterParams*/)
         {
-            //_uiRoot.ShowLoadingScreen();
+            _uiRoot.ShowLoadingScreen();
             //_cachedSceneContainer?.Dispose(); // Or any other cleanup
 
             yield return LoadScene(Scenes.BOOTSTRAP);
@@ -71,10 +76,10 @@ namespace CozySpringJam.Game.Root
 
             yield return new WaitForSeconds(1);
 
-            // Loading Saves for scene if has
+            // Loading Saves for scene if has any
 
             var sceneEntryPoint = Object.FindFirstObjectByType<EntryPoint>();
-            sceneEntryPoint.Run(/*Some Params*/).Subscribe(exitTag =>
+            sceneEntryPoint.Run(_uiRoot).Subscribe(exitTag =>
             {
                 if (exitTag == "FINISH")
                 {
@@ -86,12 +91,12 @@ namespace CozySpringJam.Game.Root
                 _coroutines.StartCoroutine(LoadAndStartMainMenu());
             });
 
-            //_uiRoot.HideLoadingScreen();
+            _uiRoot.HideLoadingScreen();
         }
 
         private IEnumerator LoadAndStartMainMenu(/*MainMenuEnterParams enterParams = null*/)
         {
-            //_uiRoot.ShowLoadingScreen();
+            _uiRoot.ShowLoadingScreen();
             //_cachedSceneContainer?.Dispose();
 
             yield return LoadScene(Scenes.BOOTSTRAP);
@@ -99,16 +104,16 @@ namespace CozySpringJam.Game.Root
 
             yield return new WaitForSeconds(1);
 
-            // Loading Saves for scene if has and is needed
+            // Loading Saves for scene if has any and is needed
 
             var sceneEntryPoint = Object.FindFirstObjectByType<EntryPoint>();
-            sceneEntryPoint.Run(/*Some Params*/).Subscribe(exitTag =>
+            sceneEntryPoint.Run(_uiRoot).Subscribe(exitTag =>
             {
                 if (exitTag == Scenes.GAMEPLAY) _coroutines.StartCoroutine(LoadAndStartGameplay());
                 //else Application.Quit();
             });
 
-            //_uiRoot.HideLoadingScreen();
+            _uiRoot.HideLoadingScreen();
         }
 
         private IEnumerator LoadScene(string sceneName)

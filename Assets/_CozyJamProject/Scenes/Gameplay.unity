@@ -1691,6 +1691,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1101223439623854849, guid: 98d694e996991314580c45ea3958e1cb, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.LowerPicture
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 1101223439623854849, guid: 98d694e996991314580c45ea3958e1cb, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.UpperPicture
+      value: 
+      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 1101223439623854849, guid: 98d694e996991314580c45ea3958e1cb, type: 3}
       propertyPath: <PuzzleSolution>k__BackingField.Array.data[3].Position.x
       value: -4
       objectReference: {fileID: 0}
@@ -2170,6 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4398daad4396504da8d83d3e49ed8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.EntryPoints.GameplayEntryPoint
+  m_sceneUIRootPrefab: {fileID: 5120401183744360906, guid: 093350cab4b53e24a8ed7053368f052c, type: 3}
   m_gameCycleControllerView: {fileID: 2113574394}
 --- !u!4 &2113574393
 Transform:

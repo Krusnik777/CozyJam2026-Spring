@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _view: {fileID: 4595096591060670330}
+  _playerAvatarAnimator: {fileID: 1536929664775954557}
 --- !u!1001 &1142331496416364193
 PrefabInstance:
   m_ObjectHideFlags: 0
