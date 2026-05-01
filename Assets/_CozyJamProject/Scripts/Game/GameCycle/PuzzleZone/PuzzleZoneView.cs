@@ -1,3 +1,4 @@
+using CozySpringJam.Game.Objects;
 using DG.Tweening;
 using UnityEngine;
 

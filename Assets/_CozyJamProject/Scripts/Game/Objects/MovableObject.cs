@@ -1,9 +1,8 @@
-using System;
 using DG.Tweening;
 using R3;
 using UnityEngine;
 
-namespace CozySpringJam
+namespace CozySpringJam.Game.Objects
 {
     public class MovableObject : MonoBehaviour, IInteractable
     {

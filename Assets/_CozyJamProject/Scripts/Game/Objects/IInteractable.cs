@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace CozySpringJam
+namespace CozySpringJam.Game.Objects
 {
     public interface IInteractable
     {

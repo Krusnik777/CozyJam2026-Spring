@@ -1,3 +1,4 @@
+using CozySpringJam.Game.Objects;
 using CozySpringJam.Game.Player;
 using UnityEngine;
 
