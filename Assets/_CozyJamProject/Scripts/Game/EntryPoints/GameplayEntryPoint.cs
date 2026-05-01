@@ -29,14 +29,20 @@ namespace CozySpringJam.Game.EntryPoints
 
         private void OnDestroy()
         {
-            _gameCycleController?.Dispose();
+            DisposeOfListeners();
         }
 
         private void FinishGame()
         {
-            _gameCycleController?.Dispose();
+            DisposeOfListeners();
 
             _onEnd.OnNext("FINISH");
+        }
+
+        private void DisposeOfListeners()
+        {
+            _gameCycleController?.Dispose();
+            _gameCycleFinishListener?.Dispose();
         }
     }
 }

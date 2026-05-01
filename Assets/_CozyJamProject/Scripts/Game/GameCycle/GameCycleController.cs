@@ -35,19 +35,28 @@ namespace CozySpringJam.Game.GameCycle
             _puzzleZoneListenerDisposables = new();
             _puzzleZonesMap = new();
 
+            InitPlayer();
+
             for (int i = 0; i < _view.PuzzleZones.Length; i++)
             {
                 var id = GeneratePuzzleZoneId();
                 var view = _view.PuzzleZones[i];
+                view.ZoneCameraTransform.gameObject.SetActive(false); // just to be safe
                 var puzzleZone = new PuzzleZone(id, view);
                 _puzzleZonesMap.Add(id, puzzleZone);
 
-                puzzleZone.OnEnter.Subscribe(pz => HandlePuzzleZoneInteraction(pz, true)).AddTo(_puzzleZoneListenerDisposables);
-                puzzleZone.OnExit.Subscribe(pz => HandlePuzzleZoneInteraction(pz, false)).AddTo(_puzzleZoneListenerDisposables);
-                puzzleZone.OnFinish.Subscribe(HandlePuzzleZoneFinish).AddTo(_puzzleZoneListenerDisposables);
+                puzzleZone.OnEnter.Subscribe(puzzleZone => HandlePuzzleZoneInteraction(puzzleZone, true)).AddTo(_puzzleZoneListenerDisposables);
+                puzzleZone.OnExit.Subscribe(puzzleZone => HandlePuzzleZoneInteraction(puzzleZone, false)).AddTo(_puzzleZoneListenerDisposables);
+                puzzleZone.OnFinish.Subscribe(puzzleZoneData => HandlePuzzleZoneFinish(puzzleZoneData)).AddTo(_puzzleZoneListenerDisposables);
             }
 
             // Init Cutscene
+        }
+
+        private void InitPlayer()
+        {
+            _view.PlayerInput.enabled = true;
+            _view.PlayerMovement.enabled = true;
         }
 
         private int GeneratePuzzleZoneId()
@@ -65,12 +74,15 @@ namespace CozySpringJam.Game.GameCycle
             _view.PlayerMovement.SetIsometricMovement(!isEnter);
         }
 
-        private void HandlePuzzleZoneFinish(int puzzleZoneId)
+        private void HandlePuzzleZoneFinish((int, PuzzleZoneView) puzzleZoneData)
         {
-            if (_puzzleZonesMap.ContainsKey(puzzleZoneId))
+            if (_puzzleZonesMap.ContainsKey(puzzleZoneData.Item1))
             {
-                _puzzleZonesMap[puzzleZoneId].Dispose();
-                _puzzleZonesMap.Remove(puzzleZoneId);
+                var id = puzzleZoneData.Item1;
+                _puzzleZonesMap[id].Dispose();
+                _puzzleZonesMap.Remove(id);
+
+                HandlePuzzleZoneInteraction(puzzleZoneData.Item2, false);
 
                 if (_puzzleZonesMap.Count == 0)
                 {

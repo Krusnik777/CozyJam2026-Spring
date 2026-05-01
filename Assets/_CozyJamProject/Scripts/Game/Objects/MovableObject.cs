@@ -1,24 +1,56 @@
+using System;
+using CozySpringJam.Game.GameCycle;
 using DG.Tweening;
 using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Objects
 {
-    public class MovableObject : MonoBehaviour, IInteractable
+    public class MovableObject : MonoBehaviour, IInteractable, IDisposable
     {
         [Header("References")]
         [SerializeField] private InteractZone _upTrigger;
         [SerializeField] private InteractZone _rightTrigger;
         [SerializeField] private InteractZone _downTrigger;
         [SerializeField] private InteractZone _leftTrigger;
-        
+
         [Header("Settings")]
         [SerializeField] private float _moveDuration;
         [SerializeField] private float _scalePowerAnimation;
+
+        public Subject<Unit> OnGridPositionChange = new();
+
         private float _baseScale;
         private Vector3 _direction = Vector3.zero;
         private bool _isMoving = false;
-        private CompositeDisposable  _disposables = new();
+
+        private MovableObjectData _bindedMovableObjectData;
+
+        private CompositeDisposable _disposables = new();
+
+        public void Interact()
+        {
+            if (_isMoving) return;
+
+            if (TryMoveToDirection())
+                Move();
+        }
+
+        public void Dispose()
+        {
+            _disposables?.Dispose();
+        }
+
+        public MovableObjectData CreateAndBindData()
+        {
+            _bindedMovableObjectData = new MovableObjectData
+            {
+                MovableObject = this,
+                Position = new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.z)
+            };
+            
+            return _bindedMovableObjectData;
+        }
 
         private void Start()
         {
@@ -42,30 +74,38 @@ namespace CozySpringJam.Game.Objects
                 ChangeDirectionMove(new Vector2(0, 2));
                 Interact();
             }));
-            
+
             _baseScale = transform.localScale.x;
         }
-        
-        public void Interact()
+
+        private void OnDestroy()
         {
-            if(TryMoveToDirection())
-                Move();
+            _disposables.Dispose();
         }
-        
+
+        private void UpdateGridPosition()
+        {
+            if (_bindedMovableObjectData == null) return;
+            _bindedMovableObjectData.Position = new Vector2Int((int) transform.localPosition.x, (int) transform.localPosition.z); 
+
+            OnGridPositionChange.OnNext(Unit.Default);
+        }
+
         private void ChangeDirectionMove(Vector2 direction)
         {
             _direction = new Vector3(direction.x, 0, direction.y);
         }
-        
+
         private bool TryMoveToDirection()
         {
             if (ShootRay(_direction, 1.5f, out RaycastHit hit))
             {
                 return false;
             }
+
             return true;
         }
-        
+
         private bool ShootRay(Vector3 direction, float distance, out RaycastHit hit)
         {
             var origin = transform.position + Vector3.up;
@@ -77,16 +117,16 @@ namespace CozySpringJam.Game.Objects
 
             return Physics.Raycast(ray, out hit, distance, layerMask);
         }
-        
+
         #region Move
         private void Move()
         {
             _isMoving = true;
-            Vector3 targetPosition = transform.position + _direction; 
+            Vector3 targetPosition = transform.position + _direction;
             transform.DOMove(targetPosition, _moveDuration).SetEase(Ease.InFlash).OnComplete(FinishMove);
             MoveAnimation();
         }
-        
+
         private void MoveAnimation()
         {
             var seq = DOTween.Sequence();
@@ -98,7 +138,7 @@ namespace CozySpringJam.Game.Objects
                     .SetEase(Ease.OutQuad));
                 seq.Join(transform.DOScaleZ(_baseScale - (_scalePowerAnimation - _baseScale), _moveDuration / 2)
                     .SetEase(Ease.OutQuad));
-                
+
                 seq.Append(transform.DOScaleX(_baseScale, _moveDuration / 2)
                     .SetEase(Ease.InQuad));
                 seq.Join(transform.DOScaleY(_baseScale, _moveDuration / 2)
@@ -114,7 +154,7 @@ namespace CozySpringJam.Game.Objects
                     .SetEase(Ease.OutQuad));
                 seq.Join(transform.DOScaleX(_baseScale - (_scalePowerAnimation - _baseScale), _moveDuration / 2)
                     .SetEase(Ease.OutQuad));
-                
+
                 seq.Append(transform.DOScaleZ(_baseScale, _moveDuration / 2)
                     .SetEase(Ease.InQuad));
                 seq.Join(transform.DOScaleY(_baseScale, _moveDuration / 2)
@@ -123,18 +163,14 @@ namespace CozySpringJam.Game.Objects
                     .SetEase(Ease.OutQuad));
             }
         }
-        
+
         private void FinishMove()
         {
             _isMoving = false;
+            transform.localPosition = new Vector3(Mathf.Round(transform.localPosition.x), transform.localPosition.y, Mathf.Round(transform.localPosition.z));
+            UpdateGridPosition();
         }
-        
 
         #endregion
-
-        private void OnDestroy()
-        {
-            _disposables.Dispose();
-        }
     }
 }

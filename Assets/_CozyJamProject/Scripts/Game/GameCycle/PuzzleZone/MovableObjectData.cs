@@ -1,11 +1,12 @@
+using CozySpringJam.Game.Objects;
 using UnityEngine;
 
-namespace CozySpringJam
+namespace CozySpringJam.Game.GameCycle
 {
     [System.Serializable]
     public class MovableObjectData
     {
-        public int UniqueId;
+        public MovableObject MovableObject;
         public Vector2Int Position;
     }
 }

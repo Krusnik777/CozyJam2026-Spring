@@ -9,7 +9,7 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public EnterTrigger EnterTrigger { get; private set; }
         [field: SerializeField] public Transform ZoneCameraTransform { get; private set; }
         [field: SerializeField] public MovableObjectData[] PuzzleSolution { get; private set; }
-        // List of MovableObjects;
+        [field: SerializeField] public MovableObject[] MovableObjects { get; private set; }
         [SerializeField] private ChangebleEnvironment m_changeableEnvironment;
 
         public void HandleEnvironmentChange(System.Action onEnd = null)
