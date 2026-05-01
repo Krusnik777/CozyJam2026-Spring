@@ -1,9 +1,8 @@
-using System;
 using DG.Tweening;
 using R3;
 using UnityEngine;
 
-namespace CozySpringJam
+namespace CozySpringJam.Game.Objects
 {
     public class MovableObject : MonoBehaviour, IInteractable
     {
@@ -56,12 +55,11 @@ namespace CozySpringJam
         private void ChangeDirectionMove(Vector2 direction)
         {
             _direction = new Vector3(direction.x, 0, direction.y);
-            Debug.Log(_direction);
         }
         
         private bool TryMoveToDirection()
         {
-            if (ShootRay(_direction, 0.5f, out RaycastHit hit))
+            if (ShootRay(_direction, 1.5f, out RaycastHit hit))
             {
                 return false;
             }
@@ -70,12 +68,14 @@ namespace CozySpringJam
         
         private bool ShootRay(Vector3 direction, float distance, out RaycastHit hit)
         {
-            var origin = transform.position + new Vector3(0,1,0) + direction / 1.9f;
+            var origin = transform.position + Vector3.up;
             Ray ray = new Ray(origin, direction.normalized);
 
             Debug.DrawRay(origin, direction.normalized * distance, Color.red, 1f);
 
-            return Physics.Raycast(ray, out hit, distance);
+            int layerMask = ~(1 << 7);
+
+            return Physics.Raycast(ray, out hit, distance, layerMask);
         }
         
         #region Move

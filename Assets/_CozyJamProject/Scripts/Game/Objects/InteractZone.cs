@@ -1,7 +1,7 @@
 using R3;
 using UnityEngine;
 
-namespace CozySpringJam
+namespace CozySpringJam.Game.Objects
 {
     public class InteractZone : MonoBehaviour, IInteractable
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CozySpringJam
+namespace CozySpringJam.Game.Player
 {
     public class PlayerAvatarInteract : MonoBehaviour
     {
