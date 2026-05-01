@@ -5,6 +5,7 @@ namespace CozySpringJam.Game.Player
     public class PlayerAvatarAnimator : MonoBehaviour
     {
         private const string _IsMoving = "IsMoving";
+        private const string _OnInteract = "OnInteract";
         private const float _MovementThreshold = 0.05f;
 
         [SerializeField] private CharacterController m_characterController;
@@ -13,6 +14,11 @@ namespace CozySpringJam.Game.Player
         private void Update()
         {
             m_animator.SetBool(_IsMoving, m_characterController.velocity.magnitude >= _MovementThreshold);
+        }
+
+        public void Interact()
+        {
+            m_animator.SetTrigger(_OnInteract);
         }
     }
 }
