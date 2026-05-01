@@ -18,12 +18,14 @@ namespace CozySpringJam.Game.Player
 
         private bool ShootRay(Vector3 direction, float distance, out RaycastHit hit)
         {
-            var origin = transform.position + new Vector3(0, 1, 0);
+            var origin = transform.position + Vector3.up;
             Ray ray = new Ray(origin, direction.normalized);
 
             Debug.DrawRay(origin, direction.normalized * distance, Color.red, 1f);
 
-            return Physics.Raycast(ray, out hit, distance);
+            int layerMask = 1 << 7;
+
+            return Physics.Raycast(ray, out hit, distance, layerMask);
         }
     }
 }

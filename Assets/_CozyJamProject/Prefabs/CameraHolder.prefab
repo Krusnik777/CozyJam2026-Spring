@@ -143,5 +143,5 @@ MonoBehaviour:
   NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
   AmplitudeGain: 1
-  FrequencyGain: 1
+  FrequencyGain: 0.25
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
