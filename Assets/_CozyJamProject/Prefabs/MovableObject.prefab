@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8534085378758630171}
   - component: {fileID: 2567353046719466321}
   - component: {fileID: 2826376134916872063}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DownPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 5744375960962938651}
   - component: {fileID: 5626809377362554164}
   - component: {fileID: 1724526882819811569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 6894789515992129455}
   - component: {fileID: 802564991979007002}
   - component: {fileID: 5932137106562602079}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 5986395340820236252}
   - component: {fileID: 7181047849243572902}
   - component: {fileID: 5204457096255401018}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
