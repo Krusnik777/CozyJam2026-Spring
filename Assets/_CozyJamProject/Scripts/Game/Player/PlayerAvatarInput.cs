@@ -31,7 +31,7 @@ namespace CozySpringJam.Game.Player
             }
 
             _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            if (m_inverseMovement) _input *= -1;
+            if (m_inverseMovement) _input *= -1f;
 
             m_playerAvatarMovement.SetMoveDirection(_input);
         }

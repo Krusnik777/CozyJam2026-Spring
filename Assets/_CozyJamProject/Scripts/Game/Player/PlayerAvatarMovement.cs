@@ -27,7 +27,8 @@ namespace CozySpringJam.Game.Player
             {
                 m_characterController.Move(directionControl * m_movementSpeed * Time.deltaTime);
                 var targetRotation = Quaternion.LookRotation(directionControl);
-                m_viewTransform.rotation = Quaternion.Slerp(m_viewTransform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
+                //m_viewTransform.rotation = Quaternion.Slerp(m_viewTransform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
+                m_viewTransform.rotation = Quaternion.Lerp(m_viewTransform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
             }
             else
             {
