@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using CozySpringJam.Utils;
 using CozySpringJam.Game.EntryPoints;
+using CozySpringJam.Game.Services;
+using CozySpringJam.Game.SO;
+using Unity.VisualScripting;
 
 namespace CozySpringJam.Game.Root
 {
@@ -26,6 +29,16 @@ namespace CozySpringJam.Game.Root
         {
             _coroutines = new GameObject("[COROUTINES]").AddComponent<Coroutines>();
             Object.DontDestroyOnLoad(_coroutines.gameObject);
+            
+            ParticleCollections collections = Resources.Load<ParticleCollections>("ParticleCollection");
+            ParticleService particleService = new ParticleService(collections);
+
+            AudioSource audioSource = _coroutines.AddComponent<AudioSource>();
+            AudioSource backgroundMusic = new GameObject("[BACKGROUND_MUSIC]").AddComponent<AudioSource>();
+            Object.DontDestroyOnLoad(backgroundMusic);
+            SoundService soundService = new SoundService(audioSource, backgroundMusic);
+            
+            soundService.PlayBackgroundMusic();
         }
 
         private /*async*/ void RunGame()

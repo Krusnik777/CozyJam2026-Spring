@@ -1,3 +1,4 @@
+using CozySpringJam.Game.Services;
 using DG.Tweening;
 using R3;
 using UnityEngine;
@@ -83,6 +84,7 @@ namespace CozySpringJam.Game.Objects
         {
             _isMoving = true;
             Vector3 targetPosition = transform.position + _direction; 
+            SoundService.Instance.PlayMoveObject();
             transform.DOMove(targetPosition, _moveDuration).SetEase(Ease.InFlash).OnComplete(FinishMove);
             MoveAnimation();
         }
