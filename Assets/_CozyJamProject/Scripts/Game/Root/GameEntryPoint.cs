@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using CozySpringJam.Utils;
+using CozySpringJam.Game.EntryPoints;
 
 namespace CozySpringJam.Game.Root
 {
@@ -14,8 +15,8 @@ namespace CozySpringJam.Game.Root
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void AutostartGame()
         {
-            Application.targetFrameRate = 60;
-            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            //Application.targetFrameRate = 60;
+            //Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
             _instance = new GameEntryPoint();
             _instance.RunGame();
@@ -29,14 +30,14 @@ namespace CozySpringJam.Game.Root
 
         private /*async*/ void RunGame()
         {
-            /*#if UNITY_EDITOR
+            #if UNITY_EDITOR
 
             var sceneName = SceneManager.GetActiveScene().name;
 
             if (sceneName == Scenes.GAMEPLAY)
             {
-                var enterParams = new GameplayEnterParams(0);
-                _coroutines.StartCoroutine(LoadAndStartGameplay(enterParams));
+                //var enterParams = new GameplayEnterParams(0);
+                _coroutines.StartCoroutine(LoadAndStartGameplay(/*enterParams*/));
 
                 return;
             }
@@ -53,9 +54,10 @@ namespace CozySpringJam.Game.Root
                 return;
             }
 
-            #endif*/
+            #endif
 
-            _coroutines.StartCoroutine(LoadAndStartMainMenu());
+            //_coroutines.StartCoroutine(LoadAndStartMainMenu());
+            _coroutines.StartCoroutine(LoadAndStartGameplay());
         }
 
         private IEnumerator LoadAndStartGameplay(/*GameplayEnterParams enterParams*/)
@@ -85,6 +87,8 @@ namespace CozySpringJam.Game.Root
             yield return LoadScene(Scenes.MAIN_MENU);
 
             yield return new WaitForSeconds(1);
+
+            // Loading Saves for scene if has and is needed
 
             var sceneEntryPoint = Object.FindFirstObjectByType<EntryPoint>();
             sceneEntryPoint.Run(/*Some Params*//*And Exit Func*/);

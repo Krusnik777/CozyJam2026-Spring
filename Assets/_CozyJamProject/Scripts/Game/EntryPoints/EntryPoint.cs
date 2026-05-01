@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CozySpringJam.Game
+namespace CozySpringJam.Game.EntryPoints
 {
     public abstract class EntryPoint : MonoBehaviour
     {
