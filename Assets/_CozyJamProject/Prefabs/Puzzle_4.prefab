@@ -3727,12 +3727,12 @@ MonoBehaviour:
     <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 8575542952981063364}
-      <Duration>k__BackingField: 4
+      <Duration>k__BackingField: 5
       <Message>k__BackingField:
         <ID>k__BackingField: puzzle4_finish_message
         <Text>k__BackingField: I should put these things everywhere...
         <StartDelay>k__BackingField: 0.25
-        <StayDuration>k__BackingField: 2
+        <StayDuration>k__BackingField: 3
         <ShowDuration>k__BackingField: 0.25
         <HideDuration>k__BackingField: 0.25
         <Force>k__BackingField: 0
@@ -4577,6 +4577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97a05fdfef9f514ebeefde5615c240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Objects.PipeConnector
+  m_checkInterval: 0.25
   m_1stPipe: {fileID: 3964892681442106512}
   m_2ndPipe: {fileID: 9109567153385413562}
 --- !u!1 &7683570583812332977

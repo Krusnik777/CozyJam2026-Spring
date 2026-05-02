@@ -5874,12 +5874,12 @@ MonoBehaviour:
     <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 4382630268374112375}
-      <Duration>k__BackingField: 4
+      <Duration>k__BackingField: 5
       <Message>k__BackingField:
         <ID>k__BackingField: puzzle3_finish_message
         <Text>k__BackingField: This place loves to mess with my head...
         <StartDelay>k__BackingField: 0.25
-        <StayDuration>k__BackingField: 2
+        <StayDuration>k__BackingField: 3
         <ShowDuration>k__BackingField: 0.25
         <HideDuration>k__BackingField: 0.25
         <Force>k__BackingField: 0
