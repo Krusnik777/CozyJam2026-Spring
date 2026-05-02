@@ -36,7 +36,7 @@ namespace CozySpringJam.Game.Objects
         
         private bool ShootRay(Vector3 direction, float distance, out RaycastHit hit)
         {
-            var origin = transform.position - Vector3.one / 2;
+            var origin = transform.position - Vector3.up / 2;
             Ray ray = new Ray(origin, direction.normalized);
 
             Debug.DrawRay(origin, direction.normalized * distance, Color.red, 1f);
