@@ -905,6 +905,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073905187 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9109567153385413562, guid: fe467479914245e409c13d9c396932aa, type: 3}
+  m_PrefabInstance: {fileID: 3726222408431294155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dfbfd18fa9738498f6a0bf71ecfb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.PipeObject
 --- !u!1 &1079020778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,7 +1255,7 @@ MonoBehaviour:
   <EventCollector>k__BackingField: {fileID: 1332793933}
   <PlayerCameraTransform>k__BackingField: {fileID: 2330369353873635577}
   <EntryCutsceneSettings>k__BackingField:
-    <ShowDelay>k__BackingField: 1
+    <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 319223011}
       <Duration>k__BackingField: 10
@@ -1256,19 +1267,19 @@ MonoBehaviour:
         <ShowDuration>k__BackingField: 1
         <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
-        <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
     - <Camera>k__BackingField: {fileID: 1079020778}
       <Duration>k__BackingField: 3.5
       <Message>k__BackingField:
-        <ID>k__BackingField: start_scene_message
-        <Text>k__BackingField: I feel need for Spring's Touch...
-        <StartDelay>k__BackingField: 1.25
-        <StayDuration>k__BackingField: 1.75
-        <ShowDuration>k__BackingField: 0.25
+        <ID>k__BackingField: 
+        <Text>k__BackingField: 
+        <StartDelay>k__BackingField: 0
+        <StayDuration>k__BackingField: 2
+        <ShowDuration>k__BackingField: 1
         <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-    <FadeInDuration>k__BackingField: 2
+    <FadeInDuration>k__BackingField: 0
     <FadeOutDuration>k__BackingField: 0
   <PuzzleZones>k__BackingField:
   - {fileID: 8211656663406953856}
@@ -1282,17 +1293,28 @@ MonoBehaviour:
     - <Camera>k__BackingField: {fileID: 1260268821}
       <Duration>k__BackingField: 3
       <Message>k__BackingField:
-        <ID>k__BackingField: final_scene_message
-        <Text>k__BackingField: Now I can rest for while...
-        <StartDelay>k__BackingField: 1
+        <ID>k__BackingField: 
+        <Text>k__BackingField: 
+        <StartDelay>k__BackingField: 0
         <StayDuration>k__BackingField: 2
-        <ShowDuration>k__BackingField: 0.5
-        <HideDuration>k__BackingField: 0.5
+        <ShowDuration>k__BackingField: 1
+        <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
     <FadeInDuration>k__BackingField: 0
-    <FadeOutDuration>k__BackingField: 2
-  <ShowEntryCutscene>k__BackingField: 1
+    <FadeOutDuration>k__BackingField: 0
+  <ShowEntryCutscene>k__BackingField: 0
+--- !u!114 &2126849506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3964892681442106512, guid: fe467479914245e409c13d9c396932aa, type: 3}
+  m_PrefabInstance: {fileID: 3726222408431294155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dfbfd18fa9738498f6a0bf71ecfb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.PipeObject
 --- !u!114 &1101223439119768924 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2055612508511461589, guid: a2eacfb10ceecb34388ad2fdcb1bb305, type: 3}
@@ -1405,6 +1427,14 @@ PrefabInstance:
       propertyPath: _checkInterval
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 3964892681442106512, guid: fe467479914245e409c13d9c396932aa, type: 3}
+      propertyPath: _secondPipeObject
+      value: 
+      objectReference: {fileID: 1073905187}
+    - target: {fileID: 4163129239847757526, guid: fe467479914245e409c13d9c396932aa, type: 3}
+      propertyPath: m_Name
+      value: Pipe_2
+      objectReference: {fileID: 0}
     - target: {fileID: 4491579122146493457, guid: fe467479914245e409c13d9c396932aa, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.43
@@ -1453,6 +1483,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Puzzle_4
       objectReference: {fileID: 0}
+    - target: {fileID: 8118837909585879548, guid: fe467479914245e409c13d9c396932aa, type: 3}
+      propertyPath: m_Name
+      value: Pipe_1
+      objectReference: {fileID: 0}
     - target: {fileID: 8590832372149633851, guid: fe467479914245e409c13d9c396932aa, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.43
@@ -1461,7 +1495,12 @@ PrefabInstance:
       propertyPath: _checkInterval
       value: 0.05
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9109567153385413562, guid: fe467479914245e409c13d9c396932aa, type: 3}
+      propertyPath: _secondPipeObject
+      value: 
+      objectReference: {fileID: 2126849506}
+    m_RemovedComponents:
+    - {fileID: 5281782157220148191, guid: fe467479914245e409c13d9c396932aa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

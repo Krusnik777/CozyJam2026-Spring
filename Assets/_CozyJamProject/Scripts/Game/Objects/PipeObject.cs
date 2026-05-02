@@ -6,7 +6,7 @@ namespace CozySpringJam.Game.Objects
     {
         [SerializeField] private MovableObject _movableObject;
         [SerializeField] private PipeObject _secondPipeObject;
-        private float _checkInterval = 1f;
+        private float _checkInterval = 0.25f;
         private float _timer;
         private bool _isPressed = false;
         private RaycastHit _hit =  new RaycastHit();
