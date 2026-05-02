@@ -65,7 +65,7 @@ namespace CozySpringJam.Game.GameCycle
 
                 puzzleZone.OnEnter.Subscribe(puzzleZone => HandlePuzzleZoneInteraction(puzzleZone, true)).AddTo(_puzzleZoneListenerDisposables);
                 puzzleZone.OnExit.Subscribe(puzzleZone => HandlePuzzleZoneInteraction(puzzleZone, false)).AddTo(_puzzleZoneListenerDisposables);
-                puzzleZone.OnFinish.Subscribe(puzzleZoneData => HandlePuzzleZoneFinish(puzzleZoneData)).AddTo(_puzzleZoneListenerDisposables);
+                puzzleZone.OnFinish.Subscribe(puzzleZoneData => HandlePuzzleZoneFinish(puzzleZoneData, soundService)).AddTo(_puzzleZoneListenerDisposables);
             }
 
             if (_view.ShowEntryCutscene)
@@ -112,13 +112,15 @@ namespace CozySpringJam.Game.GameCycle
             else _picturesHideSignal.OnNext(Unit.Default);
         }
 
-        private void HandlePuzzleZoneFinish((int, PuzzleZoneView) puzzleZoneData)
+        private void HandlePuzzleZoneFinish((int, PuzzleZoneView) puzzleZoneData, SoundService soundService)
         {
             if (_puzzleZonesMap.ContainsKey(puzzleZoneData.Item1))
             {
                 var id = puzzleZoneData.Item1;
                 _puzzleZonesMap[id].Dispose();
                 _puzzleZonesMap.Remove(id);
+                
+                soundService.PlaySuccessful();
 
                 HandlePuzzleZoneInteraction(puzzleZoneData.Item2, false);
 
