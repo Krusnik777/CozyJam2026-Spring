@@ -66,11 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6db874268d1e02c42b9f37ecaeec1e56, type: 3}
       propertyPath: m_Name
-      value: mini_oak_tree
+      value: GreenTree_4
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6db874268d1e02c42b9f37ecaeec1e56, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
