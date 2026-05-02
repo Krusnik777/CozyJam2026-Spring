@@ -873,12 +873,12 @@ MonoBehaviour:
     <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 7260436199973913938}
-      <Duration>k__BackingField: 4
+      <Duration>k__BackingField: 5
       <Message>k__BackingField:
         <ID>k__BackingField: puzzle2_finish_message
         <Text>k__BackingField: These doors always sticking...
         <StartDelay>k__BackingField: 0.25
-        <StayDuration>k__BackingField: 2
+        <StayDuration>k__BackingField: 3
         <ShowDuration>k__BackingField: 0.25
         <HideDuration>k__BackingField: 0.25
         <Force>k__BackingField: 0

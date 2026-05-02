@@ -1373,12 +1373,12 @@ MonoBehaviour:
     <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 5035463986077589756}
-      <Duration>k__BackingField: 8
+      <Duration>k__BackingField: 5
       <Message>k__BackingField:
-        <ID>k__BackingField: puzzle1_finish_message
-        <Text>k__BackingField: I really shouldn't forget to clean up here...
+        <ID>k__BackingField: puzzle5_finish_message
+        <Text>k__BackingField: Perfect place for picnic...
         <StartDelay>k__BackingField: 0.25
-        <StayDuration>k__BackingField: 2
+        <StayDuration>k__BackingField: 3
         <ShowDuration>k__BackingField: 0.25
         <HideDuration>k__BackingField: 0.25
         <Force>k__BackingField: 0
@@ -3922,13 +3922,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8505746220580274135}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: -1.0000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3249542571308352470}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8663822764282134171
 GameObject:
   m_ObjectHideFlags: 0

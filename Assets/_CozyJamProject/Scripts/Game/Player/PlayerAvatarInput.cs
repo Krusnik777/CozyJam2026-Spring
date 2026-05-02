@@ -47,6 +47,11 @@ namespace CozySpringJam.Game.Player
             m_interactTip.Subscribe();
         }
 
+        private void OnDestroy()
+        {
+            Dispose();
+        }
+
         private void Update()
         {
             if (Input.GetButtonDown("Cancel"))

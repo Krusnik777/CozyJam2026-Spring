@@ -11,9 +11,9 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public Transform ZoneCameraTransform { get; private set; }
         [field: SerializeField] public MovableObjectData[] PuzzleSolution { get; private set; }
         [field: SerializeField] public MovableObject[] MovableObjects { get; private set; }
-        [field: SerializeField] public PicturesScreenSettings PicturesScreenSettings { get; private set; } 
-        [field: SerializeField] public Transform PlayerTargetPositionOnReset { get; private set; } 
-        [field: SerializeField] public CutsceneSettings CutsceneAtEndSettings { get; private set; } 
+        [field: SerializeField] public PicturesScreenSettings PicturesScreenSettings { get; private set; }
+        [field: SerializeField] public Transform PlayerTargetPositionOnReset { get; private set; }
+        [field: SerializeField] public CutsceneSettings CutsceneAtEndSettings { get; private set; }
         [SerializeField] private ChangebleEnvironment m_changeableEnvironment;
 
         public void HandleEnvironmentChange(System.Action onEnd = null)
@@ -29,6 +29,8 @@ namespace CozySpringJam.Game.GameCycle
 
                 if (duration > 0f)
                 {
+                    //ProcessCollidersRecursively(target.transform, true, true);
+
                     float baseScale = target.transform.localScale.x;
                     target.transform.localScale = Vector3.zero;
                     var anim = target.transform.DOScale(baseScale, duration).SetEase(Ease.OutBack).OnComplete(() => onEnd?.Invoke());
@@ -43,6 +45,8 @@ namespace CozySpringJam.Game.GameCycle
 
                 if (duration > 0f)
                 {
+                    ProcessCollidersRecursively(target.transform, true, false);
+
                     var anim = target.transform.DOScale(Vector3.zero, duration).SetEase(Ease.OutBack).OnComplete(() => target.SetActive(false));
                     anim.SetLink(gameObject);
                 }
@@ -50,6 +54,26 @@ namespace CozySpringJam.Game.GameCycle
                 {
                     target.SetActive(false);
                 }
+            }
+        }
+
+        private void ProcessCollidersRecursively(Transform parent, bool includeSelf, bool enable)
+        {
+            if (parent == null) return;
+
+            if (includeSelf)
+            {
+                Collider[] colliders = parent.GetComponents<Collider>();
+                foreach (Collider col in colliders)
+                {
+                    if (col != null)
+                        col.enabled = enable;
+                }
+            }
+
+            foreach (Transform child in parent)
+            {
+                ProcessCollidersRecursively(child, true, enable);
             }
         }
     }

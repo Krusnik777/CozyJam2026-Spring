@@ -950,7 +950,7 @@ Transform:
   m_GameObject: {fileID: 1079020778}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16172901, y: -0.83731925, z: 0.39044836, w: 0.346829}
-  m_LocalPosition: {x: -10.02, y: 14.87, z: -1.88}
+  m_LocalPosition: {x: -2.49, y: 12.37, z: -5.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   <EventCollector>k__BackingField: {fileID: 1332793933}
   <PlayerCameraTransform>k__BackingField: {fileID: 2330369353873635577}
   <EntryCutsceneSettings>k__BackingField:
-    <ShowDelay>k__BackingField: 0
+    <ShowDelay>k__BackingField: 1
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 319223011}
       <Duration>k__BackingField: 10
@@ -1166,15 +1166,15 @@ MonoBehaviour:
     - <Camera>k__BackingField: {fileID: 1079020778}
       <Duration>k__BackingField: 3.5
       <Message>k__BackingField:
-        <ID>k__BackingField: 
-        <Text>k__BackingField: 
-        <StartDelay>k__BackingField: 0
-        <StayDuration>k__BackingField: 2
-        <ShowDuration>k__BackingField: 1
+        <ID>k__BackingField: start_scene_message
+        <Text>k__BackingField: I feel need for Spring's Touch...
+        <StartDelay>k__BackingField: 1.25
+        <StayDuration>k__BackingField: 1.75
+        <ShowDuration>k__BackingField: 0.25
         <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-    <FadeInDuration>k__BackingField: 0
+    <FadeInDuration>k__BackingField: 2
     <FadeOutDuration>k__BackingField: 0
   <PuzzleZones>k__BackingField:
   - {fileID: 8211656663406953856}
@@ -1189,17 +1189,17 @@ MonoBehaviour:
     - <Camera>k__BackingField: {fileID: 1260268821}
       <Duration>k__BackingField: 3
       <Message>k__BackingField:
-        <ID>k__BackingField: 
-        <Text>k__BackingField: 
-        <StartDelay>k__BackingField: 0
+        <ID>k__BackingField: final_scene_message
+        <Text>k__BackingField: Now I can rest for a while...
+        <StartDelay>k__BackingField: 1
         <StayDuration>k__BackingField: 2
-        <ShowDuration>k__BackingField: 1
-        <HideDuration>k__BackingField: 1
+        <ShowDuration>k__BackingField: 0.5
+        <HideDuration>k__BackingField: 0.5
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
     <FadeInDuration>k__BackingField: 0
-    <FadeOutDuration>k__BackingField: 0
-  <ShowEntryCutscene>k__BackingField: 0
+    <FadeOutDuration>k__BackingField: 2
+  <ShowEntryCutscene>k__BackingField: 1
 --- !u!114 &2126849506 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3964892681442106512, guid: fe467479914245e409c13d9c396932aa, type: 3}
@@ -1707,10 +1707,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6428236243088792231, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}
 --- !u!114 &4731936107793615518 stripped
 MonoBehaviour:

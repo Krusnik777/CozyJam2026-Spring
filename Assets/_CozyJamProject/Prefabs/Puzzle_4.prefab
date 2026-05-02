@@ -1401,6 +1401,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!1 &3154169827132023886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6357706573634249227}
+  m_Layer: 0
+  m_Name: PlayerRestartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6357706573634249227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3154169827132023886}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.08, y: 0, z: -0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6398940613360749769}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &3274997451588902077
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,6 +3677,8 @@ Transform:
   - {fileID: 7671502468012856999}
   - {fileID: 663323521043852108}
   - {fileID: 7649663834447999609}
+  - {fileID: 1532205461067136213}
+  - {fileID: 6357706573634249227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &635682800007289626
@@ -3660,6 +3693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e6069efdfc4443b72ae17b591d3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.GameCycle.PuzzleZoneView
+  <IsIsometric>k__BackingField: 1
   <EnterTrigger>k__BackingField: {fileID: 6216415920923399916}
   <ZoneCameraTransform>k__BackingField: {fileID: 7671502468012856999}
   <PuzzleSolution>k__BackingField:
@@ -3685,24 +3719,37 @@ MonoBehaviour:
   - {fileID: 2997837211338499392}
   - {fileID: 3524031649052163893}
   - {fileID: 6011130318896268923}
+  <PicturesScreenSettings>k__BackingField:
+    UpperPicture: {fileID: 21300000, guid: 9d83237b0d6f44c43b22a70700a0b0d3, type: 3}
+    LowerPicture: {fileID: 21300000, guid: d7016f4a570ae0843b6188c2c3e41780, type: 3}
+  <PlayerTargetPositionOnReset>k__BackingField: {fileID: 6357706573634249227}
+  <CutsceneAtEndSettings>k__BackingField:
+    <ShowDelay>k__BackingField: 0
+    <Segments>k__BackingField:
+    - <Camera>k__BackingField: {fileID: 8575542952981063364}
+      <Duration>k__BackingField: 5
+      <Message>k__BackingField:
+        <ID>k__BackingField: puzzle4_finish_message
+        <Text>k__BackingField: I should put these things everywhere...
+        <StartDelay>k__BackingField: 0.25
+        <StayDuration>k__BackingField: 3
+        <ShowDuration>k__BackingField: 0.25
+        <HideDuration>k__BackingField: 0.25
+        <Force>k__BackingField: 0
+        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <FadeInDuration>k__BackingField: 0
+    <FadeOutDuration>k__BackingField: 0
   m_changeableEnvironment:
     objectsToEnable:
     - targetObject: {fileID: 3453018903448932787}
       duration: 1
-      updateImmediately: 0
     - targetObject: {fileID: 6881093429356864541}
       duration: 1
-      updateImmediately: 0
     - targetObject: {fileID: 663489152083344789}
       duration: 1
-      updateImmediately: 0
     - targetObject: {fileID: 2522742489453972166}
       duration: 1
-      updateImmediately: 0
     objectsToDisable: []
-  <PicturesScreenSettings>k__BackingField:
-    UpperPicture: {fileID: 21300000, guid: 9d83237b0d6f44c43b22a70700a0b0d3, type: 3}
-    LowerPicture: {fileID: 21300000, guid: d7016f4a570ae0843b6188c2c3e41780, type: 3}
 --- !u!1 &6881093429356864541
 GameObject:
   m_ObjectHideFlags: 0
@@ -4493,9 +4540,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7649663834447999609}
-  - component: {fileID: 5281782157220148191}
+  - component: {fileID: 9161683076679450999}
   m_Layer: 0
-  m_Name: PipesController
+  m_Name: PipeConnector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4518,7 +4565,7 @@ Transform:
   - {fileID: 4491579122146493457}
   m_Father: {fileID: 6398940613360749769}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5281782157220148191
+--- !u!114 &9161683076679450999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4527,11 +4574,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7573677132214508936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81a6dd832afc6ed41a8185c33ecb622d, type: 3}
+  m_Script: {fileID: 11500000, guid: f97a05fdfef9f514ebeefde5615c240b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  _firstPipe: {fileID: 3964892681442106512}
-  _secondPipe: {fileID: 9109567153385413562}
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Objects.PipeConnector
+  m_checkInterval: 0.25
+  m_1stPipe: {fileID: 3964892681442106512}
+  m_2ndPipe: {fileID: 9109567153385413562}
 --- !u!1 &7683570583812332977
 GameObject:
   m_ObjectHideFlags: 0
@@ -4871,6 +4919,81 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8575542952981063364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532205461067136213}
+  - component: {fileID: 5881707660723877186}
+  m_Layer: 0
+  m_Name: CutsceneCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1532205461067136213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575542952981063364}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.16172901, y: -0.83731925, z: 0.39044836, w: 0.346829}
+  m_LocalPosition: {x: 6, y: 10.5, z: 6.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6398940613360749769}
+  m_LocalEulerAnglesHint: {x: 50, y: -135, z: 0}
+--- !u!114 &5881707660723877186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575542952981063364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 2
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 9.5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 1
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &9055818699080233775
 GameObject:
   m_ObjectHideFlags: 0
