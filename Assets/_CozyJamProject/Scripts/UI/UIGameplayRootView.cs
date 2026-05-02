@@ -19,7 +19,7 @@ namespace CozySpringJam.UI
             _uiPicturesScreen.Setup(picturesScreenInfluencer);
         }
 
-        public void BindScreen(IUIScreenInfluencer<CutscenesScreenSettings, (CutscenesScreenSettings, System.Action)> cutsceneScreenInfluencer)
+        public void BindScreen(IUICutscenesScreenInfluencer cutsceneScreenInfluencer)
         {
             var uiCutscenesScreenPrefab = Resources.Load<UICutscenesScreen>("Prefabs/UI/CutscenesScreen");
             _uICutscenesScreen = Instantiate(uiCutscenesScreenPrefab, m_screensTransform);

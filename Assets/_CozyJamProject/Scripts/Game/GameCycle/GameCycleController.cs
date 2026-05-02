@@ -9,7 +9,7 @@ namespace CozySpringJam.Game.GameCycle
     public class GameCycleController : IDisposable, IUIScreenInfluencer<PicturesScreenSettings, Unit>
     {
         public Subject<Unit> OnFinish = new();
-        
+
         private readonly GameCycleControllerView _view;
         private readonly MessageService _messageService;
         private readonly CutsceneService _cutsceneService;
@@ -60,7 +60,7 @@ namespace CozySpringJam.Game.GameCycle
                 var id = GeneratePuzzleZoneId();
                 var view = _view.PuzzleZones[i];
                 view.ZoneCameraTransform.gameObject.SetActive(false); // just to be safe
-                var puzzleZone = new PuzzleZone(id, view, soundService, particleService, _view.PlayerInput, _view.PlayerCharacter);
+                var puzzleZone = new PuzzleZone(id, view, soundService, particleService, _view.PlayerInput, _view.PlayerMovement);
                 _puzzleZonesMap.Add(id, puzzleZone);
 
                 puzzleZone.OnEnter.Subscribe(puzzleZone => HandlePuzzleZoneInteraction(puzzleZone, true)).AddTo(_puzzleZoneListenerDisposables);
@@ -68,17 +68,30 @@ namespace CozySpringJam.Game.GameCycle
                 puzzleZone.OnFinish.Subscribe(puzzleZoneData => HandlePuzzleZoneFinish(puzzleZoneData)).AddTo(_puzzleZoneListenerDisposables);
             }
 
-            // Start Player Animations
-            //_view.PlayerCameraTransform.gameObject.SetActive(false);
-            _view.PlayerAnimator.PlayWakeUpAnimation();
-            _cutsceneService.PlayCutscene(_view.EntryCutsceneSettings, () => InitPlayer());
+            if (_view.ShowEntryCutscene)
+            {
+                _view.PlayerAnimator.PlayWakeUpAnimation();
+                _cutsceneService.PlayCutscene(_view.EntryCutsceneSettings, () => EnablePlayer());
+            }
+            else
+            {
+                EnablePlayer();
+            }
         }
 
-        private void InitPlayer()
+        private void EnablePlayer()
         {
             _view.PlayerInput.enabled = true;
             _view.PlayerMovement.enabled = true;
             _view.PlayerCameraTransform.gameObject.SetActive(true);
+        }
+
+        private void DisablePlayer()
+        {
+            _view.PlayerInput.enabled = false;
+            _view.PlayerMovement.enabled = false;
+            _view.PlayerMovement.Reset();
+            //_view.PlayerCameraTransform.gameObject.SetActive(false);
         }
 
         private int GeneratePuzzleZoneId()
@@ -109,11 +122,20 @@ namespace CozySpringJam.Game.GameCycle
 
                 HandlePuzzleZoneInteraction(puzzleZoneData.Item2, false);
 
+                DisablePlayer();
+
+                _cutsceneService.PlayCutscene(puzzleZoneData.Item2.CutsceneAtEndSettings, () =>
+                {
+                    EnablePlayer();
+
+                    if (_puzzleZonesMap.Count == 0) _messageService.ShowMessage(new("started_final_segment", "Now time to rest..."));
+                });
+
                 if (_puzzleZonesMap.Count == 0)
                 {
                     _puzzleZoneListenerDisposables?.Dispose();
 
-                    _messageService.ShowMessage(new("started_final_segment", "Now time to rest..."));
+                    //_messageService.ShowMessage(new("started_final_segment", "Now time to rest..."));
 
                     _finalSegmentDisposable = _view.FinalEnterTrigger.OnEnter.Subscribe(_ => OnFinalSegmentEnd());
                 }
@@ -123,11 +145,7 @@ namespace CozySpringJam.Game.GameCycle
         private void OnFinalSegmentEnd()
         {
             _finalSegmentDisposable?.Dispose();
-
-            _view.PlayerInput.enabled = false;
-            _view.PlayerMovement.enabled = false;
-            _view.PlayerMovement.Reset();
-            //_view.PlayerCameraTransform.gameObject.SetActive(false);
+            DisablePlayer();
 
             // Some player Animations
 
@@ -136,5 +154,7 @@ namespace CozySpringJam.Game.GameCycle
                 OnFinish.OnNext(Unit.Default);
             });
         }
+
+        
     }
 }

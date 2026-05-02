@@ -15,7 +15,7 @@ namespace CozySpringJam.Game.Services
             _messagePanel.gameObject.SetActive(false);
         }
 
-        public void ShowMessage(MessageData data)
+        public void ShowMessage(MessageData data, float delay = 0f)
         {
             if (data.Force)
                 _lifeTween?.Kill();
@@ -25,7 +25,7 @@ namespace CozySpringJam.Game.Services
             _messagePanel.SetMessage(data.Text, data.Color);
             _messagePanel.gameObject.SetActive(true);
 
-            _messagePanel.PlayShow(data.ShowDuration, () =>
+            _messagePanel.PlayShow(data.ShowDuration, delay, () =>
             {
                 _lifeTween = DOVirtual.DelayedCall(data.StayDuration, () => _messagePanel.PlayHide(data.HideDuration)).SetLink(_messagePanel.gameObject);
             });

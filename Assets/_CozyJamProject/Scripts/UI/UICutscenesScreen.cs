@@ -3,13 +3,16 @@ using CozySpringJam.Game.SO;
 using DG.Tweening;
 using R3;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CozySpringJam.UI
 {
     public class UICutscenesScreen : MonoBehaviour, IDisposable
     {
         [SerializeField] private RectTransform[] m_cutsceneBorders;
+        [SerializeField] private Image m_fadeImage;
 
+        private IDisposable _waitingDisposable;
         private CompositeDisposable _disposables;
 
         public void Dispose()
@@ -17,24 +20,29 @@ namespace CozySpringJam.UI
             _disposables?.Dispose();
         }
 
-        public void Setup(IUIScreenInfluencer<CutscenesScreenSettings, (CutscenesScreenSettings, System.Action)> screenInfluencer)
+        public void Setup(IUICutscenesScreenInfluencer screenInfluencer)
         {
             _disposables = new();
 
-            screenInfluencer.ShowSignal.Subscribe(Show).AddTo(_disposables);
-            screenInfluencer.HideSignal.Subscribe(Hide).AddTo(_disposables);
-        }
-
-        private void Start()
-        {
             for (int i = 0; i < m_cutsceneBorders.Length; i++)
             {
                 m_cutsceneBorders[i].localScale = new Vector3(1, 0, 1);
             }
+
+            m_fadeImage.gameObject.SetActive(false);
+
+            screenInfluencer.ShowSignal.Subscribe(Show).AddTo(_disposables);
+            screenInfluencer.HideSignal.Subscribe(Hide).AddTo(_disposables);
+
+            screenInfluencer.FadeInSignal.Subscribe(FadeIn).AddTo(_disposables);
+            screenInfluencer.FadeOutSignal.Subscribe(FadeOut).AddTo(_disposables);
+
+            screenInfluencer.PrepareFadeInSignal.Subscribe(PrepareFadeIn).AddTo(_disposables);
         }
 
         private void OnDestroy()
         {
+            _waitingDisposable?.Dispose();
             _disposables?.Dispose();
         }
 
@@ -58,6 +66,57 @@ namespace CozySpringJam.UI
                 });
                 anim.SetLink(gameObject);
             }
+        }
+
+        private void FadeIn(float duration)
+        {
+            if (duration <= 0f) return;
+
+            m_fadeImage.color = Color.black;
+            var color = Color.black;
+            color.a = 0f;
+
+            m_fadeImage.gameObject.SetActive(true);
+
+            var anim = m_fadeImage.DOColor(color, duration).SetEase(Ease.InSine).OnComplete(() => m_fadeImage.gameObject.SetActive(false));
+            anim.SetLink(gameObject);
+        }
+
+        private void FadeOut((float, System.Action) fadeoutParameters)
+        {
+            if (fadeoutParameters.Item1 <= 0f) return;
+
+            var color = Color.black;
+            color.a = 0f;
+            m_fadeImage.color = color;
+
+            m_fadeImage.gameObject.SetActive(true);
+
+            var anim = m_fadeImage.DOColor(Color.black, fadeoutParameters.Item1).SetEase(Ease.InSine).OnComplete(() =>
+            {
+                //m_fadeImage.gameObject.SetActive(false);
+                fadeoutParameters.Item2?.Invoke();
+            });
+            anim.SetLink(gameObject);
+        }
+
+        private void PrepareFadeIn((float, Action) waitingParameters)
+        {
+            m_fadeImage.color = Color.black;
+            m_fadeImage.gameObject.SetActive(true);
+
+            if (waitingParameters.Item1 <= 0)
+            {
+                waitingParameters.Item2?.Invoke();
+                return;
+            }
+
+            _waitingDisposable = Observable.Interval(TimeSpan.FromSeconds(waitingParameters.Item1)).Subscribe(_ =>
+            {
+                _waitingDisposable?.Dispose();
+
+                waitingParameters.Item2?.Invoke();
+            });
         }
     }
 }

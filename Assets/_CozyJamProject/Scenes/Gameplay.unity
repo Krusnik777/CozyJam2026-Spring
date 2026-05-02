@@ -552,7 +552,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  CustomBlends: {fileID: 0}
+  CustomBlends: {fileID: 11400000, guid: f6b10d700484e114cb9907f3be80d351, type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1104,7 @@ GameObject:
   - component: {fileID: 1260268822}
   - component: {fileID: 1260268823}
   m_Layer: 0
-  m_Name: CinemachineCamera_Ortographic (1)
+  m_Name: FinalCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,51 +1238,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796bf2a873c2cd14794cea4ac8a381fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.GameCycle.GameCycleControllerView
-  <PlayerCharacter>k__BackingField: {fileID: 4731936107793615522}
+  <PlayerMovement>k__BackingField: {fileID: 4731936107793615519}
   <PlayerAnimator>k__BackingField: {fileID: 4731936107793615518}
   <PlayerInput>k__BackingField: {fileID: 4731936107793615520}
-  <PlayerMovement>k__BackingField: {fileID: 4731936107793615519}
   <EventCollector>k__BackingField: {fileID: 1332793933}
   <PlayerCameraTransform>k__BackingField: {fileID: 2330369353873635577}
   <EntryCutsceneSettings>k__BackingField:
+    <ShowDelay>k__BackingField: 1
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 319223011}
       <Duration>k__BackingField: 10
       <Message>k__BackingField:
         <ID>k__BackingField: 
         <Text>k__BackingField: 
+        <StartDelay>k__BackingField: 0
         <StayDuration>k__BackingField: 2
         <ShowDuration>k__BackingField: 1
         <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
     - <Camera>k__BackingField: {fileID: 1079020778}
-      <Duration>k__BackingField: 3
+      <Duration>k__BackingField: 3.5
       <Message>k__BackingField:
         <ID>k__BackingField: start_scene_message
         <Text>k__BackingField: I feel need for Spring's Touch...
-        <StayDuration>k__BackingField: 2
-        <ShowDuration>k__BackingField: 0.5
+        <StartDelay>k__BackingField: 1.25
+        <StayDuration>k__BackingField: 1.75
+        <ShowDuration>k__BackingField: 0.25
         <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <FadeInDuration>k__BackingField: 2
+    <FadeOutDuration>k__BackingField: 0
   <PuzzleZones>k__BackingField:
   - {fileID: 8211656663406953856}
   - {fileID: 1101223439119768924}
   - {fileID: 1101223439472255881}
   <FinalEnterTrigger>k__BackingField: {fileID: 305943454}
   <FinalCutsceneSettings>k__BackingField:
+    <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
     - <Camera>k__BackingField: {fileID: 1260268821}
-      <Duration>k__BackingField: 5
+      <Duration>k__BackingField: 3
       <Message>k__BackingField:
         <ID>k__BackingField: final_scene_message
         <Text>k__BackingField: Now I can rest for while...
+        <StartDelay>k__BackingField: 1
         <StayDuration>k__BackingField: 2
         <ShowDuration>k__BackingField: 0.5
-        <HideDuration>k__BackingField: 1
+        <HideDuration>k__BackingField: 0.5
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <FadeInDuration>k__BackingField: 0
+    <FadeOutDuration>k__BackingField: 2
+  <ShowEntryCutscene>k__BackingField: 1
 --- !u!114 &1101223439119768924 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2055612508511461589, guid: a2eacfb10ceecb34388ad2fdcb1bb305, type: 3}
@@ -1495,7 +1504,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: [{targetCorrespondingSourceObject: {fileID: 6428236243088792231, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}, insertIndex: -1, addedObject: {fileID: 0}}]
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6428236243088792231, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}
 --- !u!114 &4731936107793615518 stripped
 MonoBehaviour:
@@ -1530,11 +1542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eceb6021322357042b7ad3c29afb862f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Player.PlayerAvatarInput
---- !u!143 &4731936107793615522 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 6383916679585713637, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}
-  m_PrefabInstance: {fileID: 4731936107793615516}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8211656663406953855
 PrefabInstance:
   m_ObjectHideFlags: 0

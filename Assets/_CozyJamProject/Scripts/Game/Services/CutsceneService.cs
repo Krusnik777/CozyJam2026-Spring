@@ -5,18 +5,18 @@ using R3;
 
 namespace CozySpringJam.Game.Services
 {
-    public class CutsceneService : IUIScreenInfluencer<CutscenesScreenSettings, (CutscenesScreenSettings, Action)>, IDisposable
+    public class CutsceneService : IUICutscenesScreenInfluencer, IDisposable
     {
-        public Subject<CutscenesScreenSettings> ShowSignal => _showSignal;
-        private Subject<CutscenesScreenSettings> _showSignal = new();
-
-        public Subject<(CutscenesScreenSettings, Action)> HideSignal => _hideSignal;
-        private Subject<(CutscenesScreenSettings, Action)> _hideSignal = new();
+        public Subject<CutscenesScreenSettings> ShowSignal { get; private set; } = new();
+        public Subject<(CutscenesScreenSettings, Action)> HideSignal { get; private set; } = new();
+        public Subject<(float, Action)> PrepareFadeInSignal { get; private set; } = new();
+        public Subject<float> FadeInSignal { get; private set; } = new();
+        public Subject<(float, Action)> FadeOutSignal { get; private set; } = new();
 
         private CutscenesScreenSettings _cutsceneScreenSettings;
         private MessageService _messageService;
 
-        private System.Action _repeatableAction;
+        private Action _repeatableAction;
         public IDisposable _disposable;
 
         public CutsceneService(CutscenesScreenSettings cutsceneScreenSettings, MessageService messageService)
@@ -30,7 +30,7 @@ namespace CozySpringJam.Game.Services
             _disposable?.Dispose();
         }
 
-        public void PlayCutscene(CutsceneSettings cutsceneSettings, System.Action onEnd)
+        public void PlayCutscene(CutsceneSettings cutsceneSettings, Action onEnd)
         {
             if (cutsceneSettings.Segments.Length == 0)
             {
@@ -38,7 +38,20 @@ namespace CozySpringJam.Game.Services
                 return;
             }
 
+            if (cutsceneSettings.ShowDelay > 0 && cutsceneSettings.FadeInDuration > 0)
+            {
+                PrepareFadeInSignal.OnNext((cutsceneSettings.ShowDelay, () => HandleCutscene(cutsceneSettings, onEnd)));
+            }
+            else
+            {
+                HandleCutscene(cutsceneSettings, onEnd);
+            }
+        }
+
+        private void HandleCutscene(CutsceneSettings cutsceneSettings, Action onEnd)
+        {
             ShowSignal.OnNext(_cutsceneScreenSettings);
+            if (cutsceneSettings.FadeInDuration > 0f) FadeInSignal.OnNext(cutsceneSettings.FadeInDuration);
 
             _disposable?.Dispose();
             int currentSegment = 0;
@@ -47,14 +60,28 @@ namespace CozySpringJam.Game.Services
             {
                 _disposable?.Dispose();
 
+                var previousCamera = cutsceneSettings.Segments[currentSegment].Camera;
+
                 currentSegment++;
 
                 if (currentSegment > cutsceneSettings.Segments.Length - 1)
                 {
-                     HideSignal.OnNext((_cutsceneScreenSettings, onEnd));
+                    if (cutsceneSettings.FadeOutDuration > 0f)
+                    {
+                        FadeOutSignal.OnNext((cutsceneSettings.FadeOutDuration, 
+                                              () => HideSignal.OnNext((_cutsceneScreenSettings, onEnd))));
+                    }
+                    else
+                    {
+                        previousCamera.SetActive(false);
+
+                        HideSignal.OnNext((_cutsceneScreenSettings, onEnd));
+                    }
                 }
                 else
                 {
+                    previousCamera.SetActive(false);
+
                     _disposable = ActivateCutsceneSegment(cutsceneSettings.Segments[currentSegment], _repeatableAction);
                 }
             };
@@ -62,7 +89,7 @@ namespace CozySpringJam.Game.Services
             _disposable = ActivateCutsceneSegment(cutsceneSettings.Segments[currentSegment], _repeatableAction);
         }
 
-        private IDisposable ActivateCutsceneSegment(CutsceneSegment cutsceneSegment, System.Action onEnd)
+        private IDisposable ActivateCutsceneSegment(CutsceneSegment cutsceneSegment, Action onEnd)
         {
             if (cutsceneSegment.Duration <= 0)
             {
@@ -71,11 +98,11 @@ namespace CozySpringJam.Game.Services
             }
 
             cutsceneSegment.Camera.SetActive(true);
-            if (cutsceneSegment.Message.ID != string.Empty) _messageService.ShowMessage(new(cutsceneSegment.Message));
+            if (cutsceneSegment.Message.ID != string.Empty) _messageService.ShowMessage(new(cutsceneSegment.Message), cutsceneSegment.Message.StartDelay);
 
             return Observable.Interval(TimeSpan.FromSeconds(cutsceneSegment.Duration)).Subscribe(_ =>
             {
-                cutsceneSegment.Camera.SetActive(false);
+                //cutsceneSegment.Camera.SetActive(false);
 
                 onEnd?.Invoke();
             });

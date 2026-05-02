@@ -115,8 +115,12 @@ namespace CozySpringJam.Game.Root
             {
                 if (exitTag == "FINISH")
                 {
-                    //Application.Quit();
+                    #if PLATFORM_STANDALONE_WIN && !UNITY_EDITOR
+                    Application.Quit();
+                    #else
                     _coroutines.StartCoroutine(LoadAndStartGameplay());
+                    #endif
+
                     return;
                 }
 

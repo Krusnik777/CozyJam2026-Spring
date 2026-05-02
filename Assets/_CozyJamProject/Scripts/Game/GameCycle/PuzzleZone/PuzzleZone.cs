@@ -12,7 +12,7 @@ namespace CozySpringJam.Game.GameCycle
         private readonly int _uniqueId;
         private readonly PuzzleZoneView _view;
         private readonly PlayerAvatarInput _playerInput;
-        private readonly CharacterController _playerCharacter;
+        private readonly PlayerAvatarMovement _playerMovement;
 
         public Subject<PuzzleZoneView> OnEnter = new();
         public Subject<PuzzleZoneView> OnExit = new();
@@ -23,12 +23,14 @@ namespace CozySpringJam.Game.GameCycle
         private IDisposable _resetListenerDisposable;
         private CompositeDisposable _disposables;
 
-        public PuzzleZone(int id, PuzzleZoneView view, SoundService soundService, ParticleService particleService, PlayerAvatarInput playerInput, CharacterController playerCharacter)
+        public PuzzleZone(int id, PuzzleZoneView view,
+                          SoundService soundService, ParticleService particleService,
+                          PlayerAvatarInput playerInput, PlayerAvatarMovement playerMovement)
         {
             _uniqueId = id;
             _view = view;
             _playerInput = playerInput;
-            _playerCharacter = playerCharacter;
+            _playerMovement = playerMovement;
 
             Init(soundService, particleService);
         }
@@ -60,6 +62,7 @@ namespace CozySpringJam.Game.GameCycle
 
         private void HandleEnter()
         {
+            _resetListenerDisposable?.Dispose();
             _resetListenerDisposable = _playerInput.OnResetButtonPressed.Subscribe(_ => ResetPuzzle());
 
             OnEnter.OnNext(_view);
@@ -74,16 +77,13 @@ namespace CozySpringJam.Game.GameCycle
 
         private void ResetPuzzle()
         {
-            _playerCharacter.enabled = false;
+            _playerMovement.Teleport(_view.PlayerTargetPositionOnReset);
 
-            _playerInput.transform.position = _view.PlayerTargetPositionOnReset.position;
             for (int i = 0; i < _view.MovableObjects.Length; i++)
             {
                 var movable = _view.MovableObjects[i];
                 movable.ResetPosition();
             }
-
-            _playerCharacter.enabled = true;
         }
 
         private void CheckIfPuzzleSolved()
