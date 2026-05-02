@@ -91,7 +91,7 @@ namespace CozySpringJam.Game.GameCycle
             puzzleZoneView.ZoneCameraTransform.gameObject.SetActive(isEnter);
             _view.PlayerCameraTransform.gameObject.SetActive(!isEnter);
 
-            _view.PlayerMovement.SetIsometricMovement(!isEnter);
+            //_view.PlayerMovement.SetIsometricMovement(!isEnter);
 
             if (isEnter) _picturesShowSignal.OnNext(puzzleZoneView.PicturesScreenSettings);
             else _picturesHideSignal.OnNext(Unit.Default);
