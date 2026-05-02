@@ -8,7 +8,7 @@ namespace CozySpringJam.UI
     {
         [SerializeField] private TMP_Text m_messageText;
 
-        private Tween _showTween;
+        private Sequence _showTween;
         private Tween _hideTween;
 
         private Color _currentColor;
@@ -21,7 +21,7 @@ namespace CozySpringJam.UI
             _currentColor = color;
         }
 
-        public void PlayShow(float duration, System.Action onEnd)
+        public void PlayShow(float duration, float delay, System.Action onEnd)
         {
             _showTween?.Kill();
             _hideTween?.Kill();
@@ -30,7 +30,14 @@ namespace CozySpringJam.UI
             startColor.a = 0;
             m_messageText.color = startColor;
 
-            _showTween = m_messageText.DOColor(_currentColor, duration).SetEase(Ease.Linear).OnComplete(() => onEnd?.Invoke());
+            _showTween = DOTween.Sequence();
+            _showTween.SetLink(gameObject);
+
+            if (delay > 0f) _showTween.AppendInterval(delay);
+
+            _showTween.Append(m_messageText.DOColor(_currentColor, duration).SetEase(Ease.Linear));
+
+            _showTween.OnComplete(() => onEnd?.Invoke());
         }
 
         public void PlayHide(float duration)

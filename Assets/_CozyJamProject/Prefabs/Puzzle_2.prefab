@@ -896,12 +896,14 @@ Transform:
   - {fileID: 8356507752605540126}
   - {fileID: 1758582609797672729}
   - {fileID: 7905940504927288550}
-  - {fileID: 1379900254122165869}
   - {fileID: 630468823840680630}
   - {fileID: 2848584609935952956}
   - {fileID: 4262837125894513561}
   - {fileID: 7874591798326742851}
   - {fileID: 1202250294480326177}
+  - {fileID: 7415292474628234454}
+  - {fileID: 1321306821684644134}
+  - {fileID: 3089914316234659184}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2055612508511461589
@@ -916,7 +918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e6069efdfc4443b72ae17b591d3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.GameCycle.PuzzleZoneView
-  <EnterTrigger>k__BackingField: {fileID: 8353199122614450534}
+  <IsIsometric>k__BackingField: 1
+  <EnterTrigger>k__BackingField: {fileID: 825989198697492989}
   <ZoneCameraTransform>k__BackingField: {fileID: 630468823840680630}
   <PuzzleSolution>k__BackingField:
   - MovableObject: {fileID: 553822646541440152}
@@ -941,24 +944,37 @@ MonoBehaviour:
   - {fileID: 6695632192746742880}
   - {fileID: 2921403770136312523}
   - {fileID: 629732660786615844}
+  <PicturesScreenSettings>k__BackingField:
+    UpperPicture: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    LowerPicture: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  <PlayerTargetPositionOnReset>k__BackingField: {fileID: 7415292474628234454}
+  <CutsceneAtEndSettings>k__BackingField:
+    <ShowDelay>k__BackingField: 0
+    <Segments>k__BackingField:
+    - <Camera>k__BackingField: {fileID: 7260436199973913938}
+      <Duration>k__BackingField: 4
+      <Message>k__BackingField:
+        <ID>k__BackingField: puzzle2_finish_message
+        <Text>k__BackingField: These doors always sticking...
+        <StartDelay>k__BackingField: 0.25
+        <StayDuration>k__BackingField: 2
+        <ShowDuration>k__BackingField: 0.25
+        <HideDuration>k__BackingField: 0.25
+        <Force>k__BackingField: 0
+        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <FadeInDuration>k__BackingField: 0
+    <FadeOutDuration>k__BackingField: 0
   m_changeableEnvironment:
     objectsToEnable:
     - targetObject: {fileID: 1267239640702454616}
       duration: 1
-      updateImmediately: 0
     - targetObject: {fileID: 6850843693551448217}
       duration: 1
-      updateImmediately: 0
     - targetObject: {fileID: 440062499799472423}
       duration: 1
-      updateImmediately: 0
     - targetObject: {fileID: 2006996720813881186}
       duration: 1
-      updateImmediately: 0
     objectsToDisable: []
-  <PicturesScreenSettings>k__BackingField:
-    UpperPicture: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    LowerPicture: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &1267239640702454616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,7 +2359,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &4397002255003703929
+--- !u!1 &4284745250066583875
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2351,9 +2367,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1379900254122165869}
-  - component: {fileID: 5705032013744244333}
-  - component: {fileID: 8353199122614450534}
+  - component: {fileID: 1321306821684644134}
+  - component: {fileID: 5288992532658609673}
+  - component: {fileID: 825989198697492989}
   m_Layer: 0
   m_Name: EnterTrigger
   m_TagString: Untagged
@@ -2361,28 +2377,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1379900254122165869
+--- !u!4 &1321306821684644134
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4397002255003703929}
+  m_GameObject: {fileID: 4284745250066583875}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.55, y: 0.78, z: 1.64}
-  m_LocalScale: {x: 13.64, y: 13.64, z: 13.64}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 17.6, y: 13.64, z: 22.2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4747741694494202408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5705032013744244333
+--- !u!65 &5288992532658609673
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4397002255003703929}
+  m_GameObject: {fileID: 4284745250066583875}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2395,20 +2411,51 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8353199122614450534
+  m_Size: {x: 1, y: 1, z: 0.9508415}
+  m_Center: {x: 0, y: 0, z: 0.024579516}
+--- !u!114 &825989198697492989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4397002255003703929}
+  m_GameObject: {fileID: 4284745250066583875}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2c2ae52e703cb34ab874bfe451734ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Objects.EnterTrigger
+--- !u!1 &4336562651545251019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7415292474628234454}
+  m_Layer: 0
+  m_Name: PlayerRestartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7415292474628234454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336562651545251019}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 4.19, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4747741694494202408}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &4488746584804043866
 GameObject:
   m_ObjectHideFlags: 0
@@ -3750,6 +3797,81 @@ MonoBehaviour:
   Lens:
     FieldOfView: 60.000004
     OrthographicSize: 7
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 1
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
+--- !u!1 &7260436199973913938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3089914316234659184}
+  - component: {fileID: 7149780829140121960}
+  m_Layer: 0
+  m_Name: CutsceneCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3089914316234659184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260436199973913938}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.12427372, y: -0.87380743, z: 0.30002332, w: 0.3619429}
+  m_LocalPosition: {x: 5.2, y: 9.28, z: 7.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4747741694494202408}
+  m_LocalEulerAnglesHint: {x: 37.9, y: -135, z: 0}
+--- !u!114 &7149780829140121960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260436199973913938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 2
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 8.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

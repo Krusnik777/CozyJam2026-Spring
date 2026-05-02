@@ -9,12 +9,15 @@ namespace CozySpringJam.UI
     {
         [SerializeField] private PictureUIView m_upperPictureView;
         [SerializeField] private PictureUIView m_lowerPictureView;
+        [SerializeField] private MovableRectView m_tipMovableRectView;
+        [SerializeField] private ControlsTip m_controlsTip;
 
         private CompositeDisposable _disposables;
 
         public void Dispose()
         {
             _disposables?.Dispose();
+            m_controlsTip.Unsubscribe();
         }
 
         public void Setup(IUIScreenInfluencer<PicturesScreenSettings, Unit> screenInfluencer)
@@ -23,11 +26,13 @@ namespace CozySpringJam.UI
 
             screenInfluencer.ShowSignal.Subscribe(Show).AddTo(_disposables);     
             screenInfluencer.HideSignal.Subscribe(_ => Hide()).AddTo(_disposables);
+
+            m_controlsTip.Subscribe();
         }
 
         private void OnDestroy()
         {
-            _disposables?.Dispose();
+            Dispose();
         }
 
         private void Show(PicturesScreenSettings picturesScreenSettings)
@@ -37,12 +42,14 @@ namespace CozySpringJam.UI
 
             m_upperPictureView.Show();
             m_lowerPictureView.Show();
+            m_tipMovableRectView.Show();
         }
 
         private void Hide()
         {
             m_upperPictureView.Hide();
             m_lowerPictureView.Hide();
+            m_tipMovableRectView.Hide();
         }
     }
 }

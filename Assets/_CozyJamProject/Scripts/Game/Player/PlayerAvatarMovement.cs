@@ -18,6 +18,19 @@ namespace CozySpringJam.Game.Player
 
         public void Reset() => m_characterController.Move(Vector3.zero);
 
+        public void Teleport(Transform targetPlace)
+        {
+            m_characterController.Move(Vector3.zero); // just to be safe
+            m_characterController.enabled = false;
+
+            transform.position = targetPlace.position;
+            m_viewTransform.rotation = targetPlace.rotation;
+
+            m_characterController.enabled = true;
+        }
+
+        public void SetCharacterControllerActive(bool state) => m_characterController.enabled = state;
+
         public void SetMoveDirection(Vector3 moveDirection)
         {
             directionControl = moveDirection;

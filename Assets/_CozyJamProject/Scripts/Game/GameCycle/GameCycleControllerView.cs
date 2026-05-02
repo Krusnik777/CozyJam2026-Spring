@@ -7,10 +7,9 @@ namespace CozySpringJam.Game.GameCycle
     public class GameCycleControllerView : MonoBehaviour
     {
         [field: Header("Player")]
-        [field: SerializeField] public Transform PlayerTransform { get; private set; }  
+        [field: SerializeField] public PlayerAvatarMovement PlayerMovement { get; private set; } 
         [field: SerializeField] public PlayerAvatarAnimator PlayerAnimator { get; private set; } 
         [field: SerializeField] public PlayerAvatarInput PlayerInput { get; private set; } 
-        [field: SerializeField] public PlayerAvatarMovement PlayerMovement { get; private set; } 
         [field: SerializeField] public EventCollector EventCollector { get; private set; } 
         [field: Header("Camera")]
         [field: SerializeField] public Transform PlayerCameraTransform { get; private set; } 
@@ -21,5 +20,7 @@ namespace CozySpringJam.Game.GameCycle
         [field: Header("Final Segment")]
         [field: SerializeField] public EnterTrigger FinalEnterTrigger { get; private set; }
         [field: SerializeField] public CutsceneSettings FinalCutsceneSettings { get; private set; } 
+        [field: Header("DEBUG")]
+        [field: SerializeField] public bool ShowEntryCutscene { get; private set; } = true;
     }
 }

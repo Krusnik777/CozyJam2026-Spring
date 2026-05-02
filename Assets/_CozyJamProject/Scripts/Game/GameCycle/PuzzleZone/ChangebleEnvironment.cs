@@ -10,7 +10,6 @@ namespace CozySpringJam.Game.GameCycle
         {
             public GameObject targetObject;
             public float duration;
-            public bool updateImmediately;
         }
 
         public TargetObject[] objectsToEnable;

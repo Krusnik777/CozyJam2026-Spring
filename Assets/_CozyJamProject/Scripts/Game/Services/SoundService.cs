@@ -13,19 +13,6 @@ namespace CozySpringJam.Game.Services
             _backgroundSource = backgroundSource;
         }
 
-        private void Play(string soundName, float volume = 1)
-        {
-            var clip = Resources.Load<AudioClip>($"Sounds/{soundName}");
-
-            if (clip == null)
-            {
-                Debug.LogWarning($"Sound not found: {soundName}");
-                return;
-            }
-
-            _audioSource.PlayOneShot(clip, volume);
-        }
-
         public void PlayFootstep()
         {
             int step = Random.Range(1, 5);
@@ -55,6 +42,18 @@ namespace CozySpringJam.Game.Services
             _backgroundSource.volume = 0.05f;
             _backgroundSource.Play();
         }
-        
+
+        private void Play(string soundName, float volume = 1)
+        {
+            var clip = Resources.Load<AudioClip>($"Sounds/{soundName}");
+
+            if (clip == null)
+            {
+                Debug.LogWarning($"Sound not found: {soundName}");
+                return;
+            }
+
+            _audioSource.PlayOneShot(clip, volume);
+        }
     }
 }

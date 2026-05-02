@@ -1,4 +1,5 @@
 using CozySpringJam.Game.Objects;
+using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Player
@@ -8,16 +9,34 @@ namespace CozySpringJam.Game.Player
         [SerializeField] private Transform _view;
         [SerializeField] private PlayerAvatarAnimator _playerAvatarAnimator;
 
+        public Observable<IInteractable> DetectedInteractable => _detectedInteractableObject;
+        private ReactiveProperty<IInteractable> _detectedInteractableObject = new();
+
         public void CheckEnvironment()
+        {
+            if (_detectedInteractableObject.Value == null) return;
+
+            _detectedInteractableObject.Value.Interact();
+            _playerAvatarAnimator.Interact();
+        }
+
+        private void Update()
         {
             if (ShootRay(_view.forward, 2f, out RaycastHit hit))
             {
                 if (hit.collider.TryGetComponent(out IInteractable interactableObject))
                 {
-                    interactableObject.Interact();
-                    _playerAvatarAnimator.Interact();
-                } 
+                    if (interactableObject.IsAvailableForInteraction)
+                    {
+                        if (_detectedInteractableObject.Value != interactableObject)
+                            _detectedInteractableObject.Value = interactableObject;
+
+                        return;
+                    }
+                }
             }
+
+            if (_detectedInteractableObject.Value != null) _detectedInteractableObject.Value = null;
         }
 
         private bool ShootRay(Vector3 direction, float distance, out RaycastHit hit)
