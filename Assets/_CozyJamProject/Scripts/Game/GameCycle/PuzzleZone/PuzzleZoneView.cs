@@ -29,9 +29,9 @@ namespace CozySpringJam.Game.GameCycle
 
                 if (duration > 0f)
                 {
+                    float baseScale = target.transform.localScale.x;
                     target.transform.localScale = Vector3.zero;
-
-                    var anim = target.transform.DOScale(Vector3.one, duration).SetEase(Ease.OutBack).OnComplete(() => onEnd?.Invoke());
+                    var anim = target.transform.DOScale(baseScale, duration).SetEase(Ease.OutBack).OnComplete(() => onEnd?.Invoke());
                     anim.SetLink(gameObject);
                 }
             }
