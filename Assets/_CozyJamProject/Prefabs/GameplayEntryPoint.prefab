@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &963633930035829085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4121555777850921744}
+  - component: {fileID: 7886404789024446941}
+  - component: {fileID: 615537374320347689}
+  m_Layer: 0
+  m_Name: GameplayEntryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4121555777850921744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963633930035829085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7886404789024446941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963633930035829085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4398daad4396504da8d83d3e49ed8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.EntryPoints.GameplayEntryPoint
+  m_sceneUIRootPrefab: {fileID: 5120401183744360906, guid: 093350cab4b53e24a8ed7053368f052c, type: 3}
+  m_gameCycleControllerView: {fileID: 615537374320347689}
+--- !u!114 &615537374320347689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963633930035829085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796bf2a873c2cd14794cea4ac8a381fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.GameCycle.GameCycleControllerView
+  <PlayerMovement>k__BackingField: {fileID: 0}
+  <PlayerAnimator>k__BackingField: {fileID: 0}
+  <PlayerInput>k__BackingField: {fileID: 0}
+  <EventCollector>k__BackingField: {fileID: 0}
+  <PlayerCameraTransform>k__BackingField: {fileID: 0}
+  <EntryCutsceneSettings>k__BackingField:
+    <ShowDelay>k__BackingField: 1
+    <Segments>k__BackingField:
+    - <Camera>k__BackingField: {fileID: 0}
+      <Duration>k__BackingField: 10
+      <Message>k__BackingField:
+        <ID>k__BackingField: 
+        <Text>k__BackingField: 
+        <StartDelay>k__BackingField: 0
+        <StayDuration>k__BackingField: 2
+        <ShowDuration>k__BackingField: 1
+        <HideDuration>k__BackingField: 1
+        <Force>k__BackingField: 0
+        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    - <Camera>k__BackingField: {fileID: 0}
+      <Duration>k__BackingField: 3.5
+      <Message>k__BackingField:
+        <ID>k__BackingField: start_scene_message
+        <Text>k__BackingField: I feel need for Spring's Touch...
+        <StartDelay>k__BackingField: 1.25
+        <StayDuration>k__BackingField: 1.75
+        <ShowDuration>k__BackingField: 0.25
+        <HideDuration>k__BackingField: 1
+        <Force>k__BackingField: 0
+        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <FadeInDuration>k__BackingField: 2
+    <FadeOutDuration>k__BackingField: 0
+  <PuzzleZones>k__BackingField:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  <FinalEnterTrigger>k__BackingField: {fileID: 0}
+  <FinalCutsceneSettings>k__BackingField:
+    <ShowDelay>k__BackingField: 0
+    <Segments>k__BackingField:
+    - <Camera>k__BackingField: {fileID: 0}
+      <Duration>k__BackingField: 3
+      <Message>k__BackingField:
+        <ID>k__BackingField: final_scene_message
+        <Text>k__BackingField: Now I can rest for a while...
+        <StartDelay>k__BackingField: 1
+        <StayDuration>k__BackingField: 2
+        <ShowDuration>k__BackingField: 0.5
+        <HideDuration>k__BackingField: 0.5
+        <Force>k__BackingField: 0
+        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <FadeInDuration>k__BackingField: 0
+    <FadeOutDuration>k__BackingField: 2
+  <ShowEntryCutscene>k__BackingField: 1

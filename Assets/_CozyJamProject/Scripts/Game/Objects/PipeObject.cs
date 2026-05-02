@@ -1,78 +1,75 @@
+using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Objects
 {
     public class PipeObject : MonoBehaviour
     {
-        [SerializeField] private MovableObject _movableObject;
-        [SerializeField] private PipeObject _secondPipeObject;
-        private float _checkInterval = 0.25f;
-        private float _timer;
-        private bool _isPressed = false;
-        private RaycastHit _hit =  new RaycastHit();
-
-        private void SetMovableObject(MovableObject movableObject)
+        public enum Mode
         {
-            _movableObject = movableObject;
+            Detect,
+            Holder
         }
 
-        public MovableObject GetMovableObject() => _movableObject;
-        
-        private void Update()
+        [SerializeField] private EnterTrigger m_playerDetector;
+
+        public Mode CurrentMode { get; set; }
+
+        public bool PlayerDetected { get; private set; }
+        public bool IsBusy { get; set; }
+
+        private CompositeDisposable _disposables = new();
+
+        public Transform TryGetMovableTransform() => TryDetectMovableObject(Vector3.up, 2f);
+
+        private void Awake()
         {
-            _timer += Time.deltaTime;
+            m_playerDetector.OnEnter.Subscribe(_ => OnPlayerDetected()).AddTo(_disposables);
+            m_playerDetector.OnExit.Subscribe(_ => OnPlayerVanished()).AddTo(_disposables);
 
-            if (_timer < _checkInterval) return;
-
-            _timer = 0f;
-            
-            bool hit = ShootRay(Vector3.up, 2f, out _hit);
-            
-            if (hit && !_isPressed)
-            {
-                _isPressed = true;
-                if (_movableObject != null && _secondPipeObject.GetMovableObject() == null)
-                {
-                    _secondPipeObject.SetMovableObject(_movableObject);
-                    _movableObject.transform.position = new Vector3(_secondPipeObject.transform.position.x, 0, _secondPipeObject.transform.position.z);
-                    _movableObject = null;
-                    _isPressed = false;
-                }
-            }
-            else if (!hit && _isPressed)
-            {
-                _isPressed = false;
-            }
+            PlayerDetected = false;
         }
-        
-        private bool ShootRay(Vector3 direction, float distance, out RaycastHit hit)
+
+        private void OnDestroy()
+        {
+            _disposables?.Dispose();
+        }
+
+        private Transform TryDetectMovableObject(Vector3 direction, float distance)
         {
             var origin = transform.position - Vector3.up / 2;
             Ray ray = new Ray(origin, direction.normalized);
-
-            Debug.DrawRay(origin, direction.normalized * distance, Color.red, 1f);
+            RaycastHit hit;
 
             int layerMask = 1 << 0;
 
             bool hitBool = Physics.Raycast(ray, out hit, distance, layerMask);
 
+            Debug.DrawRay(origin, direction.normalized * distance, hitBool ? Color.red : Color.green, 1f);
+
             if (hitBool && hit.collider != null)
             {
                 if (hit.collider.TryGetComponent(out MovableObject movableObject))
                 {
-                    if (_movableObject != movableObject)
-                        _movableObject = movableObject;
-                    else
-                        return false;
+                    return movableObject.transform;
+                }
+                else
+                {
+                    return null;
                 }
             }
-            else
-            {
-                if(_movableObject != null)
-                    _movableObject = null;
-            }
 
-            return hitBool;
+            return null;
+        }
+
+        private void OnPlayerVanished()
+        {
+            PlayerDetected = false;
+        }
+
+        private void OnPlayerDetected()
+        {
+            PlayerDetected = true;
         }
     }
 }

@@ -169,7 +169,7 @@ namespace CozySpringJam.Game.Objects
 
             Debug.DrawRay(origin, direction.normalized * distance, Color.red, 1f);
 
-            int layerMask = ~((1 << 7) | (1 << 2));
+            int layerMask = ~((1 << 7) | (1 << 2) | (1 << 8));
 
             return Physics.Raycast(ray, out hit, distance, layerMask);
         }
