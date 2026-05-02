@@ -13,5 +13,6 @@ namespace CozySpringJam.Game.GameCycle
     public class CutsceneSettings
     {
         [field: SerializeField] public CutsceneSegment[] Segments { get; private set; } 
+        [field: SerializeField] public string Message { get; private set; }  
     }
 }
