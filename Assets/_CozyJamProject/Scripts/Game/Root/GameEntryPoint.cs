@@ -7,7 +7,6 @@ using R3;
 using DI;
 using CozySpringJam.Game.Services;
 using CozySpringJam.Game.SO;
-using Unity.VisualScripting;
 
 namespace CozySpringJam.Game.Root
 {
@@ -59,8 +58,11 @@ namespace CozySpringJam.Game.Root
             _rootContainer.RegisterInstance(soundService);
 
             var cutscenesScreenSettings = Resources.Load<CutscenesScreenSettings>("CutscenesScreenSettings");
-            var cutsceneService = new CutsceneService(cutscenesScreenSettings);
+            var cutsceneService = new CutsceneService(cutscenesScreenSettings, messageService);
             _rootContainer.RegisterInstance(cutsceneService);
+
+            var inputDeviceDetectService = new InputDeviceDetectService();
+            _rootContainer.RegisterInstance(inputDeviceDetectService);
         }
 
         private /*async*/ void RunGame()

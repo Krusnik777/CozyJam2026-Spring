@@ -52,5 +52,16 @@ namespace CozySpringJam.Game.Services
             Force = force;
             Color = color ?? Color.white;
         }
+
+        public MessageData(MessageContainer messageContainer)
+        {
+            ID = messageContainer.ID;
+            Text = messageContainer.Text;
+            StayDuration = messageContainer.StayDuration;
+            ShowDuration = messageContainer.ShowDuration;
+            HideDuration = messageContainer.HideDuration;
+            Force = messageContainer.Force;
+            Color = messageContainer.Color;
+        }
     }
 }

@@ -618,8 +618,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.55, y: 0.78, z: 1.64}
-  m_LocalScale: {x: 13.64, y: 13.64, z: 13.64}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 17.6, y: 13.64, z: 22.2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7977404980088025988}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -642,8 +642,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.7581049}
+  m_Center: {x: 0, y: 0, z: 0.12094775}
 --- !u!114 &2966299710643450246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,13 +1274,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4033920367647155756}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -5.72, y: 47.640003, z: 1.21}
+  m_LocalRotation: {x: 0.16172901, y: -0.83731925, z: 0.39044836, w: 0.346829}
+  m_LocalPosition: {x: 3.49, y: 8.26, z: 9.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7977404980088025988}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 50, y: -135, z: 0}
 --- !u!114 &7103912227241182192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1306,7 +1306,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 7.87
+    OrthographicSize: 6.06
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1504,6 +1504,7 @@ Transform:
   - {fileID: 865223336052961679}
   - {fileID: 2030489070180878166}
   - {fileID: 4571635637637741699}
+  - {fileID: 1031482284688030058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1101223439623854849
@@ -1518,6 +1519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e6069efdfc4443b72ae17b591d3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.GameCycle.PuzzleZoneView
+  <IsIsometric>k__BackingField: 1
   <EnterTrigger>k__BackingField: {fileID: 2966299710643450246}
   <ZoneCameraTransform>k__BackingField: {fileID: 4571635637637741699}
   <PuzzleSolution>k__BackingField:
@@ -1537,12 +1539,13 @@ MonoBehaviour:
   - {fileID: 1536285676492997470}
   - {fileID: 5875914717649609032}
   - {fileID: 7775684666258315535}
-  m_changeableEnvironment:
-    objectsToEnable: []
-    objectsToDisable: []
   <PicturesScreenSettings>k__BackingField:
     UpperPicture: {fileID: 21300000, guid: 9d83237b0d6f44c43b22a70700a0b0d3, type: 3}
     LowerPicture: {fileID: 21300000, guid: d7016f4a570ae0843b6188c2c3e41780, type: 3}
+  <PlayerTargetPositionOnReset>k__BackingField: {fileID: 1031482284688030058}
+  m_changeableEnvironment:
+    objectsToEnable: []
+    objectsToDisable: []
 --- !u!1 &4398386733533204570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,6 +2563,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8830818251010195894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1031482284688030058}
+  m_Layer: 0
+  m_Name: PlayerRestartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1031482284688030058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830818251010195894}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7977404980088025988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8881461840682225192
 GameObject:
   m_ObjectHideFlags: 0

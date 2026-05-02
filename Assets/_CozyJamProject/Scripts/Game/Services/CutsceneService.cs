@@ -5,22 +5,24 @@ using R3;
 
 namespace CozySpringJam.Game.Services
 {
-    public class CutsceneService : IUIScreenInfluencer<CutscenesScreenSettings, (CutscenesScreenSettings, System.Action)>, IDisposable
+    public class CutsceneService : IUIScreenInfluencer<CutscenesScreenSettings, (CutscenesScreenSettings, Action)>, IDisposable
     {
         public Subject<CutscenesScreenSettings> ShowSignal => _showSignal;
         private Subject<CutscenesScreenSettings> _showSignal = new();
 
-        public Subject<(CutscenesScreenSettings, System.Action)> HideSignal => _hideSignal;
-        private Subject<(CutscenesScreenSettings, System.Action)> _hideSignal = new();
+        public Subject<(CutscenesScreenSettings, Action)> HideSignal => _hideSignal;
+        private Subject<(CutscenesScreenSettings, Action)> _hideSignal = new();
 
         private CutscenesScreenSettings _cutsceneScreenSettings;
+        private MessageService _messageService;
 
         private System.Action _repeatableAction;
         public IDisposable _disposable;
 
-        public CutsceneService(CutscenesScreenSettings cutsceneScreenSettings)
+        public CutsceneService(CutscenesScreenSettings cutsceneScreenSettings, MessageService messageService)
         {
             _cutsceneScreenSettings = cutsceneScreenSettings;
+            _messageService = messageService;
         }
 
         public void Dispose()
@@ -69,6 +71,7 @@ namespace CozySpringJam.Game.Services
             }
 
             cutsceneSegment.Camera.SetActive(true);
+            if (cutsceneSegment.Message.ID != string.Empty) _messageService.ShowMessage(new(cutsceneSegment.Message));
 
             return Observable.Interval(TimeSpan.FromSeconds(cutsceneSegment.Duration)).Subscribe(_ =>
             {

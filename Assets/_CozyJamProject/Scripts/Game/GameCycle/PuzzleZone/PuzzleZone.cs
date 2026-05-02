@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using CozySpringJam.Game.Objects;
+using CozySpringJam.Game.Player;
 using CozySpringJam.Game.Services;
 using R3;
 using UnityEngine;
@@ -11,6 +11,8 @@ namespace CozySpringJam.Game.GameCycle
     {
         private readonly int _uniqueId;
         private readonly PuzzleZoneView _view;
+        private readonly PlayerAvatarInput _playerInput;
+        private readonly CharacterController _playerCharacter;
 
         public Subject<PuzzleZoneView> OnEnter = new();
         public Subject<PuzzleZoneView> OnExit = new();
@@ -18,12 +20,15 @@ namespace CozySpringJam.Game.GameCycle
 
         private List<MovableObjectData> _movableObjectsList;
 
+        private IDisposable _resetListenerDisposable;
         private CompositeDisposable _disposables;
 
-        public PuzzleZone(int id, PuzzleZoneView view, SoundService soundService, ParticleService particleService)
+        public PuzzleZone(int id, PuzzleZoneView view, SoundService soundService, ParticleService particleService, PlayerAvatarInput playerInput, CharacterController playerCharacter)
         {
             _uniqueId = id;
             _view = view;
+            _playerInput = playerInput;
+            _playerCharacter = playerCharacter;
 
             Init(soundService, particleService);
         }
@@ -31,6 +36,7 @@ namespace CozySpringJam.Game.GameCycle
         public void Dispose()
         {
             _disposables?.Dispose();
+            _resetListenerDisposable?.Dispose();
         }
 
         private void Init(SoundService soundService, ParticleService particleService)
@@ -38,8 +44,8 @@ namespace CozySpringJam.Game.GameCycle
             _disposables = new();
             _movableObjectsList = new();
 
-            _view.EnterTrigger.OnEnter.Subscribe(_ => OnEnter.OnNext(_view)).AddTo(_disposables);
-            _view.EnterTrigger.OnExit.Subscribe(_ => OnExit.OnNext(_view)).AddTo(_disposables);
+            _view.EnterTrigger.OnEnter.Subscribe(_ => HandleEnter()).AddTo(_disposables);
+            _view.EnterTrigger.OnExit.Subscribe(_ => HandleExit()).AddTo(_disposables);
 
             for (int i = 0; i < _view.MovableObjects.Length; i++)
             {
@@ -50,8 +56,34 @@ namespace CozySpringJam.Game.GameCycle
 
                 movable.OnGridPositionChange.Subscribe(_ => CheckIfPuzzleSolved()).AddTo(_disposables);
             }
+        }
 
-            // Subscribe to movableObjects movements => CheckIfPuzzleSolved
+        private void HandleEnter()
+        {
+            _resetListenerDisposable = _playerInput.OnResetButtonPressed.Subscribe(_ => ResetPuzzle());
+
+            OnEnter.OnNext(_view);
+        }
+
+        private void HandleExit()
+        {
+            _resetListenerDisposable?.Dispose();
+
+            OnExit.OnNext(_view);
+        }
+
+        private void ResetPuzzle()
+        {
+            _playerCharacter.enabled = false;
+
+            _playerInput.transform.position = _view.PlayerTargetPositionOnReset.position;
+            for (int i = 0; i < _view.MovableObjects.Length; i++)
+            {
+                var movable = _view.MovableObjects[i];
+                movable.ResetPosition();
+            }
+
+            _playerCharacter.enabled = true;
         }
 
         private void CheckIfPuzzleSolved()

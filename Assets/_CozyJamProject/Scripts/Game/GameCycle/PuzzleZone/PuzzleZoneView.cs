@@ -6,13 +6,15 @@ namespace CozySpringJam.Game.GameCycle
 {
     public class PuzzleZoneView : MonoBehaviour
     {
+        [field: SerializeField] public bool IsIsometric { get; private set; } = true;
         [field: SerializeField] public EnterTrigger EnterTrigger { get; private set; }
         [field: SerializeField] public Transform ZoneCameraTransform { get; private set; }
         [field: SerializeField] public MovableObjectData[] PuzzleSolution { get; private set; }
         [field: SerializeField] public MovableObject[] MovableObjects { get; private set; }
-        [SerializeField] private ChangebleEnvironment m_changeableEnvironment;
         [field: SerializeField] public PicturesScreenSettings PicturesScreenSettings { get; private set; } 
-        
+        [field: SerializeField] public Transform PlayerTargetPositionOnReset { get; private set; } 
+        [SerializeField] private ChangebleEnvironment m_changeableEnvironment;
+
         public void HandleEnvironmentChange(System.Action onEnd = null)
         {
             for (int i = 0; i < m_changeableEnvironment.objectsToEnable.Length; i++)

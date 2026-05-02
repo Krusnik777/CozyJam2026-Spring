@@ -45,6 +45,7 @@ namespace CozySpringJam.Game.GameCycle
 
         public void Dispose()
         {
+            _view.PlayerInput.Dispose();
             _puzzleZoneListenerDisposables?.Dispose();
             _finalSegmentDisposable?.Dispose();
         }
@@ -59,7 +60,7 @@ namespace CozySpringJam.Game.GameCycle
                 var id = GeneratePuzzleZoneId();
                 var view = _view.PuzzleZones[i];
                 view.ZoneCameraTransform.gameObject.SetActive(false); // just to be safe
-                var puzzleZone = new PuzzleZone(id, view, soundService, particleService);
+                var puzzleZone = new PuzzleZone(id, view, soundService, particleService, _view.PlayerInput, _view.PlayerCharacter);
                 _puzzleZonesMap.Add(id, puzzleZone);
 
                 puzzleZone.OnEnter.Subscribe(puzzleZone => HandlePuzzleZoneInteraction(puzzleZone, true)).AddTo(_puzzleZoneListenerDisposables);
@@ -69,6 +70,7 @@ namespace CozySpringJam.Game.GameCycle
 
             // Start Player Animations
             //_view.PlayerCameraTransform.gameObject.SetActive(false);
+            _view.PlayerAnimator.PlayWakeUpAnimation();
             _cutsceneService.PlayCutscene(_view.EntryCutsceneSettings, () => InitPlayer());
         }
 
@@ -91,7 +93,7 @@ namespace CozySpringJam.Game.GameCycle
             puzzleZoneView.ZoneCameraTransform.gameObject.SetActive(isEnter);
             _view.PlayerCameraTransform.gameObject.SetActive(!isEnter);
 
-            _view.PlayerMovement.SetIsometricMovement(!isEnter);
+            _view.PlayerMovement.SetIsometricMovement(!(isEnter & !puzzleZoneView.IsIsometric));
 
             if (isEnter) _picturesShowSignal.OnNext(puzzleZoneView.PicturesScreenSettings);
             else _picturesHideSignal.OnNext(Unit.Default);
@@ -111,7 +113,7 @@ namespace CozySpringJam.Game.GameCycle
                 {
                     _puzzleZoneListenerDisposables?.Dispose();
 
-                    _messageService.ShowMessage(new("started_final_segment", "Now Time to Rest..."));
+                    _messageService.ShowMessage(new("started_final_segment", "Now time to rest..."));
 
                     _finalSegmentDisposable = _view.FinalEnterTrigger.OnEnter.Subscribe(_ => OnFinalSegmentEnd());
                 }

@@ -7,7 +7,7 @@ namespace CozySpringJam.Game.GameCycle
     public class GameCycleControllerView : MonoBehaviour
     {
         [field: Header("Player")]
-        [field: SerializeField] public Transform PlayerTransform { get; private set; }  
+        [field: SerializeField] public CharacterController PlayerCharacter { get; private set; }  
         [field: SerializeField] public PlayerAvatarAnimator PlayerAnimator { get; private set; } 
         [field: SerializeField] public PlayerAvatarInput PlayerInput { get; private set; } 
         [field: SerializeField] public PlayerAvatarMovement PlayerMovement { get; private set; } 

@@ -220,6 +220,9 @@ MonoBehaviour:
   _leftTrigger: {fileID: 5932137106562602079}
   _moveDuration: 0.25
   _scalePowerAnimation: 1.1
+  _resetScaleDuration: 0.5
+  _resetDropDuration: 0.25
+  _forceUpValue: 0.5
 --- !u!65 &2906271488722087182
 BoxCollider:
   m_ObjectHideFlags: 0
