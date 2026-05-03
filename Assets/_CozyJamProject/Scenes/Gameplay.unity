@@ -20585,10 +20585,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 305943454}
     - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
-      propertyPath: <ShowEntryCutscene>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
       propertyPath: <PlayerCameraTransform>k__BackingField
       value: 
       objectReference: {fileID: 2330369353873635577}

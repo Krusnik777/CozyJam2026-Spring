@@ -24,6 +24,7 @@ namespace CozySpringJam.Game.GameCycle
         private int _puzzleZoneGeneratedId = 0;
 
         private IDisposable _finalSegmentDisposable;
+        private IDisposable _exitGameButtonPressedDisposable;
         private IDisposable _upperZoomListenerDisposable;
         private IDisposable _lowerZoomListenerDisposable;
         private CompositeDisposable _puzzleZoneListenerDisposables;
@@ -50,13 +51,17 @@ namespace CozySpringJam.Game.GameCycle
             _lowerZoomListenerDisposable?.Dispose();
 
             _puzzleZoneListenerDisposables?.Dispose();
+            
             _finalSegmentDisposable?.Dispose();
+            _exitGameButtonPressedDisposable?.Dispose();
         }
 
         private void Init(SoundService soundService, ParticleService particleService)
         {
             _puzzleZoneListenerDisposables = new();
             _puzzleZonesMap = new();
+
+            _exitGameButtonPressedDisposable = _view.PlayerInput.OnExitGameButtonPressed.Subscribe(_ => OnFinish.OnNext(Unit.Default));
 
             for (int i = 0; i < _view.PuzzleZones.Length; i++)
             {

@@ -11,6 +11,8 @@ namespace CozySpringJam.Game.Player
         [SerializeField] private bool m_inverseMovement = true;
         [SerializeField] private ControlsTip m_interactTip;
 
+        public Subject<Unit> OnExitGameButtonPressed { get; private set;} = new();
+
         public Subject<Unit> OnResetButtonPressed { get; private set;} = new();
         public Subject<Unit> OnCompleteButtonPressed { get; private set;} = new();
 
@@ -29,7 +31,7 @@ namespace CozySpringJam.Game.Player
             m_interactTip.Unsubscribe();
         }
 
-        private void OnEnable()
+        /*private void OnEnable()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -39,7 +41,7 @@ namespace CozySpringJam.Game.Player
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-        }
+        }*/
 
         private void Awake()
         {
@@ -60,9 +62,9 @@ namespace CozySpringJam.Game.Player
 
         private void Update()
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("ExitGame"))
             {
-                // End for Game ?
+                OnExitGameButtonPressed.OnNext(Unit.Default);
 
                 return;
             }
@@ -77,21 +79,21 @@ namespace CozySpringJam.Game.Player
             if (Input.GetButtonDown("Reset") && !IsLimitedControls)
             {
                 Debug.Log("TRYING RESET");
-                OnResetButtonPressed?.OnNext(Unit.Default);
+                OnResetButtonPressed.OnNext(Unit.Default);
 
                 return;
             }
 
             if (Input.GetButtonDown("UpperZoom"))
             {
-                OnUpperPictureZoomButtonPressed?.OnNext(Unit.Default);
+                OnUpperPictureZoomButtonPressed.OnNext(Unit.Default);
 
                 return;
             }
 
             if (Input.GetButtonDown("LowerZoom"))
             {
-                OnLowerPictureZoomButtonPressed?.OnNext(Unit.Default);
+                OnLowerPictureZoomButtonPressed.OnNext(Unit.Default);
 
                 return;
             }

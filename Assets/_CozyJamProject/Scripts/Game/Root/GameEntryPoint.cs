@@ -26,6 +26,9 @@ namespace CozySpringJam.Game.Root
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
             _instance = new GameEntryPoint();
             _instance.RunGame();
         }
