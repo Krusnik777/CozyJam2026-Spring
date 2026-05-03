@@ -79,6 +79,10 @@ MonoBehaviour:
         <HideDuration>k__BackingField: 0
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <Actor>k__BackingField:
+        <ActorAnimator>k__BackingField: {fileID: 0}
+        <AnimationPlayDelay>k__BackingField: 0
+        <AnimationSignal>k__BackingField: 
     - <WaitingInput>k__BackingField: 0
       <Camera>k__BackingField: {fileID: 0}
       <Duration>k__BackingField: 9
@@ -91,6 +95,10 @@ MonoBehaviour:
         <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <Actor>k__BackingField:
+        <ActorAnimator>k__BackingField: {fileID: 0}
+        <AnimationPlayDelay>k__BackingField: 0
+        <AnimationSignal>k__BackingField: 
     - <WaitingInput>k__BackingField: 0
       <Camera>k__BackingField: {fileID: 0}
       <Duration>k__BackingField: 3.5
@@ -103,6 +111,10 @@ MonoBehaviour:
         <HideDuration>k__BackingField: 1
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <Actor>k__BackingField:
+        <ActorAnimator>k__BackingField: {fileID: 0}
+        <AnimationPlayDelay>k__BackingField: 0
+        <AnimationSignal>k__BackingField: 
     <FadeInDuration>k__BackingField: 2
     <FadeOutDuration>k__BackingField: 0
   <PuzzleZones>k__BackingField:
@@ -112,21 +124,42 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   <FinalEnterTrigger>k__BackingField: {fileID: 0}
+  <FinalSceneHolder>k__BackingField: {fileID: 0}
   <FinalCutsceneSettings>k__BackingField:
     <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
     - <WaitingInput>k__BackingField: 0
       <Camera>k__BackingField: {fileID: 0}
-      <Duration>k__BackingField: 3
+      <Duration>k__BackingField: 3.1
+      <Message>k__BackingField:
+        <ID>k__BackingField: 
+        <Text>k__BackingField: 
+        <StartDelay>k__BackingField: 0
+        <StayDuration>k__BackingField: 0
+        <ShowDuration>k__BackingField: 0
+        <HideDuration>k__BackingField: 0
+        <Force>k__BackingField: 0
+        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <Actor>k__BackingField:
+        <ActorAnimator>k__BackingField: {fileID: 0}
+        <AnimationPlayDelay>k__BackingField: 0
+        <AnimationSignal>k__BackingField: 
+    - <WaitingInput>k__BackingField: 0
+      <Camera>k__BackingField: {fileID: 0}
+      <Duration>k__BackingField: 5
       <Message>k__BackingField:
         <ID>k__BackingField: final_scene_message
         <Text>k__BackingField: Now I can rest for a while...
-        <StartDelay>k__BackingField: 1
+        <StartDelay>k__BackingField: 2
         <StayDuration>k__BackingField: 2
         <ShowDuration>k__BackingField: 0.5
         <HideDuration>k__BackingField: 0.5
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <Actor>k__BackingField:
+        <ActorAnimator>k__BackingField: {fileID: 0}
+        <AnimationPlayDelay>k__BackingField: 1.5
+        <AnimationSignal>k__BackingField: Waving
     <FadeInDuration>k__BackingField: 0
-    <FadeOutDuration>k__BackingField: 2
+    <FadeOutDuration>k__BackingField: 3
   <ShowEntryCutscene>k__BackingField: 1

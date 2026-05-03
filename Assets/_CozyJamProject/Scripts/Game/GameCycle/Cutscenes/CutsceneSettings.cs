@@ -10,6 +10,15 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public GameObject Camera { get; protected set; }
         [field: SerializeField] public float Duration { get; protected set; }
         [field: SerializeField] public MessageContainer Message { get; protected set; }
+        [field: SerializeField] public CutsceneActor Actor { get; protected set; }
+    }
+
+    [System.Serializable]
+    public class CutsceneActor
+    {
+        [field: SerializeField] public Animator ActorAnimator { get; protected set; }
+        [field: SerializeField] public float AnimationPlayDelay { get; protected set; }
+        [field: SerializeField] public string AnimationSignal { get; protected set; } 
     }
 
     public class InputCutsceneSegment : CutsceneSegment
@@ -22,6 +31,7 @@ namespace CozySpringJam.Game.GameCycle
             Camera = inputCutscene.Camera;
             Duration = inputCutscene.Duration;
             Message = inputCutscene.Message;
+            Actor = inputCutscene.Actor;
             OnInput = onInput;
         }
     }

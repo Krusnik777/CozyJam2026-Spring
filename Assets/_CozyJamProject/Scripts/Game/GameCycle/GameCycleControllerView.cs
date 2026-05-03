@@ -19,6 +19,7 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public PuzzleZoneView[] PuzzleZones { get; private set; }  
         [field: Header("Final Segment")]
         [field: SerializeField] public EnterTrigger FinalEnterTrigger { get; private set; }
+        [field: SerializeField] public GameObject FinalSceneHolder { get; private set; }
         [field: SerializeField] public CutsceneSettings FinalCutsceneSettings { get; private set; } 
         [field: Header("DEBUG")]
         [field: SerializeField] public bool ShowEntryCutscene { get; private set; } = true;

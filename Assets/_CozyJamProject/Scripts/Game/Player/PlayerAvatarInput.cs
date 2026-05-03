@@ -77,11 +77,15 @@ namespace CozySpringJam.Game.Player
                 return;
             }
 
+            #if UNITY_EDITOR
+
             if (Input.GetKeyUp(KeyCode.V))
             {
                 Debug.Log("COMPLETE PUZZLE");
                 OnCompleteButtonPressed?.OnNext(Unit.Default);
             }
+
+            #endif
 
             _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             if (m_inverseMovement) _input *= -1f;

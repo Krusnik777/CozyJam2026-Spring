@@ -149,8 +149,8 @@ namespace CozySpringJam.Game.GameCycle
                 {
                     _puzzleZoneListenerDisposables?.Dispose();
 
-                    //_messageService.ShowMessage(new("started_final_segment", "Now time to rest..."));
-
+                    _view.FinalSceneHolder.gameObject.SetActive(true);
+                    
                     _finalSegmentDisposable = _view.FinalEnterTrigger.OnEnter.Subscribe(_ => OnFinalSegmentEnd());
                 }
             }

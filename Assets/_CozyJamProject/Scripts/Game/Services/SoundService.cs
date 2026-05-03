@@ -76,7 +76,7 @@ namespace CozySpringJam.Game.Services
             PlayLoop("CatSleep", 0.5f);
         }
 
-        public void PlayWakeUpMew(float delay = 5.75f)
+        public void PlayWakeUpMew(float delay = 6.5f)
         {
             if (delay <= 0)
             {
