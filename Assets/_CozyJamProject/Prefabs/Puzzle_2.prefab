@@ -872,8 +872,8 @@ MonoBehaviour:
   - {fileID: 2921403770136312523}
   - {fileID: 629732660786615844}
   <PicturesScreenSettings>k__BackingField:
-    UpperPicture: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    LowerPicture: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    UpperPicture: {fileID: 21300000, guid: f1bf7e6977c038c4a860313962fa6e05, type: 3}
+    LowerPicture: {fileID: 21300000, guid: 2aef02d08dc7ea34babe5c8ce04f4470, type: 3}
   <PlayerTargetPositionOnReset>k__BackingField: {fileID: 7415292474628234454}
   <CutsceneAtEndSettings>k__BackingField:
     <ShowDelay>k__BackingField: 0

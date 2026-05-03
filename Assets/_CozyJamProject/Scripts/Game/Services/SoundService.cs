@@ -13,6 +13,9 @@ namespace CozySpringJam.Game.Services
         private Coroutines _coroutines;
         private Coroutine _fadeCoroutine;
         private float _savedBackgroundMusicVolume;
+        private string[] _playlist;
+        private int _currentTrackIndex;
+        private Coroutine _playlistCoroutine;
 
         public SoundService(AudioSource audioSource, AudioSource backgroundSource, Coroutines coroutines)
         {
@@ -163,5 +166,77 @@ namespace CozySpringJam.Game.Services
                 _backgroundSource.Stop();
             }
         }
+
+        #region PlayList
+
+        public void PlayBackgroundPlaylist(string[] trackNames, bool withFade = false)
+        {
+            if (trackNames == null || trackNames.Length == 0)
+            {
+                Debug.LogWarning("Playlist is empty");
+                return;
+            }
+
+            _playlist = trackNames;
+            _currentTrackIndex = 0;
+            _backgroundSource.volume = 0.05f;
+            _savedBackgroundMusicVolume = _backgroundSource.volume;
+            if (_playlistCoroutine != null)
+                _coroutines.StopCoroutine(_playlistCoroutine);
+
+            _playlistCoroutine = _coroutines.StartCoroutine(PlaylistRoutine(withFade));
+        }
+        
+        private IEnumerator PlaylistRoutine(bool withFade)
+        {
+            while (true)
+            {
+                yield return PlayTrack(_playlist[_currentTrackIndex], withFade);
+
+                _currentTrackIndex = (_currentTrackIndex + 1) % _playlist.Length;
+            }
+        }
+        
+        private IEnumerator PlayTrack(string trackName, bool withFade)
+        {
+            var clip = Resources.Load<AudioClip>($"Sounds/{trackName}");
+
+            if (clip == null)
+            {
+                Debug.LogWarning($"Track not found: {trackName}");
+                yield break;
+            }
+
+            _backgroundSource.clip = clip;
+            _backgroundSource.loop = false;
+            _backgroundSource.volume = _savedBackgroundMusicVolume;
+
+            if (withFade)
+            {
+                _backgroundSource.volume = 0f;
+                _backgroundSource.Play();
+                StartFade(_savedBackgroundMusicVolume, 1f, false);
+            }
+            else
+            {
+                _backgroundSource.Play();
+            }
+
+            yield return new WaitForSeconds(clip.length);
+        }
+        
+        public void StopPlaylist()
+        {
+            if (_playlistCoroutine != null)
+            {
+                _coroutines.StopCoroutine(_playlistCoroutine);
+                _playlistCoroutine = null;
+            }
+
+            StopBackgroundMusic();
+        }
+        
+
+        #endregion
     }
 }

@@ -72,7 +72,13 @@ namespace CozySpringJam.Game.GameCycle
                 inputActionsMap.Add(0, () =>
                 {
                     _view.PlayerAnimator.PlayWakeUpAnimation();
-                    soundService.PlayBackgroundMusic();
+                    //soundService.PlayBackgroundMusic();
+                    soundService.PlayBackgroundPlaylist(new[]
+                    {
+                        "BackgroundMusic_1",
+                        "BackgroundMusic_2",
+                        "BackgroundMusic_3"
+                    });
                 });
 
                 var cutsceneSettings = HandleCutsceneWithInputsSettings(_view.EntryCutsceneSettings, inputActionsMap);
@@ -83,7 +89,13 @@ namespace CozySpringJam.Game.GameCycle
             else
             {
                 EnablePlayer();
-                soundService.PlayBackgroundMusic();
+                //soundService.PlayBackgroundMusic();
+                soundService.PlayBackgroundPlaylist(new[]
+                {
+                    "BackgroundMusic_1",
+                    "BackgroundMusic_2",
+                    "BackgroundMusic_3"
+                });
             }
         }
 
