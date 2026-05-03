@@ -86,6 +86,7 @@ namespace CozySpringJam.Game.GameCycle
         private void HandleExit()
         {
             _resetListenerDisposable?.Dispose();
+            _completeListenerDisposable?.Dispose();
 
             OnExit.OnNext(_view);
         }

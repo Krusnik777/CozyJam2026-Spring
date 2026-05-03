@@ -276,7 +276,8 @@ namespace CozySpringJam.Game.Services
 
             _playlist = trackNames;
             _currentTrackIndex = 0;
-            _backgroundSource.volume = 0.05f;
+            //_backgroundSource.volume = 0.05f;
+            _backgroundSource.volume = 0.1f;
             _savedBackgroundMusicVolume = _backgroundSource.volume;
             if (_playlistCoroutine != null)
                 _coroutines.StopCoroutine(_playlistCoroutine);

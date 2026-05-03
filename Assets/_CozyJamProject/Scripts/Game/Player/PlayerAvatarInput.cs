@@ -13,6 +13,11 @@ namespace CozySpringJam.Game.Player
 
         public Subject<Unit> OnResetButtonPressed { get; private set;} = new();
         public Subject<Unit> OnCompleteButtonPressed { get; private set;} = new();
+
+        public Subject<Unit> OnUpperPictureZoomButtonPressed { get; private set;} = new();
+        public Subject<Unit> OnLowerPictureZoomButtonPressed { get; private set;} = new();
+
+        public bool IsLimitedControls { get; set;} = false;
         
         private Vector3 _input;
 
@@ -24,7 +29,7 @@ namespace CozySpringJam.Game.Player
             m_interactTip.Unsubscribe();
         }
 
-        /*private void OnEnable()
+        private void OnEnable()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -34,7 +39,7 @@ namespace CozySpringJam.Game.Player
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-        }*/
+        }
 
         private void Awake()
         {
@@ -62,14 +67,14 @@ namespace CozySpringJam.Game.Player
                 return;
             }
 
-            if (Input.GetButtonDown("Jump") && m_playerAvatarInteract != null)
+            if (Input.GetButtonDown("Jump") && m_playerAvatarInteract != null && !IsLimitedControls)
             {
                 m_playerAvatarInteract.CheckEnvironment();
 
                 return;
             }
 
-            if (Input.GetButtonDown("Reset"))
+            if (Input.GetButtonDown("Reset") && !IsLimitedControls)
             {
                 Debug.Log("TRYING RESET");
                 OnResetButtonPressed?.OnNext(Unit.Default);
@@ -77,9 +82,23 @@ namespace CozySpringJam.Game.Player
                 return;
             }
 
+            if (Input.GetButtonDown("UpperZoom"))
+            {
+                OnUpperPictureZoomButtonPressed?.OnNext(Unit.Default);
+
+                return;
+            }
+
+            if (Input.GetButtonDown("LowerZoom"))
+            {
+                OnLowerPictureZoomButtonPressed?.OnNext(Unit.Default);
+
+                return;
+            }
+
             #if UNITY_EDITOR
 
-            if (Input.GetKeyUp(KeyCode.V))
+            if (Input.GetKeyUp(KeyCode.V) && !IsLimitedControls)
             {
                 Debug.Log("COMPLETE PUZZLE");
                 OnCompleteButtonPressed?.OnNext(Unit.Default);

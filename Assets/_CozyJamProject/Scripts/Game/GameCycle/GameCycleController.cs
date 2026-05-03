@@ -6,7 +6,7 @@ using R3;
 
 namespace CozySpringJam.Game.GameCycle
 {
-    public class GameCycleController : IDisposable, IUIScreenInfluencer<PicturesScreenSettings, Unit>
+    public class GameCycleController : IDisposable, IUIPicturesScreenInfluencer
     {
         public Subject<Unit> OnFinish = new();
 
@@ -14,17 +14,18 @@ namespace CozySpringJam.Game.GameCycle
         private readonly MessageService _messageService;
         private readonly CutsceneService _cutsceneService;
 
-        public Subject<PicturesScreenSettings> ShowSignal => _picturesShowSignal;
-        private Subject<PicturesScreenSettings> _picturesShowSignal = new();
-
-        public Subject<Unit> HideSignal => _picturesHideSignal;
-        private Subject<Unit> _picturesHideSignal = new();
+        public Subject<PicturesScreenSettings> ShowSignal { get; private set; } = new();
+        public Subject<Unit> HideSignal { get; private set; } = new();
+        public Subject<(Action, Action)> UpperZoomSignal { get; private set; } = new();
+        public Subject<(Action, Action)> LowerZoomSignal { get; private set; } = new();
 
         private Dictionary<int, PuzzleZone> _puzzleZonesMap;
 
         private int _puzzleZoneGeneratedId = 0;
 
         private IDisposable _finalSegmentDisposable;
+        private IDisposable _upperZoomListenerDisposable;
+        private IDisposable _lowerZoomListenerDisposable;
         private CompositeDisposable _puzzleZoneListenerDisposables;
 
         public GameCycleController(DIContainer sceneContainer, GameCycleControllerView view)
@@ -44,6 +45,10 @@ namespace CozySpringJam.Game.GameCycle
         public void Dispose()
         {
             _view.PlayerInput.Dispose();
+
+            _upperZoomListenerDisposable?.Dispose();
+            _lowerZoomListenerDisposable?.Dispose();
+
             _puzzleZoneListenerDisposables?.Dispose();
             _finalSegmentDisposable?.Dispose();
         }
@@ -66,7 +71,7 @@ namespace CozySpringJam.Game.GameCycle
                 puzzleZone.OnFinish.Subscribe(puzzleZoneData => HandlePuzzleZoneFinish(puzzleZoneData, soundService)).AddTo(_puzzleZoneListenerDisposables);
             }
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
 
             if (_view.ShowEntryCutscene)
             {
@@ -89,7 +94,7 @@ namespace CozySpringJam.Game.GameCycle
 
                 _view.PlayerAnimator.PlaySleepAnimation();
                 soundService.PlayCatSleep();
-                
+
                 _cutsceneService.PlayCutscene(cutsceneSettings, () => EnablePlayer());
             }
             else
@@ -103,8 +108,8 @@ namespace CozySpringJam.Game.GameCycle
                     "BackgroundMusic_3"
                 });
             }
-            
-            #else
+
+#else
 
             var inputActionsMap = new Dictionary<int, System.Action>();
                 inputActionsMap.Add(0, () =>
@@ -128,7 +133,7 @@ namespace CozySpringJam.Game.GameCycle
                 
                 _cutsceneService.PlayCutscene(cutsceneSettings, () => EnablePlayer());
 
-            #endif
+#endif
         }
 
         private void EnablePlayer()
@@ -160,8 +165,22 @@ namespace CozySpringJam.Game.GameCycle
 
             _view.PlayerMovement.SetIsometricMovement(!(isEnter & !puzzleZoneView.IsIsometric));
 
-            if (isEnter) _picturesShowSignal.OnNext(puzzleZoneView.PicturesScreenSettings);
-            else _picturesHideSignal.OnNext(Unit.Default);
+            if (isEnter) ShowSignal.OnNext(puzzleZoneView.PicturesScreenSettings);
+            else HideSignal.OnNext(Unit.Default);
+
+            if (isEnter)
+            {
+                _upperZoomListenerDisposable?.Dispose();
+                _lowerZoomListenerDisposable?.Dispose();
+
+                _upperZoomListenerDisposable =_view.PlayerInput.OnUpperPictureZoomButtonPressed.Subscribe(_ => UpperZoomSignal.OnNext(HandlePlayerInput()));
+                _lowerZoomListenerDisposable = _view.PlayerInput.OnLowerPictureZoomButtonPressed.Subscribe(_ => LowerZoomSignal.OnNext(HandlePlayerInput()));
+            }
+            else
+            {
+                _upperZoomListenerDisposable?.Dispose();
+                _lowerZoomListenerDisposable?.Dispose();
+            }
         }
 
         private void HandlePuzzleZoneFinish((int, PuzzleZoneView) puzzleZoneData, SoundService soundService)
@@ -171,7 +190,7 @@ namespace CozySpringJam.Game.GameCycle
                 var id = puzzleZoneData.Item1;
                 _puzzleZonesMap[id].Dispose();
                 _puzzleZonesMap.Remove(id);
-                
+
                 soundService.PlaySuccessful();
 
                 HandlePuzzleZoneInteraction(puzzleZoneData.Item2, false);
@@ -190,7 +209,7 @@ namespace CozySpringJam.Game.GameCycle
                     _puzzleZoneListenerDisposables?.Dispose();
 
                     _view.FinalSceneHolder.gameObject.SetActive(true);
-                    
+
                     _finalSegmentDisposable = _view.FinalEnterTrigger.OnEnter.Subscribe(_ => OnFinalSegmentEnd());
                 }
             }
@@ -200,8 +219,6 @@ namespace CozySpringJam.Game.GameCycle
         {
             _finalSegmentDisposable?.Dispose();
             DisablePlayer();
-
-            // Some player Animations
 
             _cutsceneService.PlayCutscene(_view.FinalCutsceneSettings, () =>
             {
@@ -227,6 +244,26 @@ namespace CozySpringJam.Game.GameCycle
             }
 
             return new CutsceneWithInputsSettings(cutsceneSettings, segments.ToArray());
+        }
+
+        private (Action, Action) HandlePlayerInput()
+        {
+            Action disablePlayer = () =>
+            {
+                _view.PlayerInput.IsLimitedControls = true;
+
+                _view.PlayerMovement.enabled = false;
+                _view.PlayerMovement.Reset();
+            };
+
+            Action enablePlayer = () =>
+            {
+                _view.PlayerInput.IsLimitedControls = false;
+
+                _view.PlayerMovement.enabled = true;
+            };
+
+            return (disablePlayer, enablePlayer);
         }
     }
 }

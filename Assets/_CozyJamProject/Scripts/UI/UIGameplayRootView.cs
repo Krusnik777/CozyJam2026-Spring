@@ -12,7 +12,7 @@ namespace CozySpringJam.UI
         private UIPicturesScreen _uiPicturesScreen;
         private UICutscenesScreen _uICutscenesScreen;
 
-        public void BindScreen(IUIScreenInfluencer<PicturesScreenSettings, Unit> picturesScreenInfluencer)
+        public void BindScreen(IUIPicturesScreenInfluencer picturesScreenInfluencer)
         {
             var uiPicturesScreenPrefab = Resources.Load<UIPicturesScreen>("Prefabs/UI/PicturesScreen");
             _uiPicturesScreen = Instantiate(uiPicturesScreenPrefab, m_screensTransform);

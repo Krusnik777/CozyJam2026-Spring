@@ -104,8 +104,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4527118402412701964}
   - {fileID: 2408367931432636546}
+  - {fileID: 4527118402412701964}
   - {fileID: 6836331117359666803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,8 +128,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.UI.UIPicturesScreen
   m_upperPictureView: {fileID: 2648718771641870363}
   m_lowerPictureView: {fileID: 973714370080851629}
+  m_upperPictureZoom: {fileID: 802867477339094222}
+  m_lowerPictureZoom: {fileID: 5598537303356551878}
   m_tipMovableRectView: {fileID: 681059554553214948}
-  m_controlsTip: {fileID: 3104306671676456143}
+  m_controlsTips:
+  - {fileID: 3104306671676456143}
+  - {fileID: 2297278070464589529}
+  - {fileID: 686634706486424795}
 --- !u!1 &6831640521071788351
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +353,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3551422094715759207}
     m_Modifications:
+    - target: {fileID: 406314874411535609, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2766534466502038844, guid: 6dcea19c50225574494385eda89784c4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -430,8 +439,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6911417902155495257, guid: 6dcea19c50225574494385eda89784c4, type: 3}
       propertyPath: m_Name
-      value: Picture
+      value: UpperPicture
       objectReference: {fileID: 0}
+    - target: {fileID: 8071630572683385650, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e49dbfb2ad094fd4cadc2ec8651e3ba8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -439,7 +452,41 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6911417902155495257, guid: 6dcea19c50225574494385eda89784c4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2648718771641870363}
+    - targetCorrespondingSourceObject: {fileID: 6911417902155495257, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 802867477339094222}
+    - targetCorrespondingSourceObject: {fileID: 449603087323979119, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2297278070464589529}
   m_SourcePrefab: {fileID: 100100000, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+--- !u!1 &87193535834216657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 449603087323979119, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 506806343458784702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2297278070464589529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87193535834216657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac1d49631bedd9428bc352fcd5257e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.ControlsTip
+  m_text: {fileID: 9168721719851159067}
+  m_keyboardTip: 
+  m_gamepadTip: 
+  m_image: {fileID: 8578434330479517324}
+  m_keyboardButtonImage: {fileID: 21300000, guid: e49dbfb2ad094fd4cadc2ec8651e3ba8, type: 3}
+  m_gamepadButtonImage: {fileID: 21300000, guid: c05b0805a1a769e41a4a8a9adde74a66, type: 3}
+--- !u!1 &192261250087340359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 406314874411535609, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 506806343458784702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2408367931432636546 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2766534466502038844, guid: 6dcea19c50225574494385eda89784c4, type: 3}
@@ -478,6 +525,45 @@ MonoBehaviour:
   _shownPosition: {x: 621, y: 177}
   _duration: 1
   <PictureImage>k__BackingField: {fileID: 2667125218459440319}
+  _buttonPrompt: {fileID: 192261250087340359}
+--- !u!114 &802867477339094222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6404893111235277543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83da903e578edb4393e96bef7c7e1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.UI.UIPictureZoom
+  m_targetRect: {fileID: 2408367931432636546}
+  m_targetPosition: {x: 0, y: 0}
+  m_targetSize: {x: 1000, y: 1000}
+  m_duration: 0.25
+--- !u!114 &8578434330479517324 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8071630572683385650, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 506806343458784702}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192261250087340359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &9168721719851159067 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8661933347735702437, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 506806343458784702}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1780956237107297328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,6 +572,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3551422094715759207}
     m_Modifications:
+    - target: {fileID: 406314874411535609, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2453056545727205633, guid: 6dcea19c50225574494385eda89784c4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -572,7 +662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6911417902155495257, guid: 6dcea19c50225574494385eda89784c4, type: 3}
       propertyPath: m_Name
-      value: Picture (1)
+      value: LowerPicture
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -581,7 +671,41 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6911417902155495257, guid: 6dcea19c50225574494385eda89784c4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 973714370080851629}
+    - targetCorrespondingSourceObject: {fileID: 6911417902155495257, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5598537303356551878}
+    - targetCorrespondingSourceObject: {fileID: 449603087323979119, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 686634706486424795}
   m_SourcePrefab: {fileID: 100100000, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+--- !u!1 &2095510260512600265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 406314874411535609, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 1780956237107297328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2200700986624221535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 449603087323979119, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 1780956237107297328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &686634706486424795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2200700986624221535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac1d49631bedd9428bc352fcd5257e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.ControlsTip
+  m_text: {fileID: 6954230999088527253}
+  m_keyboardTip: 
+  m_gamepadTip: 
+  m_image: {fileID: 7544386439047423746}
+  m_keyboardButtonImage: {fileID: 21300000, guid: 87185c74b02dcff469efb4146cb270ce, type: 3}
+  m_gamepadButtonImage: {fileID: 21300000, guid: 8e4da2fb1dab86345beb0805e82c5ba5, type: 3}
 --- !u!114 &4232323366038514993 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2453056545727205633, guid: 6dcea19c50225574494385eda89784c4, type: 3}
@@ -620,3 +744,42 @@ MonoBehaviour:
   _shownPosition: {x: 668, y: -280}
   _duration: 1
   <PictureImage>k__BackingField: {fileID: 4232323366038514993}
+  _buttonPrompt: {fileID: 2095510260512600265}
+--- !u!114 &5598537303356551878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5142393573857758057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83da903e578edb4393e96bef7c7e1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.UI.UIPictureZoom
+  m_targetRect: {fileID: 4527118402412701964}
+  m_targetPosition: {x: 0, y: 0}
+  m_targetSize: {x: 1000, y: 1000}
+  m_duration: 0.25
+--- !u!114 &6954230999088527253 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8661933347735702437, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 1780956237107297328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &7544386439047423746 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8071630572683385650, guid: 6dcea19c50225574494385eda89784c4, type: 3}
+  m_PrefabInstance: {fileID: 1780956237107297328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095510260512600265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
