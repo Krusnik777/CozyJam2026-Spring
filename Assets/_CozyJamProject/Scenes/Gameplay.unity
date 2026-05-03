@@ -4051,6 +4051,68 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6143480216229376883, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
   m_PrefabInstance: {fileID: 6707965717990402961}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &629578801
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8920827786767850756}
+    m_Modifications:
+    - target: {fileID: 100010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_Name
+      value: SkyDome
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.45972
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.02414
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+--- !u!4 &629578802 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400010, guid: d0223f77114284b47a0e8b317e71e4dc, type: 3}
+  m_PrefabInstance: {fileID: 629578801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &630296972 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3635176490189677618, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
@@ -15819,8 +15881,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1055662986192808411, guid: a2eacfb10ceecb34388ad2fdcb1bb305, type: 3}
       propertyPath: m_Name
-      value: Puzzle_2
+      value: Puzzle_3
       objectReference: {fileID: 0}
+    - target: {fileID: 2055612508511461589, guid: a2eacfb10ceecb34388ad2fdcb1bb305, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.LowerPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: 2aef02d08dc7ea34babe5c8ce04f4470, type: 3}
+    - target: {fileID: 2055612508511461589, guid: a2eacfb10ceecb34388ad2fdcb1bb305, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.UpperPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: f1bf7e6977c038c4a860313962fa6e05, type: 3}
     - target: {fileID: 2055612508511461589, guid: a2eacfb10ceecb34388ad2fdcb1bb305, type: 3}
       propertyPath: m_changeableEnvironment.objectsToDisable.Array.data[0].targetObject
       value: 
@@ -17656,7 +17726,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3205511431714046983, guid: 43fb63a3679d1b741835e2d041852aee, type: 3}
       propertyPath: m_Name
-      value: Puzzle_5
+      value: Puzzle_2
       objectReference: {fileID: 0}
     - target: {fileID: 3249542571308352470, guid: 43fb63a3679d1b741835e2d041852aee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17698,6 +17768,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4285007781990807946, guid: 43fb63a3679d1b741835e2d041852aee, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.LowerPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: 725f975aba5fad04ca1299613463f875, type: 3}
+    - target: {fileID: 4285007781990807946, guid: 43fb63a3679d1b741835e2d041852aee, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.UpperPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: 526551af3fdb42a47a9da03acd015942, type: 3}
     - target: {fileID: 4285007781990807946, guid: 43fb63a3679d1b741835e2d041852aee, type: 3}
       propertyPath: m_changeableEnvironment.objectsToEnable.Array.data[13].targetObject
       value: 
@@ -26749,7 +26827,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6724267660010497556, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8993636487861809367, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 629578802}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
 --- !u!23 &6707965717990402962 stripped
@@ -32985,6 +33066,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2098986098612753850, guid: 4aa6a1635fa9b784a96fca64e451a902, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.LowerPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: 32ae6f7d934720c4dadad2197a7c6e95, type: 3}
+    - target: {fileID: 2098986098612753850, guid: 4aa6a1635fa9b784a96fca64e451a902, type: 3}
+      propertyPath: <PicturesScreenSettings>k__BackingField.UpperPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: ae94c4d271cbbc64191680e4f91b1b91, type: 3}
+    - target: {fileID: 2098986098612753850, guid: 4aa6a1635fa9b784a96fca64e451a902, type: 3}
       propertyPath: m_changeableEnvironment.objectsToEnable.Array.data[40].targetObject
       value: 
       objectReference: {fileID: 2122502870}
@@ -36210,7 +36299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8560750714153192919, guid: 4aa6a1635fa9b784a96fca64e451a902, type: 3}
       propertyPath: m_Name
-      value: Puzzle_3
+      value: Puzzle_5
       objectReference: {fileID: 0}
     - target: {fileID: 8560750714153192919, guid: 4aa6a1635fa9b784a96fca64e451a902, type: 3}
       propertyPath: m_IsActive
@@ -36282,6 +36371,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5efef4cd8d1f7b345a6ef3b010486115, type: 3}
+--- !u!4 &8920827786767850756 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8993636487861809367, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
+  m_PrefabInstance: {fileID: 6707965717990402961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -36292,9 +36386,9 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 4731936107793615516}
   - {fileID: 8211656663406953855}
-  - {fileID: 3949425860630161233}
-  - {fileID: 8415025109164305596}
-  - {fileID: 3726222408431294155}
   - {fileID: 3985434590660816778}
+  - {fileID: 3949425860630161233}
+  - {fileID: 3726222408431294155}
+  - {fileID: 8415025109164305596}
   - {fileID: 305943458}
   - {fileID: 6707965717990402961}
