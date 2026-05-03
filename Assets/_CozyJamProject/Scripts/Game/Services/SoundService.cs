@@ -312,7 +312,7 @@ namespace CozySpringJam.Game.Services
             {
                 _backgroundSource.volume = 0f;
                 _backgroundSource.Play();
-                StartFade(_savedBackgroundMusicVolume, 1f, false);
+                StartFadeBGM(_savedBackgroundMusicVolume, 1f, false);
             }
             else
             {

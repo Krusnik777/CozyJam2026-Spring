@@ -66,6 +66,8 @@ namespace CozySpringJam.Game.GameCycle
                 puzzleZone.OnFinish.Subscribe(puzzleZoneData => HandlePuzzleZoneFinish(puzzleZoneData, soundService)).AddTo(_puzzleZoneListenerDisposables);
             }
 
+            #if UNITY_EDITOR
+
             if (_view.ShowEntryCutscene)
             {
                 var inputActionsMap = new Dictionary<int, System.Action>();
@@ -101,6 +103,32 @@ namespace CozySpringJam.Game.GameCycle
                     "BackgroundMusic_3"
                 });
             }
+            
+            #else
+
+            var inputActionsMap = new Dictionary<int, System.Action>();
+                inputActionsMap.Add(0, () =>
+                {
+                    _view.PlayerAnimator.PlayWakeUpAnimation();
+                    soundService.StopLoopedSound();
+                    //soundService.PlayBackgroundMusic();
+                    soundService.PlayBackgroundPlaylist(new[]
+                    {
+                        "BackgroundMusic_1",
+                        "BackgroundMusic_2",
+                        "BackgroundMusic_3"
+                    });
+                    soundService.PlayWakeUpMew();
+                });
+
+                var cutsceneSettings = HandleCutsceneWithInputsSettings(_view.EntryCutsceneSettings, inputActionsMap);
+
+                _view.PlayerAnimator.PlaySleepAnimation();
+                soundService.PlayCatSleep();
+                
+                _cutsceneService.PlayCutscene(cutsceneSettings, () => EnablePlayer());
+
+            #endif
         }
 
         private void EnablePlayer()
