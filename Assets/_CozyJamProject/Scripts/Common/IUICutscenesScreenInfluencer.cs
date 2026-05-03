@@ -8,5 +8,6 @@ namespace CozySpringJam
         public Subject<(float, System.Action)> PrepareFadeInSignal { get; }
         public Subject<float> FadeInSignal { get; }
         public Subject<(float, System.Action)> FadeOutSignal { get; }
+        public Subject<(float, System.Action)> InputSequenceSignal { get; }
     }
 }

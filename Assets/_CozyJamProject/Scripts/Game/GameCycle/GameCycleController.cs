@@ -39,8 +39,6 @@ namespace CozySpringJam.Game.GameCycle
             _view.EventCollector.Bind(soundService, particleService);
 
             Init(soundService, particleService);
-
-            soundService.PlayBackgroundMusic();
         }
 
         public void Dispose()
@@ -70,12 +68,22 @@ namespace CozySpringJam.Game.GameCycle
 
             if (_view.ShowEntryCutscene)
             {
-                _view.PlayerAnimator.PlayWakeUpAnimation();
-                _cutsceneService.PlayCutscene(_view.EntryCutsceneSettings, () => EnablePlayer());
+                var inputActionsMap = new Dictionary<int, System.Action>();
+                inputActionsMap.Add(0, () =>
+                {
+                    _view.PlayerAnimator.PlayWakeUpAnimation();
+                    soundService.PlayBackgroundMusic();
+                });
+
+                var cutsceneSettings = HandleCutsceneWithInputsSettings(_view.EntryCutsceneSettings, inputActionsMap);
+
+                _view.PlayerAnimator.PlaySleepAnimation();
+                _cutsceneService.PlayCutscene(cutsceneSettings, () => EnablePlayer());
             }
             else
             {
                 EnablePlayer();
+                soundService.PlayBackgroundMusic();
             }
         }
 
@@ -157,6 +165,24 @@ namespace CozySpringJam.Game.GameCycle
             });
         }
 
-        
+        private CutsceneSettings HandleCutsceneWithInputsSettings(CutsceneSettings cutsceneSettings, Dictionary<int, System.Action> inputActionsMap)
+        {
+            var segments = new List<CutsceneSegment>();
+
+            for (int i = 0; i < cutsceneSettings.Segments.Length; i++)
+            {
+                if (cutsceneSettings.Segments[i].WaitingInput && inputActionsMap.ContainsKey(i))
+                {
+                    var inputSegment = new InputCutsceneSegment(cutsceneSettings.Segments[i], inputActionsMap[i]);
+                    segments.Add(inputSegment);
+                }
+                else
+                {
+                    segments.Add(cutsceneSettings.Segments[i]);
+                }
+            }
+
+            return new CutsceneWithInputsSettings(cutsceneSettings, segments.ToArray());
+        }
     }
 }

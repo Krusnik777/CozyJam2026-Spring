@@ -48,6 +48,7 @@ namespace CozySpringJam.UI
             targetColor.a = 0;
             
             _hideTween = m_messageText.DOColor(targetColor, duration).SetEase(Ease.Linear).OnComplete(() => gameObject.SetActive(false));
+            _hideTween.SetLink(gameObject);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace CozySpringJam.UI
     {
         [SerializeField] private RectTransform[] m_cutsceneBorders;
         [SerializeField] private Image m_fadeImage;
+        [SerializeField] private PressAnyButtonSequence m_pressAnyButtonSequence;
 
         private IDisposable _waitingDisposable;
         private CompositeDisposable _disposables;
@@ -38,6 +39,8 @@ namespace CozySpringJam.UI
             screenInfluencer.FadeOutSignal.Subscribe(FadeOut).AddTo(_disposables);
 
             screenInfluencer.PrepareFadeInSignal.Subscribe(PrepareFadeIn).AddTo(_disposables);
+
+            screenInfluencer.InputSequenceSignal.Subscribe(StartInputSequence).AddTo(_disposables);
         }
 
         private void OnDestroy()
@@ -117,6 +120,11 @@ namespace CozySpringJam.UI
 
                 waitingParameters.Item2?.Invoke();
             });
+        }
+
+        private void StartInputSequence((float, Action) inputSequenceParameters)
+        {
+            m_pressAnyButtonSequence.StartSequence(inputSequenceParameters.Item1, inputSequenceParameters.Item2);
         }
     }
 }

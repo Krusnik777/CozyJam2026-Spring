@@ -7,6 +7,7 @@ namespace CozySpringJam.Game.Player
         private const string _IsMoving = "IsMoving";
         private const string _OnInteract = "OnInteract";
         private const string _OnSleep = "OnSleep";
+        private const string _OnWakeUp = "OnWakeUp";
         private const float _MovementThreshold = 0.05f;
 
         [SerializeField] private CharacterController m_characterController;
@@ -17,9 +18,14 @@ namespace CozySpringJam.Game.Player
             m_animator.SetTrigger(_OnInteract);
         }
 
-        public void PlayWakeUpAnimation()
+        public void PlaySleepAnimation()
         {
             m_animator.SetTrigger(_OnSleep);
+        }
+
+        public void PlayWakeUpAnimation()
+        {
+            m_animator.SetTrigger(_OnWakeUp);
         }
 
         private void Update()

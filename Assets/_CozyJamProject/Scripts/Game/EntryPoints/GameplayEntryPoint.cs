@@ -29,12 +29,18 @@ namespace CozySpringJam.Game.EntryPoints
 
             uiSceneRoot.BindScreen(sceneContainer.Resolve<CutsceneService>());
 
+            var soundService = sceneContainer.Resolve<SoundService>();
+
             _gameCycleController = new GameCycleController(sceneContainer, m_gameCycleControllerView);
             uiSceneRoot.BindScreen(_gameCycleController);
 
             _onEnd = new();
 
-            _gameCycleFinishListener = _gameCycleController.OnFinish.Subscribe(_ => FinishGame());
+            _gameCycleFinishListener = _gameCycleController.OnFinish.Subscribe(_ =>
+            {
+                soundService.StopBackgroundMusic();
+                FinishGame();
+            });
 
             return _onEnd;
         }

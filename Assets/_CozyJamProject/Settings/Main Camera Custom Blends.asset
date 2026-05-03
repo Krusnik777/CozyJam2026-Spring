@@ -16,16 +16,27 @@ MonoBehaviour:
   - From: '**ANY CAMERA**'
     To: Camera1
     Blend:
-      Style: 1
-      Time: 5
+      Style: 0
+      Time: 0
       CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
-        m_RotationOrder: 0
+        m_RotationOrder: 4
   - From: '**ANY CAMERA**'
     To: Camera2
+    Blend:
+      Style: 1
+      Time: 3
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: '**ANY CAMERA**'
+    To: Camera3
     Blend:
       Style: 1
       Time: 1.25
@@ -34,7 +45,7 @@ MonoBehaviour:
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
-        m_RotationOrder: 0
+        m_RotationOrder: 4
   - From: '**ANY CAMERA**'
     To: FinalCamera
     Blend:
@@ -45,4 +56,4 @@ MonoBehaviour:
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
-        m_RotationOrder: 0
+        m_RotationOrder: 4

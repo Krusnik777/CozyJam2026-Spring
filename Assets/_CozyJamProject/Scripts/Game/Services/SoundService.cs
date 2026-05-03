@@ -43,7 +43,7 @@ namespace CozySpringJam.Game.Services
             InvokeDelayed(() => ContinueBackgroundMusic(),7f);
         }
 
-        public void PlayBackgroundMusic()
+        public void PlayBackgroundMusic(bool withFade = true)
         {
             var clip = Resources.Load<AudioClip>($"Sounds/BackgroundMusic");
 
@@ -52,11 +52,25 @@ namespace CozySpringJam.Game.Services
                 Debug.LogWarning($"Sound not found: BackgroundMusic");
                 return;
             }
+            
             _backgroundSource.loop = true;
             _backgroundSource.clip = clip;
             _backgroundSource.volume = 0.05f;
             _savedBackgroundMusicVolume = _backgroundSource.volume;
+
+            if (withFade)
+            {
+                _backgroundSource.volume = 0f;
+
+                StartFade(_savedBackgroundMusicVolume, 1f, stopAfterFade: false);
+            }
+
             _backgroundSource.Play();
+        }
+
+        public void StopBackgroundMusic()
+        {
+            _backgroundSource.Stop();
         }
 
         public void PauseBackgroundMusic(float duration = 1f)

@@ -12,6 +12,7 @@ namespace CozySpringJam.Game.Services
         public Subject<(float, Action)> PrepareFadeInSignal { get; private set; } = new();
         public Subject<float> FadeInSignal { get; private set; } = new();
         public Subject<(float, Action)> FadeOutSignal { get; private set; } = new();
+        public Subject<(float, Action)> InputSequenceSignal { get; private set; } = new();
 
         private CutscenesScreenSettings _cutsceneScreenSettings;
         private MessageService _messageService;
@@ -68,7 +69,7 @@ namespace CozySpringJam.Game.Services
                 {
                     if (cutsceneSettings.FadeOutDuration > 0f)
                     {
-                        FadeOutSignal.OnNext((cutsceneSettings.FadeOutDuration, 
+                        FadeOutSignal.OnNext((cutsceneSettings.FadeOutDuration,
                                               () => HideSignal.OnNext((_cutsceneScreenSettings, onEnd))));
                     }
                     else
@@ -91,7 +92,7 @@ namespace CozySpringJam.Game.Services
 
         private IDisposable ActivateCutsceneSegment(CutsceneSegment cutsceneSegment, Action onEnd)
         {
-            if (cutsceneSegment.Duration <= 0)
+            if (cutsceneSegment.Duration <= 0 && !cutsceneSegment.WaitingInput)
             {
                 onEnd?.Invoke();
                 return null;
@@ -100,12 +101,32 @@ namespace CozySpringJam.Game.Services
             cutsceneSegment.Camera.SetActive(true);
             if (cutsceneSegment.Message.ID != string.Empty) _messageService.ShowMessage(new(cutsceneSegment.Message), cutsceneSegment.Message.StartDelay);
 
-            return Observable.Interval(TimeSpan.FromSeconds(cutsceneSegment.Duration)).Subscribe(_ =>
+            if (cutsceneSegment.WaitingInput)
             {
-                //cutsceneSegment.Camera.SetActive(false);
+                bool receivedInput = false;
 
-                onEnd?.Invoke();
-            });
+                InputSequenceSignal.OnNext((cutsceneSegment.Duration, () =>
+                {
+                    (cutsceneSegment as InputCutsceneSegment).OnInput?.Invoke();
+                    receivedInput = true;
+                }));
+
+                return Observable.EveryUpdate().Where(_ => receivedInput == true).Subscribe(_ => 
+                {
+                    //cutsceneSegment.Camera.SetActive(false);
+
+                    onEnd?.Invoke();
+                });
+            }
+            else
+            {
+                return Observable.Interval(TimeSpan.FromSeconds(cutsceneSegment.Duration)).Subscribe(_ =>
+                {
+                    //cutsceneSegment.Camera.SetActive(false);
+
+                    onEnd?.Invoke();
+                });
+            }
         }
     }
 }

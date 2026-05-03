@@ -196,6 +196,81 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ff9a48fac1a8794987a581f76178b79, type: 3}
+--- !u!1 &234108724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234108725}
+  - component: {fileID: 234108726}
+  m_Layer: 0
+  m_Name: Camera2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &234108725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234108724}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.10721417, y: -0.88688016, z: 0.2588379, w: 0.36735776}
+  m_LocalPosition: {x: -0.81, y: 2.01, z: 1.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 692716820}
+  m_LocalEulerAnglesHint: {x: 32.54, y: -135, z: 0}
+--- !u!114 &234108726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234108724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 3
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 3.15
+    NearClipPlane: -10.53
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 1
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &305943453
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,13 +421,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319223011}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10721417, y: -0.88688016, z: 0.2588379, w: 0.36735776}
-  m_LocalPosition: {x: -0.81, y: 2.01, z: 1.35}
+  m_LocalRotation: {x: 0.1362044, y: -0.86361796, z: 0.35252386, w: 0.33367553}
+  m_LocalPosition: {x: 0.17, y: 2.23, z: 0.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 692716820}
-  m_LocalEulerAnglesHint: {x: 32.54, y: -135, z: 0}
+  m_LocalEulerAnglesHint: {x: 44.41, y: -137.75, z: 0}
 --- !u!114 &319223013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +453,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 3.15
+    OrthographicSize: 1.94
     NearClipPlane: -10.53
     FarClipPlane: 1000
     Dutch: 0
@@ -829,6 +904,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 319223012}
+  - {fileID: 234108725}
   - {fileID: 1079020779}
   m_Father: {fileID: 623822199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -935,7 +1011,7 @@ GameObject:
   - component: {fileID: 1079020779}
   - component: {fileID: 1079020780}
   m_Layer: 0
-  m_Name: Camera2
+  m_Name: Camera3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1085,121 +1161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b4e0fd4fc25cf4fa580dace610483f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Player.EventCollector
---- !u!1 &2113574391
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2113574393}
-  - component: {fileID: 2113574392}
-  - component: {fileID: 2113574394}
-  m_Layer: 0
-  m_Name: EntryPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2113574392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113574391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4398daad4396504da8d83d3e49ed8d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.EntryPoints.GameplayEntryPoint
-  m_sceneUIRootPrefab: {fileID: 5120401183744360906, guid: 093350cab4b53e24a8ed7053368f052c, type: 3}
-  m_gameCycleControllerView: {fileID: 2113574394}
---- !u!4 &2113574393
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113574391}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2113574394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113574391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 796bf2a873c2cd14794cea4ac8a381fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.GameCycle.GameCycleControllerView
-  <PlayerMovement>k__BackingField: {fileID: 4731936107793615519}
-  <PlayerAnimator>k__BackingField: {fileID: 4731936107793615518}
-  <PlayerInput>k__BackingField: {fileID: 4731936107793615520}
-  <EventCollector>k__BackingField: {fileID: 1332793933}
-  <PlayerCameraTransform>k__BackingField: {fileID: 2330369353873635577}
-  <EntryCutsceneSettings>k__BackingField:
-    <ShowDelay>k__BackingField: 1
-    <Segments>k__BackingField:
-    - <Camera>k__BackingField: {fileID: 319223011}
-      <Duration>k__BackingField: 10
-      <Message>k__BackingField:
-        <ID>k__BackingField: 
-        <Text>k__BackingField: 
-        <StartDelay>k__BackingField: 0
-        <StayDuration>k__BackingField: 2
-        <ShowDuration>k__BackingField: 1
-        <HideDuration>k__BackingField: 1
-        <Force>k__BackingField: 0
-        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-    - <Camera>k__BackingField: {fileID: 1079020778}
-      <Duration>k__BackingField: 3.5
-      <Message>k__BackingField:
-        <ID>k__BackingField: start_scene_message
-        <Text>k__BackingField: I feel need for Spring's Touch...
-        <StartDelay>k__BackingField: 1.25
-        <StayDuration>k__BackingField: 1.75
-        <ShowDuration>k__BackingField: 0.25
-        <HideDuration>k__BackingField: 1
-        <Force>k__BackingField: 0
-        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-    <FadeInDuration>k__BackingField: 2
-    <FadeOutDuration>k__BackingField: 0
-  <PuzzleZones>k__BackingField:
-  - {fileID: 8211656663406953856}
-  - {fileID: 1101223439119768924}
-  - {fileID: 1101223439472255881}
-  - {fileID: 8247357394519486345}
-  - {fileID: 1126656653568417413}
-  <FinalEnterTrigger>k__BackingField: {fileID: 305943454}
-  <FinalCutsceneSettings>k__BackingField:
-    <ShowDelay>k__BackingField: 0
-    <Segments>k__BackingField:
-    - <Camera>k__BackingField: {fileID: 1260268821}
-      <Duration>k__BackingField: 3
-      <Message>k__BackingField:
-        <ID>k__BackingField: final_scene_message
-        <Text>k__BackingField: Now I can rest for a while...
-        <StartDelay>k__BackingField: 1
-        <StayDuration>k__BackingField: 2
-        <ShowDuration>k__BackingField: 0.5
-        <HideDuration>k__BackingField: 0.5
-        <Force>k__BackingField: 0
-        <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-    <FadeInDuration>k__BackingField: 0
-    <FadeOutDuration>k__BackingField: 2
-  <ShowEntryCutscene>k__BackingField: 1
 --- !u!114 &2126849506 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3964892681442106512, guid: fe467479914245e409c13d9c396932aa, type: 3}
@@ -1742,6 +1703,123 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eceb6021322357042b7ad3c29afb862f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Player.PlayerAvatarInput
+--- !u!1001 &6323018567184761136
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510027195658570692, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100906289422202421, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: m_Name
+      value: EntryPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <PlayerInput>k__BackingField
+      value: 
+      objectReference: {fileID: 4731936107793615520}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <EventCollector>k__BackingField
+      value: 
+      objectReference: {fileID: 1332793933}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <PlayerAnimator>k__BackingField
+      value: 
+      objectReference: {fileID: 4731936107793615518}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <PlayerMovement>k__BackingField
+      value: 
+      objectReference: {fileID: 4731936107793615519}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <FinalEnterTrigger>k__BackingField
+      value: 
+      objectReference: {fileID: 305943454}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <PlayerCameraTransform>k__BackingField
+      value: 
+      objectReference: {fileID: 2330369353873635577}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: '<PuzzleZones>k__BackingField.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8211656663406953856}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: '<PuzzleZones>k__BackingField.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1101223439119768924}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: '<PuzzleZones>k__BackingField.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1101223439472255881}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: '<PuzzleZones>k__BackingField.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8247357394519486345}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: '<PuzzleZones>k__BackingField.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1126656653568417413}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <EntryCutsceneSettings>k__BackingField.<Segments>k__BackingField.Array.data[0].<Camera>k__BackingField
+      value: 
+      objectReference: {fileID: 319223011}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <EntryCutsceneSettings>k__BackingField.<Segments>k__BackingField.Array.data[1].<Camera>k__BackingField
+      value: 
+      objectReference: {fileID: 234108724}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <EntryCutsceneSettings>k__BackingField.<Segments>k__BackingField.Array.data[2].<Camera>k__BackingField
+      value: 
+      objectReference: {fileID: 1079020778}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <FinalCutsceneSettings>k__BackingField.<Segments>k__BackingField.Array.data[0].<Camera>k__BackingField
+      value: 
+      objectReference: {fileID: 1260268821}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
 --- !u!1001 &7281824275704798864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1948,7 +2026,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2113574393}
+  - {fileID: 6323018567184761136}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
