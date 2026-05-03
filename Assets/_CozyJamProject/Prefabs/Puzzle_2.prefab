@@ -918,6 +918,7 @@ MonoBehaviour:
   - {fileID: 1006845228330648303}
   - {fileID: 3946052084337292414}
   - {fileID: 5497574249731797016}
+  <ParticleReceivers>k__BackingField: []
 --- !u!1 &1327370121081441531
 GameObject:
   m_ObjectHideFlags: 0

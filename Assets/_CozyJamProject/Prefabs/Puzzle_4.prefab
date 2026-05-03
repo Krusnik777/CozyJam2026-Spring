@@ -3493,6 +3493,9 @@ MonoBehaviour:
       duration: 0.2
     - targetObject: {fileID: 0}
       duration: 0
+  <SoundReceivers>k__BackingField: []
+  <ParticleReceivers>k__BackingField:
+  - {fileID: 9161683076679450999}
 --- !u!1 &6892674907093066196
 GameObject:
   m_ObjectHideFlags: 0
