@@ -3496,6 +3496,9 @@ MonoBehaviour:
       duration: 0
     changeableRenderers: []
     disableableRenderers: []
+  <SoundReceivers>k__BackingField: []
+  <ParticleReceivers>k__BackingField:
+  - {fileID: 9161683076679450999}
   <ServicesReceivers>k__BackingField:
   - {fileID: 9161683076679450999}
 --- !u!1 &6892674907093066196

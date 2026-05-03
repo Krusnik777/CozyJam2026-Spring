@@ -921,6 +921,7 @@ MonoBehaviour:
   - {fileID: 3946052084337292414}
   - {fileID: 5497574249731797016}
   - {fileID: 1006845228330648303}
+  <ParticleReceivers>k__BackingField: []
 --- !u!1 &1327370121081441531
 GameObject:
   m_ObjectHideFlags: 0
@@ -5816,11 +5817,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4510569462935576121, guid: 11e30cf0d5cf61940a9bc3de28a95f1e, type: 3}
-      propertyPath: 'doors.Array.data[0]'
+      propertyPath: doors.Array.data[0]
       value: 
       objectReference: {fileID: 3946052084337292414}
     - target: {fileID: 4510569462935576121, guid: 11e30cf0d5cf61940a9bc3de28a95f1e, type: 3}
-      propertyPath: 'doors.Array.data[1]'
+      propertyPath: doors.Array.data[1]
       value: 
       objectReference: {fileID: 5497574249731797016}
     - target: {fileID: 8825158346386055138, guid: 11e30cf0d5cf61940a9bc3de28a95f1e, type: 3}

@@ -6006,6 +6006,7 @@ MonoBehaviour:
     - targetObject: {fileID: 0}
       duration: 0
   <SoundReceivers>k__BackingField: []
+  <ParticleReceivers>k__BackingField: []
 --- !u!1 &8589828995579165384
 GameObject:
   m_ObjectHideFlags: 0
