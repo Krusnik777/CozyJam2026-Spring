@@ -73,7 +73,13 @@ namespace CozySpringJam.Game.GameCycle
                 {
                     _view.PlayerAnimator.PlayWakeUpAnimation();
                     soundService.StopLoopedSound();
-                    soundService.PlayBackgroundMusic();
+                    //soundService.PlayBackgroundMusic();
+                    soundService.PlayBackgroundPlaylist(new[]
+                    {
+                        "BackgroundMusic_1",
+                        "BackgroundMusic_2",
+                        "BackgroundMusic_3"
+                    });
                     soundService.PlayWakeUpMew();
                 });
 
@@ -87,7 +93,13 @@ namespace CozySpringJam.Game.GameCycle
             else
             {
                 EnablePlayer();
-                soundService.PlayBackgroundMusic();
+                //soundService.PlayBackgroundMusic();
+                soundService.PlayBackgroundPlaylist(new[]
+                {
+                    "BackgroundMusic_1",
+                    "BackgroundMusic_2",
+                    "BackgroundMusic_3"
+                });
             }
         }
 
