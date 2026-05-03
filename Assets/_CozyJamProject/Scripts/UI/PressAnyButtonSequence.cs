@@ -25,7 +25,8 @@ namespace CozySpringJam.UI
                 }
                 else
                 {
-                    m_commandText.text = "Press Enter or Space";
+                    m_commandText.text = "Press Space";
+                    //m_commandText.text = "Press Enter or Space";
                 }
             });
 
