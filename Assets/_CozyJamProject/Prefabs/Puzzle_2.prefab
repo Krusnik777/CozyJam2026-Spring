@@ -872,7 +872,8 @@ MonoBehaviour:
   <CutsceneAtEndSettings>k__BackingField:
     <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
-    - <Camera>k__BackingField: {fileID: 7260436199973913938}
+    - <WaitingInput>k__BackingField: 0
+      <Camera>k__BackingField: {fileID: 7260436199973913938}
       <Duration>k__BackingField: 5
       <Message>k__BackingField:
         <ID>k__BackingField: puzzle2_finish_message
@@ -914,10 +915,12 @@ MonoBehaviour:
     objectsToDisable:
     - targetObject: {fileID: 0}
       duration: 0
-  <SoundReceivers>k__BackingField:
-  - {fileID: 1006845228330648303}
+    changeableRenderers: []
+    disableableRenderers: []
+  <ServicesReceivers>k__BackingField:
   - {fileID: 3946052084337292414}
   - {fileID: 5497574249731797016}
+  - {fileID: 1006845228330648303}
 --- !u!1 &1327370121081441531
 GameObject:
   m_ObjectHideFlags: 0

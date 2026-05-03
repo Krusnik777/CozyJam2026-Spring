@@ -16,8 +16,7 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public Transform PlayerTargetPositionOnReset { get; private set; }
         [field: SerializeField] public CutsceneSettings CutsceneAtEndSettings { get; private set; }
         [SerializeField] private ChangebleEnvironment m_changeableEnvironment;
-        [field: SerializeField] public SoundReceiver[] SoundReceivers { get; private set; }
-        [field: SerializeField] public ParticleReceiver[] ParticleReceivers { get; private set; }
+        [field: SerializeField] public ServicesReceiver[] ServicesReceivers { get; private set; }
         
         public void HandleEnvironmentChange(System.Action onEnd = null)
         {

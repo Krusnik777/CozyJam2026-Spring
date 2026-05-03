@@ -66,16 +66,9 @@ namespace CozySpringJam.Game.GameCycle
                 movable.OnGridPositionChange.Subscribe(_ => CheckIfPuzzleSolved()).AddTo(_disposables);
             }
 
-            for (int i = 0; i < _view.SoundReceivers.Length; i++)
+            for (int i = 0; i < _view.ServicesReceivers.Length; i++)
             {
-                var soundReceiver = _view.SoundReceivers[i];
-                soundReceiver.InitSoundService(soundService);
-            }
-            
-            for (int i = 0; i < _view.ParticleReceivers.Length; i++)
-            {
-                var soundReceiver = _view.ParticleReceivers[i];
-                soundReceiver.InitParticleService(particleService);
+                _view.ServicesReceivers[i].Bind(soundService, particleService);
             }
         }
 

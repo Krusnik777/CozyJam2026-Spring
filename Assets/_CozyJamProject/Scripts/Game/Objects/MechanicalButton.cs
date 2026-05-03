@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CozySpringJam.Game.Objects
 {
-    public class MechanicalButton : SoundReceiver
+    public class MechanicalButton : ServicesReceiver
     {
         [SerializeField] private LayerMask _mask;
         private float _checkInterval = 0.25f;
@@ -12,12 +12,6 @@ namespace CozySpringJam.Game.Objects
         private bool _isPressed = false;
         private readonly Subject<bool> _onPress = new();
         public Observable<bool> OnPress => _onPress;
-        private SoundService _soundService;
-
-        public override void InitSoundService(SoundService soundService)
-        {
-            _soundService = soundService;
-        }
 
         private void Update()
         {

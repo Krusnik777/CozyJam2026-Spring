@@ -1,11 +1,10 @@
-using CozySpringJam.Game.Services;
 using DG.Tweening;
 using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Objects
 {
-    public class MechanicalDoor : SoundReceiver
+    public class MechanicalDoor : ServicesReceiver
     {
         [SerializeField] private MechanicalButton _mechanicalButton;
         [SerializeField] private Transform _pivot;
@@ -13,12 +12,6 @@ namespace CozySpringJam.Game.Objects
         [SerializeField] private Vector3 _openRotation;
         
         private Vector3 _baseRotation;
-        private SoundService _soundService;
-        
-        public override void InitSoundService(SoundService soundService)
-        {
-            _soundService = soundService;
-        }
 
         private void Awake()
         {

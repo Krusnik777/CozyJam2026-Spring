@@ -3385,7 +3385,8 @@ MonoBehaviour:
   <CutsceneAtEndSettings>k__BackingField:
     <ShowDelay>k__BackingField: 0
     <Segments>k__BackingField:
-    - <Camera>k__BackingField: {fileID: 8575542952981063364}
+    - <WaitingInput>k__BackingField: 0
+      <Camera>k__BackingField: {fileID: 8575542952981063364}
       <Duration>k__BackingField: 5
       <Message>k__BackingField:
         <ID>k__BackingField: puzzle4_finish_message
@@ -3493,6 +3494,10 @@ MonoBehaviour:
       duration: 0.2
     - targetObject: {fileID: 0}
       duration: 0
+    changeableRenderers: []
+    disableableRenderers: []
+  <ServicesReceivers>k__BackingField:
+  - {fileID: 9161683076679450999}
 --- !u!1 &6892674907093066196
 GameObject:
   m_ObjectHideFlags: 0

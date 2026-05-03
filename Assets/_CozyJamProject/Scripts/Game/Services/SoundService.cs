@@ -28,27 +28,32 @@ namespace CozySpringJam.Game.Services
         }
         public void PlaySadMeow()
         {
-            Play($"SadMeow");
+            Play("SadMeow", 0.5f);
         }
         
         public void PlayMoveObject()
         {
-            Play($"MoveObject");
+            Play("MoveObject");
         }
         
         public void PlayStonePlate()
         {
-            Play($"StonePlate");
+            Play("StonePlate");
         }
 
         public void PlayOpenDoor()
         {
-            Play($"OpenDoor");
+            Play("OpenDoor");
         }
         
         public void PlayPuff()
         {
-            Play($"Puff");
+            Play("Puff");
+        }
+
+        public void PlayWoop()
+        {
+            Play("Woop");
         }
         
         public void PlaySuccessful()
