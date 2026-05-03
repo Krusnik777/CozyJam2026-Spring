@@ -72,12 +72,16 @@ namespace CozySpringJam.Game.GameCycle
                 inputActionsMap.Add(0, () =>
                 {
                     _view.PlayerAnimator.PlayWakeUpAnimation();
+                    soundService.StopLoopedSound();
                     soundService.PlayBackgroundMusic();
+                    soundService.PlayWakeUpMew();
                 });
 
                 var cutsceneSettings = HandleCutsceneWithInputsSettings(_view.EntryCutsceneSettings, inputActionsMap);
 
                 _view.PlayerAnimator.PlaySleepAnimation();
+                soundService.PlayCatSleep();
+                
                 _cutsceneService.PlayCutscene(cutsceneSettings, () => EnablePlayer());
             }
             else

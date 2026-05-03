@@ -50,11 +50,13 @@ namespace CozySpringJam.Game.Root
             var audioContainer = new GameObject("[AUDIO]").AddComponent<AudioListener>();
             var soundsContainer = new GameObject("[SOUNDS]").AddComponent<AudioSource>();
             soundsContainer.transform.SetParent(audioContainer.transform);
+            var loopSoundsContainer = new GameObject("[SOUNDS_LOOP]").AddComponent<AudioSource>();
+            loopSoundsContainer.transform.SetParent(audioContainer.transform);
             AudioSource bgmContainer = new GameObject("[BACKGROUND_MUSIC]").AddComponent<AudioSource>();
             bgmContainer.transform.SetParent(audioContainer.transform);
             Object.DontDestroyOnLoad(audioContainer);
             
-            SoundService soundService = new SoundService(soundsContainer, bgmContainer, _coroutines);
+            SoundService soundService = new SoundService(soundsContainer, loopSoundsContainer, bgmContainer, _coroutines);
             _rootContainer.RegisterInstance(soundService);
 
             var cutscenesScreenSettings = Resources.Load<CutscenesScreenSettings>("CutscenesScreenSettings");
