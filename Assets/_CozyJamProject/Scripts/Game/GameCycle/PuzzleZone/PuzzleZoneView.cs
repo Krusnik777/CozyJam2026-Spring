@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CozySpringJam.Game.Objects;
 using DG.Tweening;
 using UnityEngine;
@@ -55,6 +56,68 @@ namespace CozySpringJam.Game.GameCycle
                     target.SetActive(false);
                 }
             }
+
+            for (int i = 0; i < m_changeableEnvironment.changeableRenderers.Length; i++)
+            {
+                var target = m_changeableEnvironment.changeableRenderers[i];
+
+                for (int j = 0; j < target.renderers.Length; j++)
+                {
+                    var renderer = target.renderers[j];
+
+                    if (renderer.materials.Length == 0 || target.targetMaterialIndex > renderer.materials.Length) continue;
+
+                    var material = renderer.materials[target.targetMaterialIndex];
+                    var color = renderer.materials[target.targetMaterialIndex].color;
+                    color.a = target.alphaTargetValue;
+
+                    if (target.duration > 0)
+                    {
+                        var anim = DOTween.Sequence();
+                        anim.SetLink(gameObject);
+
+                        anim.Append(material.DOColor(color, target.duration));
+                        anim.OnComplete(() =>
+                        {
+                            onEnd?.Invoke();
+                            // Delete Material
+                        });
+                    }
+                    else
+                    {
+                        renderer.materials[target.targetMaterialIndex].color = color;
+                        // Delete Material
+                    }
+                }
+            }
+
+            for (int i = 0; i < m_changeableEnvironment.disableableRenderers.Length; i++)
+            {
+                var target = m_changeableEnvironment.disableableRenderers[i];
+
+                for (int j = 0; j < target.renderers.Length; j++)
+                {
+                    var renderer = target.renderers[j];
+
+                    if (target.targetMaterialIndex >= renderer.materials.Length)
+                    {
+                        Debug.LogWarning($"[PuzzleZoneView - ChangebleEnvironment] Index for target material out of bounds: {renderer.name} : {target.targetMaterialIndex} vs Length {renderer.materials.Length}");
+
+                        continue;
+                    }
+
+                    List<Material> materialsList = new();
+
+                    for (int k = 0; k < renderer.materials.Length; k++)
+                    {
+                        if (k == target.targetMaterialIndex) continue;
+
+                        materialsList.Add(renderer.materials[k]);
+                    }
+
+                    renderer.materials = materialsList.ToArray();
+                }
+            }
         }
 
         private void ProcessCollidersRecursively(Transform parent, bool includeSelf, bool enable)
@@ -76,5 +139,35 @@ namespace CozySpringJam.Game.GameCycle
                 ProcessCollidersRecursively(child, true, enable);
             }
         }
+
+        /*private void HandleMaterialBlendForRenderer(float duration, Material targetMaterial, MeshRenderer renderer, int materialIndex = -1)
+        {
+            if (materialIndex <= 0)
+            {
+                var initialMaterial = new Material(renderer.material);
+                var blendMaterial = new Material(renderer.material);
+                //renderer.material = blendMaterial;
+
+                var materialTween = DOVirtual.Float(0, 1, duration, (value) =>
+                {
+                    blendMaterial.Lerp(initialMaterial, targetMaterial, value);
+                    renderer.material = blendMaterial;
+                }).SetEase(Ease.Linear).SetLink(gameObject);
+            }
+            else
+            {
+                var initialMaterial = new Material(renderer.materials[materialIndex]);
+                var blendMaterial = new Material(renderer.materials[materialIndex]);
+                //renderer.material = blendMaterial;
+
+                var materialTween = DOVirtual.Float(0, 1, duration, (value) =>
+                {
+                    blendMaterial.Lerp(initialMaterial, targetMaterial, value);
+                    renderer.materials[materialIndex] = blendMaterial;
+                }).SetEase(Ease.Linear).SetLink(gameObject);
+            }
+        }*/
+
+
     }
 }

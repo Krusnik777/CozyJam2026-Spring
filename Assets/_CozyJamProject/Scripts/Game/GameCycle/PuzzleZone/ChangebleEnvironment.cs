@@ -14,6 +14,23 @@ namespace CozySpringJam.Game.GameCycle
 
         public TargetObject[] objectsToEnable;
         public TargetObject[] objectsToDisable;
-        // Maybe some materials also
+        public ChangeableRenderer[] changeableRenderers;
+        public DisableableRenderer[] disableableRenderers;
+    }
+
+    [System.Serializable]
+    public class ChangeableRenderer
+    {
+        public MeshRenderer[] renderers;
+        public int targetMaterialIndex = 1;
+        public float alphaTargetValue = 0f;
+        public float duration;
+    }
+
+    [System.Serializable]
+    public class DisableableRenderer
+    {
+        public MeshRenderer[] renderers;
+        public int targetMaterialIndex;
     }
 }
