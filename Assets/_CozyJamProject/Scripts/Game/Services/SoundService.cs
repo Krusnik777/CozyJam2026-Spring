@@ -35,7 +35,22 @@ namespace CozySpringJam.Game.Services
         {
             Play($"MoveObject");
         }
+        
+        public void PlayStonePlate()
+        {
+            Play($"StonePlate");
+        }
 
+        public void PlayOpenDoor()
+        {
+            Play($"OpenDoor");
+        }
+        
+        public void PlayPuff()
+        {
+            Play($"Puff");
+        }
+        
         public void PlaySuccessful()
         {
             PauseBackgroundMusic();
@@ -86,7 +101,7 @@ namespace CozySpringJam.Game.Services
             StartFade(_savedBackgroundMusicVolume, duration, stopAfterFade: false);
         }
         
-        private void Play(string soundName, float volume = 1)
+        public void Play(string soundName, float volume = 1)
         {
             var clip = Resources.Load<AudioClip>($"Sounds/{soundName}");
 
@@ -98,8 +113,8 @@ namespace CozySpringJam.Game.Services
 
             _audioSource.PlayOneShot(clip, volume);
         }
-        
-        public void InvokeDelayed(Action action, float delay)
+
+        private void InvokeDelayed(Action action, float delay)
         {
             _coroutines.StartCoroutine(InvokeDelayedRoutine(action, delay));
         }

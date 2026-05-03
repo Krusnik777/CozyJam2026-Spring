@@ -41,7 +41,7 @@ namespace CozySpringJam.Game.Services
 
             if (parent != null && parent.Equals(null))
                 parent = null;
-
+            
             var effect = LeanPool.Spawn(prefab, position, rotation, parent);
             if (effect == null)
                 return null;
