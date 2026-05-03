@@ -22672,7 +22672,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1ffa5f6f68a671042a55db8c9e0d4369, type: 2}
     - target: {fileID: 3547216751001219059, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3572306424226690583, guid: 497889ed75ae57a4bbff957f6cd48c48, type: 3}
       propertyPath: m_Materials.Array.size
