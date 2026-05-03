@@ -1413,6 +1413,8 @@ MonoBehaviour:
       duration: 1
     - targetObject: {fileID: 1543580544870644993}
       duration: 1
+    - targetObject: {fileID: 0}
+      duration: 0
     objectsToDisable:
     - targetObject: {fileID: 3485733277255987924}
       duration: 1
@@ -1450,6 +1452,8 @@ MonoBehaviour:
       duration: 1
     - targetObject: {fileID: 4939521523089125685}
       duration: 0.2
+    - targetObject: {fileID: 0}
+      duration: 0
 --- !u!1 &3313698491789248589
 GameObject:
   m_ObjectHideFlags: 0

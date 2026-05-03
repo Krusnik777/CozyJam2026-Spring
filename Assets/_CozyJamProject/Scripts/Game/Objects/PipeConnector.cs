@@ -1,14 +1,22 @@
 using System.Collections;
+using CozySpringJam.Game.Services;
+using CozySpringJam.Game.SO;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Objects
 {
-    public class PipeConnector : MonoBehaviour
+    public class PipeConnector : ParticleReceiver
     {
         [SerializeField] private float m_checkInterval = 0.25f;
         [SerializeField] private PipeObject m_1stPipe;
         [SerializeField] private PipeObject m_2ndPipe;
+        private ParticleService _particleService;
 
+        public override void InitParticleService(ParticleService particleService)
+        {
+            _particleService = particleService;
+        }
+        
         private void Awake()
         {
             StartCoroutine(HandlePipeEndsRoutine());
@@ -53,9 +61,9 @@ namespace CozySpringJam.Game.Objects
                 {
                     //m_1stPipe.CurrentMode = PipeObject.Mode.Holder;
                     m_2ndPipe.CurrentMode = PipeObject.Mode.Holder;
-
+                    _particleService.PlayParticle(ParticleType.BoxDust,  transformFrom1st.position + Vector3.up * 1.5f, Quaternion.identity);
                     transformFrom1st.position = new Vector3(m_2ndPipe.transform.position.x, 0, m_2ndPipe.transform.position.z);
-                    
+                    _particleService.PlayParticle(ParticleType.BoxDust,  m_2ndPipe.transform.position + Vector3.up * 1.5f, Quaternion.identity);
                     continue;
                 }
 
@@ -63,9 +71,9 @@ namespace CozySpringJam.Game.Objects
                 {
                     m_1stPipe.CurrentMode = PipeObject.Mode.Holder;
                     //m_2ndPipe.CurrentMode = PipeObject.Mode.Holder;
-
+                    _particleService.PlayParticle(ParticleType.BoxDust,  transformFrom2nd.position + Vector3.up * 1.5f, Quaternion.identity);
                     transformFrom2nd.position = new Vector3(m_1stPipe.transform.position.x, 0, m_1stPipe.transform.position.z);
-                    
+                    _particleService.PlayParticle(ParticleType.BoxDust,  m_1stPipe.transform.position + Vector3.up * 1.5f, Quaternion.identity);
                     continue;
                 }
             }

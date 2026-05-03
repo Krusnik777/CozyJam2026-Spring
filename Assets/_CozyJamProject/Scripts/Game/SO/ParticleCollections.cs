@@ -39,5 +39,6 @@ namespace CozySpringJam.Game.SO
     {
         StepDust = 0,
         BoxDust = 1,
+        TeleportDust = 2,
     }
 }

@@ -12,7 +12,8 @@ namespace CozySpringJam.Game.Player
         [SerializeField] private ControlsTip m_interactTip;
 
         public Subject<Unit> OnResetButtonPressed { get; private set;} = new();
-
+        public Subject<Unit> OnCompleteButtonPressed { get; private set;} = new();
+        
         private Vector3 _input;
 
         private IDisposable _disposable;
@@ -74,6 +75,12 @@ namespace CozySpringJam.Game.Player
                 OnResetButtonPressed?.OnNext(Unit.Default);
 
                 return;
+            }
+
+            if (Input.GetKeyUp(KeyCode.V))
+            {
+                Debug.Log("COMPLETE PUZZLE");
+                OnCompleteButtonPressed?.OnNext(Unit.Default);
             }
 
             _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));

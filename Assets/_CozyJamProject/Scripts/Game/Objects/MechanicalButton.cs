@@ -1,9 +1,10 @@
+using CozySpringJam.Game.Services;
 using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Objects
 {
-    public class MechanicalButton : MonoBehaviour
+    public class MechanicalButton : SoundReceiver
     {
         [SerializeField] private LayerMask _mask;
         private float _checkInterval = 0.25f;
@@ -11,6 +12,12 @@ namespace CozySpringJam.Game.Objects
         private bool _isPressed = false;
         private readonly Subject<bool> _onPress = new();
         public Observable<bool> OnPress => _onPress;
+        private SoundService _soundService;
+
+        public override void InitSoundService(SoundService soundService)
+        {
+            _soundService = soundService;
+        }
 
         private void Update()
         {
@@ -26,11 +33,13 @@ namespace CozySpringJam.Game.Objects
             {
                 _isPressed = true;
                 _onPress.OnNext(true);
+                _soundService.PlayStonePlate();
             }
             else if (!hit && _isPressed)
             {
                 _isPressed = false;
                 _onPress.OnNext(false);
+                _soundService.PlayStonePlate();
             }
         }
         

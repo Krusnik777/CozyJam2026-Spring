@@ -15,7 +15,9 @@ namespace CozySpringJam.Game.GameCycle
         [field: SerializeField] public Transform PlayerTargetPositionOnReset { get; private set; }
         [field: SerializeField] public CutsceneSettings CutsceneAtEndSettings { get; private set; }
         [SerializeField] private ChangebleEnvironment m_changeableEnvironment;
-
+        [field: SerializeField] public SoundReceiver[] SoundReceivers { get; private set; }
+        [field: SerializeField] public ParticleReceiver[] ParticleReceivers { get; private set; }
+        
         public void HandleEnvironmentChange(System.Action onEnd = null)
         {
             for (int i = 0; i < m_changeableEnvironment.objectsToEnable.Length; i++)
@@ -31,7 +33,7 @@ namespace CozySpringJam.Game.GameCycle
                 {
                     //ProcessCollidersRecursively(target.transform, true, true);
 
-                    float baseScale = target.transform.localScale.x;
+                    Vector3 baseScale = target.transform.localScale;
                     target.transform.localScale = Vector3.zero;
                     var anim = target.transform.DOScale(baseScale, duration).SetEase(Ease.OutBack).OnComplete(() => onEnd?.Invoke());
                     anim.SetLink(gameObject);
