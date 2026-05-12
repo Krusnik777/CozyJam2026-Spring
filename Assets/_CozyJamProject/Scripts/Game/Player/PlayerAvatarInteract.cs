@@ -1,23 +1,47 @@
+using System;
 using CozySpringJam.Game.Objects;
+using CozySpringJam.Game.Services;
 using R3;
 using UnityEngine;
 
 namespace CozySpringJam.Game.Player
 {
-    public class PlayerAvatarInteract : MonoBehaviour
+    public class PlayerAvatarInteract : MonoBehaviour, IDisposable
     {
         [SerializeField] private Transform _view;
         [SerializeField] private PlayerAvatarAnimator _playerAvatarAnimator;
+        [SerializeField] private ControlsTip _interactTip;
 
         public Observable<IInteractable> DetectedInteractable => _detectedInteractableObject;
         private ReactiveProperty<IInteractable> _detectedInteractableObject = new();
 
-        public void CheckEnvironment()
-        {
-            if (_detectedInteractableObject.Value == null) return;
+        private GameInputService _gameInputService;
 
-            _detectedInteractableObject.Value.Interact();
-            _playerAvatarAnimator.Interact();
+        private IDisposable _disposable;
+
+        public void Bind(GameInputService gameInputService)
+        {
+            _gameInputService = gameInputService; 
+            _gameInputService.SetOnPlayerInteract(CheckEnvironment);
+        }
+
+        public void Dispose()
+        {
+            _disposable?.Dispose();
+            _interactTip.Unsubscribe();
+        }
+
+        private void Awake()
+        {           
+            _disposable?.Dispose(); // just to be safe
+            _disposable = DetectedInteractable.Subscribe(detected => _interactTip.gameObject.SetActive(detected != null));
+
+            _interactTip.Subscribe();
+        }
+
+        private void OnDestroy()
+        {
+            Dispose();
         }
 
         private void Update()
@@ -49,6 +73,14 @@ namespace CozySpringJam.Game.Player
             int layerMask = 1 << 7;
 
             return Physics.Raycast(ray, out hit, distance, layerMask);
+        }
+
+        private void CheckEnvironment()
+        {
+            if (_detectedInteractableObject.Value == null) return;
+
+            _detectedInteractableObject.Value.Interact();
+            _playerAvatarAnimator.Interact();
         }
     }
 }

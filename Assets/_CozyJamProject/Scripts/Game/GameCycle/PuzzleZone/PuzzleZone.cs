@@ -12,7 +12,7 @@ namespace CozySpringJam.Game.GameCycle
     {
         private readonly int _uniqueId;
         private readonly PuzzleZoneView _view;
-        private readonly PlayerAvatarInput _playerInput;
+        private readonly GameInputService _gameInputService;
         private readonly PlayerAvatarMovement _playerMovement;
 
         public Subject<PuzzleZoneView> OnEnter = new();
@@ -29,11 +29,11 @@ namespace CozySpringJam.Game.GameCycle
         
         public PuzzleZone(int id, PuzzleZoneView view,
                           SoundService soundService, ParticleService particleService,
-                          PlayerAvatarInput playerInput, PlayerAvatarMovement playerMovement)
+                          GameInputService gameInputService, PlayerAvatarMovement playerMovement)
         {
             _uniqueId = id;
             _view = view;
-            _playerInput = playerInput;
+            _gameInputService = gameInputService;
             _playerMovement = playerMovement;
             
             Init(soundService, particleService);
@@ -75,10 +75,10 @@ namespace CozySpringJam.Game.GameCycle
         private void HandleEnter()
         {
             _resetListenerDisposable?.Dispose();
-            _resetListenerDisposable = _playerInput.OnResetButtonPressed.Subscribe(_ => ResetPuzzle());
+            _resetListenerDisposable = _gameInputService.OnResetButtonPressed.Subscribe(_ => ResetPuzzle());
             
             _completeListenerDisposable?.Dispose();
-            _completeListenerDisposable = _playerInput.OnCompleteButtonPressed.Subscribe(_ => CompletePuzzle());
+            _completeListenerDisposable = _gameInputService.OnCompleteButtonPressed.Subscribe(_ => CompletePuzzle());
 
             OnEnter.OnNext(_view);
         }

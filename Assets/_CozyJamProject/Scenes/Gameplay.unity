@@ -20497,17 +20497,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9854524eb9f182e4c9779ff08b9fd7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Player.PlayerAvatarMovement
---- !u!114 &4731936107793615520 stripped
+--- !u!114 &4731936107793615521 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7912585572181742752, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2232315539032324300, guid: 50e9d5b4b51b9d542a58d6e66508c33e, type: 3}
   m_PrefabInstance: {fileID: 4731936107793615516}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eceb6021322357042b7ad3c29afb862f, type: 3}
+  m_Script: {fileID: 11500000, guid: 04fa0477f1171c14eb2fbcae937d32f0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Player.PlayerAvatarInput
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &6323018567184761136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20561,10 +20561,6 @@ PrefabInstance:
       value: EntryPoint
       objectReference: {fileID: 0}
     - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
-      propertyPath: <PlayerInput>k__BackingField
-      value: 
-      objectReference: {fileID: 4731936107793615520}
-    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
       propertyPath: <EventCollector>k__BackingField
       value: 
       objectReference: {fileID: 1332793933}
@@ -20572,6 +20568,10 @@ PrefabInstance:
       propertyPath: <PlayerAnimator>k__BackingField
       value: 
       objectReference: {fileID: 4731936107793615518}
+    - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
+      propertyPath: <PlayerInteract>k__BackingField
+      value: 
+      objectReference: {fileID: 4731936107793615521}
     - target: {fileID: 8742981420389923074, guid: 3f3c75fdcb4185b4084c2a01ade0b871, type: 3}
       propertyPath: <PlayerMovement>k__BackingField
       value: 

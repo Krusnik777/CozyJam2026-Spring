@@ -23,7 +23,8 @@ namespace CozySpringJam.Game.Root
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void AutostartGame()
         {
-            //Application.targetFrameRate = 60;
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 1;
             //Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
             Cursor.lockState = CursorLockMode.Locked;
@@ -68,6 +69,10 @@ namespace CozySpringJam.Game.Root
 
             var inputDeviceDetectService = new InputDeviceDetectService();
             _rootContainer.RegisterInstance(inputDeviceDetectService);
+
+            // Maybe in gameplay scene, not here
+            var gameInputService = new GameInputService();
+            _rootContainer.RegisterInstance(gameInputService);
         }
 
         private /*async*/ void RunGame()

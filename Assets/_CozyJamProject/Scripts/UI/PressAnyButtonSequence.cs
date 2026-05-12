@@ -1,7 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using R3;
+using CozySpringJam.Game.Services;
 
 namespace CozySpringJam.UI
 {
@@ -10,32 +10,35 @@ namespace CozySpringJam.UI
         [SerializeField] private TMP_Text m_commandText;
         [SerializeField] private TMP_Text m_titleText;
 
-        //public Observable<bool> PressedButton => _pressedButton;
-        //private ReactiveProperty<bool> _pressedButton;
+        private GameInputService _gameInputService;
+        private bool _buttonPressed;
 
-        System.IDisposable _disposable;
+        public void Bind(GameInputService gameInputService) => _gameInputService = gameInputService;
 
         public void StartSequence(float delay, System.Action onEnd)
         {
-            _disposable = ControlDevice.OnControlDeviceChanged.Subscribe(device =>
+            if (_gameInputService == null)
             {
-                if (device is UnityEngine.InputSystem.Gamepad)
-                {
-                    m_commandText.text = "Press Start Button";
-                }
-                else
-                {
-                    m_commandText.text = "Press Space";
-                    //m_commandText.text = "Press Enter or Space";
-                }
-            });
+                onEnd?.Invoke();
+
+                return;
+            }
+
+            _buttonPressed = false;
+
+            m_commandText.text = "Press Any Button";
 
             StartCoroutine(WaitForButtonPressRoutine(delay, onEnd));
         }
 
+        private void OnAnyButton()
+        {
+            _buttonPressed = true;
+        }
+
         private void OnDestroy()
         {
-            _disposable?.Dispose();
+            if (_gameInputService != null) _gameInputService.ClearReactionForAnyButtonPress();
         }
 
         private IEnumerator WaitForButtonPressRoutine(float delay, System.Action onEnd)
@@ -60,18 +63,14 @@ namespace CozySpringJam.UI
 
             yield return StartCoroutine(ChangeTextColorRoutine(m_commandText, noColor, defaultColor, 1f));
 
-            yield return new WaitUntil(() =>
-            {
-                return Input.GetButtonDown("Submit");
-            });
+            _gameInputService.SetReactionForAnyButtonPress(OnAnyButton);
 
-            //yield return StartCoroutine(ChangeTextColorRoutine(m_commandText, defaultColor, noColor, 1f));
+            yield return new WaitUntil(() => _buttonPressed);
+
             yield return StartCoroutine(ChangeTextsColorRoutine(titleDefaultColor, defaultColor, titleNoColor, noColor, 1f));
 
             m_commandText.gameObject.SetActive(false);
             m_titleText.gameObject.SetActive(false);
-
-            //_pressedButton.Value = true;
 
             onEnd?.Invoke();
         }
@@ -110,6 +109,5 @@ namespace CozySpringJam.UI
             m_commandText.color = commandTargetColor;
             m_titleText.color = titleTargetColor;
         }
-          
     }
 }

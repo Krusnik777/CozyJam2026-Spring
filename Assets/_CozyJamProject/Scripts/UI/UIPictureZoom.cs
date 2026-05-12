@@ -13,6 +13,7 @@ namespace CozySpringJam.UI
         public bool IsZoomed { get; private set; }
 
         private bool _isZooming;
+        public bool IsZooming => _isZooming;
         private Sequence _animation;
 
         private Vector2 _startPosition;
@@ -21,7 +22,7 @@ namespace CozySpringJam.UI
 
         public void Zoom(Vector2 startPosition, Vector3 startRotation, Vector2 startSize)
         {
-            if (_isZooming) return;
+            if (_isZooming || IsZoomed) return;
 
             _startPosition = startPosition;
             _startRotation = startRotation;
@@ -32,7 +33,7 @@ namespace CozySpringJam.UI
 
         public void Unzoom()
         {
-            if (_isZooming) return;
+            if (_isZooming || !IsZoomed) return;
 
             ToggleAnimation(false);
         }

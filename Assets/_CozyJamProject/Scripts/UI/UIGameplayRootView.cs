@@ -1,4 +1,5 @@
 using CozySpringJam.Game.GameCycle;
+using CozySpringJam.Game.Services;
 using CozySpringJam.Game.SO;
 using R3;
 using UnityEngine;
@@ -19,11 +20,11 @@ namespace CozySpringJam.UI
             _uiPicturesScreen.Setup(picturesScreenInfluencer);
         }
 
-        public void BindScreen(IUICutscenesScreenInfluencer cutsceneScreenInfluencer)
+        public void BindScreen(IUICutscenesScreenInfluencer cutsceneScreenInfluencer, GameInputService gameInputService)
         {
             var uiCutscenesScreenPrefab = Resources.Load<UICutscenesScreen>("Prefabs/UI/CutscenesScreen");
             _uICutscenesScreen = Instantiate(uiCutscenesScreenPrefab, m_screensTransform);
-            _uICutscenesScreen.Setup(cutsceneScreenInfluencer);
+            _uICutscenesScreen.Setup(cutsceneScreenInfluencer, gameInputService);
         }
 
         private void OnDestroy()

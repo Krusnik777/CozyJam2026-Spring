@@ -1,3 +1,4 @@
+using CozySpringJam.Game.Services;
 using CozySpringJam.Utils;
 using UnityEngine;
 
@@ -10,9 +11,13 @@ namespace CozySpringJam.Game.Player
         [SerializeField] private float m_movementSpeed;
         [SerializeField] private float m_rotationSpeed = 250f;
         [SerializeField] private bool m_doIsometricMovement = true;
+        [SerializeField] private bool m_inverseInputMovement = true;
+
+        private GameInputService _gameInputService;
 
         private Vector3 directionControl;
-        public Vector3 DirectionControl => directionControl;
+
+        public void Bind(GameInputService gameInputService) => _gameInputService = gameInputService; 
 
         public void SetIsometricMovement(bool isIsometric) => m_doIsometricMovement = isIsometric;
 
@@ -29,17 +34,10 @@ namespace CozySpringJam.Game.Player
             m_characterController.enabled = true;
         }
 
-        public void SetCharacterControllerActive(bool state) => m_characterController.enabled = state;
-
-        public void SetMoveDirection(Vector3 moveDirection)
-        {
-            directionControl = moveDirection;
-            if (m_doIsometricMovement) directionControl = directionControl.ToIsometric();
-            directionControl.Normalize();
-        }
-
         private void Update()
         {
+            GetMoveDirection();
+
             if (directionControl.magnitude > 0)
             {
                 m_characterController.Move(directionControl * m_movementSpeed * Time.deltaTime);
@@ -51,6 +49,16 @@ namespace CozySpringJam.Game.Player
             {
                 m_characterController.Move(Vector3.zero);
             }
+        }
+
+        private void GetMoveDirection()
+        {
+            if (_gameInputService == null) return;
+
+            var moveDirection = _gameInputService.GetMovementInput(m_inverseInputMovement);
+            directionControl = moveDirection;
+            if (m_doIsometricMovement) directionControl = directionControl.ToIsometric();
+            directionControl.Normalize();
         }
     }
 }

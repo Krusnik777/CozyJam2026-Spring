@@ -1,4 +1,5 @@
 using System;
+using CozySpringJam.Game.Services;
 using CozySpringJam.Game.SO;
 using DG.Tweening;
 using R3;
@@ -21,7 +22,7 @@ namespace CozySpringJam.UI
             _disposables?.Dispose();
         }
 
-        public void Setup(IUICutscenesScreenInfluencer screenInfluencer)
+        public void Setup(IUICutscenesScreenInfluencer screenInfluencer, GameInputService gameInputService)
         {
             _disposables = new();
 
@@ -31,6 +32,8 @@ namespace CozySpringJam.UI
             }
 
             m_fadeImage.gameObject.SetActive(false);
+
+            m_pressAnyButtonSequence.Bind(gameInputService);
 
             screenInfluencer.ShowSignal.Subscribe(Show).AddTo(_disposables);
             screenInfluencer.HideSignal.Subscribe(Hide).AddTo(_disposables);

@@ -27,7 +27,9 @@ namespace CozySpringJam.Game.EntryPoints
             var uiSceneRoot = Instantiate(m_sceneUIRootPrefab);
             uiRoot.AttachSceneUI(uiSceneRoot.gameObject);
 
-            uiSceneRoot.BindScreen(sceneContainer.Resolve<CutsceneService>());
+            var gameInputService = sceneContainer.Resolve<GameInputService>();
+            gameInputService.SetPlayerInputsActive(false); // just to be safe
+            uiSceneRoot.BindScreen(sceneContainer.Resolve<CutsceneService>(), gameInputService);
 
             var soundService = sceneContainer.Resolve<SoundService>();
 

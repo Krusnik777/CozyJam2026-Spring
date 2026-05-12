@@ -266,7 +266,7 @@ namespace CozySpringJam.Game.Services
 
         #region PlayList
 
-        public void PlayBackgroundPlaylist(string[] trackNames, bool withFade = false)
+        public void PlayBackgroundPlaylist(string[] trackNames, bool withFade = true)
         {
             if (trackNames == null || trackNames.Length == 0)
             {

@@ -60,13 +60,13 @@ namespace CozySpringJam.UI
 
         private void HandleZoom((Action, Action) actions, UIPictureZoom pictureZoom)
         {
-            Debug.Log("HERE 0");
-
             if (m_lowerPictureView.IsActive || m_upperPictureView.IsActive) return;
 
             var otherPictureZoom = pictureZoom == m_upperPictureZoom ? m_lowerPictureZoom : m_upperPictureZoom;
 
-            if (otherPictureZoom.IsZoomed) return;
+            if (otherPictureZoom.IsZooming) return;
+
+            if (!pictureZoom.IsZoomed && otherPictureZoom.IsZoomed) otherPictureZoom.Unzoom();
 
             if (pictureZoom.IsZoomed)
             {

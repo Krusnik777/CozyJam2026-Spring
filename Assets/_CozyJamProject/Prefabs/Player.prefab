@@ -390,7 +390,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7255439435471400793}
   - component: {fileID: 6383916679585713637}
-  - component: {fileID: 7912585572181742752}
   - component: {fileID: 2671859776462959085}
   - component: {fileID: 1536929664775954557}
   - component: {fileID: 2232315539032324300}
@@ -444,22 +443,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.76, z: 0}
---- !u!114 &7912585572181742752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7790831013566206784}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eceb6021322357042b7ad3c29afb862f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozySpringJam.Game.Player.PlayerAvatarInput
-  m_playerAvatarMovement: {fileID: 2671859776462959085}
-  m_playerAvatarInteract: {fileID: 2232315539032324300}
-  m_inverseMovement: 1
-  m_interactTip: {fileID: 778338238716044665}
 --- !u!114 &2671859776462959085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +460,7 @@ MonoBehaviour:
   m_movementSpeed: 5
   m_rotationSpeed: 20
   m_doIsometricMovement: 1
+  m_inverseInputMovement: 1
 --- !u!114 &1536929664775954557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _view: {fileID: 4595096591060670330}
   _playerAvatarAnimator: {fileID: 1536929664775954557}
+  _interactTip: {fileID: 778338238716044665}
 --- !u!1001 &1142331496416364193
 PrefabInstance:
   m_ObjectHideFlags: 0

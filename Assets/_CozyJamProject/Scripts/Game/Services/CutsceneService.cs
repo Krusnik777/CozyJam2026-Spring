@@ -118,12 +118,14 @@ namespace CozySpringJam.Game.Services
                     {
                         _actorAnimationHandlerDisposable?.Dispose();
                         
-                        cutsceneSegment.Actor.ActorAnimator.Play(animationSignal);
+                        //cutsceneSegment.Actor.ActorAnimator.Play(animationSignal);
+                        cutsceneSegment.Actor.ActorAnimator.SetTrigger(animationSignal);
                     });
                 }
                 else
                 {
-                    cutsceneSegment.Actor.ActorAnimator.Play(animationSignal);
+                    //cutsceneSegment.Actor.ActorAnimator.Play(animationSignal);
+                    cutsceneSegment.Actor.ActorAnimator.SetTrigger(animationSignal);
                 }
             }
 
