@@ -30,6 +30,7 @@ namespace CozySpringJam.Game.Objects
         private float _baseScale;
         private Vector3 _direction = Vector3.zero;
         private bool _isMoving = false;
+        public bool IsMoving => _isMoving;
         private bool _isFailedMoving = false;
 
         private MovableObjectData _bindedMovableObjectData;

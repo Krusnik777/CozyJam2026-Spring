@@ -8,6 +8,8 @@ namespace CozySpringJam.Game.Player
 {
     public class PlayerAvatarInteract : MonoBehaviour, IDisposable
     {
+        [Tooltip("0 - is center ray")][SerializeField] private Transform[] _raysOrigins;
+        [SerializeField] private float _raycastDistance = 2f;
         [SerializeField] private Transform _view;
         [SerializeField] private PlayerAvatarAnimator _playerAvatarAnimator;
         [SerializeField] private ControlsTip _interactTip;
@@ -29,10 +31,18 @@ namespace CozySpringJam.Game.Player
         {
             _disposable?.Dispose();
             _interactTip.Unsubscribe();
+            if (_gameInputService != null) _gameInputService.SetOnPlayerInteract(null);
         }
 
         private void Awake()
-        {           
+        {   
+            if (_raysOrigins.Length == 0)
+            {
+                Debug.LogError("Rays is empty - fix it");
+                enabled = false;
+                return;
+            }
+
             _disposable?.Dispose(); // just to be safe
             _disposable = DetectedInteractable.Subscribe(detected => _interactTip.gameObject.SetActive(detected != null));
 
@@ -46,7 +56,8 @@ namespace CozySpringJam.Game.Player
 
         private void Update()
         {
-            if (ShootRay(_view.forward, 2f, out RaycastHit hit))
+            //if (ShootRay(_view.forward, _raycastDistance, out RaycastHit hit))
+            if (ShootRays(out RaycastHit hit))
             {
                 if (hit.collider.TryGetComponent(out IInteractable interactableObject))
                 {
@@ -75,6 +86,32 @@ namespace CozySpringJam.Game.Player
             return Physics.Raycast(ray, out hit, distance, layerMask);
         }
 
+        private bool ShootRays(out RaycastHit centerHit)
+        {
+            var centerRayOrigin = _raysOrigins[0].position;
+            Ray centerRay = new Ray(centerRayOrigin, _raysOrigins[0].forward.normalized);
+
+            int layerMask = 1 << 7;
+
+            bool result = Physics.Raycast(centerRay, out centerHit, _raycastDistance, layerMask);
+
+            bool neighbourChecksIsSame = true;
+
+            for (int i = 1; i < _raysOrigins.Length; i++)
+            {
+                var neighbourOrigin = _raysOrigins[i].position;
+                Ray neighbourRay = new Ray(neighbourOrigin, _raysOrigins[i].forward.normalized);
+                RaycastHit neighbourHit;
+                Physics.Raycast(neighbourRay, out neighbourHit, _raycastDistance, layerMask);
+
+                neighbourChecksIsSame = neighbourHit.collider == centerHit.collider;
+
+                if (!neighbourChecksIsSame) break;
+            }
+
+            return result && neighbourChecksIsSame;
+        }
+
         private void CheckEnvironment()
         {
             if (_detectedInteractableObject.Value == null) return;
@@ -82,5 +119,18 @@ namespace CozySpringJam.Game.Player
             _detectedInteractableObject.Value.Interact();
             _playerAvatarAnimator.Interact();
         }
+
+        #if UNITY_EDITOR
+
+        private void OnDrawGizmos()
+        {
+            foreach (var rayOrigin in _raysOrigins)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(rayOrigin.position, rayOrigin.position + rayOrigin.forward * _raycastDistance);
+            }
+        }
+
+        #endif
     }
 }

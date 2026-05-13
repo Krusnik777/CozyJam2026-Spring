@@ -1,5 +1,4 @@
 using System.Collections;
-using CozySpringJam.Game.Services;
 using CozySpringJam.Game.SO;
 using UnityEngine;
 
@@ -24,6 +23,8 @@ namespace CozySpringJam.Game.Objects
 
                 if (m_1stPipe.CurrentMode == PipeObject.Mode.Holder)
                 {
+                    yield return null;
+
                     var checkResult = m_1stPipe.TryGetMovableTransform();
 
                     if (checkResult == null) m_1stPipe.CurrentMode = PipeObject.Mode.Detect;
@@ -33,6 +34,8 @@ namespace CozySpringJam.Game.Objects
 
                 if (m_2ndPipe.CurrentMode == PipeObject.Mode.Holder)
                 {
+                    yield return null;
+
                     var checkResult = m_2ndPipe.TryGetMovableTransform();
 
                     if (checkResult == null) m_2ndPipe.CurrentMode = PipeObject.Mode.Detect;
@@ -58,9 +61,9 @@ namespace CozySpringJam.Game.Objects
 
                     _soundService.PlayWoop();
 
-                    _particleService.PlayParticle(ParticleType.BoxDust,  transformFrom1st.position + Vector3.up * 1.5f, Quaternion.identity);
+                    _particleService.PlayParticle(ParticleType.BoxDust, transformFrom1st.position + Vector3.up * 1.5f, Quaternion.identity);
                     transformFrom1st.position = new Vector3(m_2ndPipe.transform.position.x, 0, m_2ndPipe.transform.position.z);
-                    _particleService.PlayParticle(ParticleType.BoxDust,  m_2ndPipe.transform.position + Vector3.up * 1.5f, Quaternion.identity);
+                    _particleService.PlayParticle(ParticleType.BoxDust, m_2ndPipe.transform.position + Vector3.up * 1.5f, Quaternion.identity);
 
                     continue;
                 }
@@ -72,9 +75,9 @@ namespace CozySpringJam.Game.Objects
 
                     _soundService.PlayWoop();
 
-                    _particleService.PlayParticle(ParticleType.BoxDust,  transformFrom2nd.position + Vector3.up * 1.5f, Quaternion.identity);
+                    _particleService.PlayParticle(ParticleType.BoxDust, transformFrom2nd.position + Vector3.up * 1.5f, Quaternion.identity);
                     transformFrom2nd.position = new Vector3(m_1stPipe.transform.position.x, 0, m_1stPipe.transform.position.z);
-                    _particleService.PlayParticle(ParticleType.BoxDust,  m_1stPipe.transform.position + Vector3.up * 1.5f, Quaternion.identity);
+                    _particleService.PlayParticle(ParticleType.BoxDust, m_1stPipe.transform.position + Vector3.up * 1.5f, Quaternion.identity);
                     
                     continue;
                 }

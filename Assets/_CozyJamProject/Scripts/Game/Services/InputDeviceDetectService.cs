@@ -1,11 +1,13 @@
 using System;
+using R3;
 using UnityEngine.InputSystem;
 
 namespace CozySpringJam.Game.Services
 {
     public class InputDeviceDetectService : IDisposable
     {
-        private InputDevice _currentDevice;
+        private static ReactiveProperty<InputDevice> _currentDevice;
+        public static Observable<InputDevice> CurrentControlDevice => _currentDevice;
 
         public void Dispose()
         {
@@ -14,16 +16,22 @@ namespace CozySpringJam.Game.Services
 
         public InputDeviceDetectService()
         {
+            _currentDevice = new();
+
+            var devices = InputSystem.devices;
+            if (devices.Count > 0)
+            {
+                _currentDevice.Value = devices[0];
+            }
+
             InputSystem.onEvent += OnDeviceChange;
         }
 
         private void OnDeviceChange(UnityEngine.InputSystem.LowLevel.InputEventPtr eventPtr, InputDevice device)
         {
-            if (_currentDevice == device) return;
+            if (_currentDevice.Value == device) return;
 
-            _currentDevice = device;
-
-            ControlDevice.OnControlDeviceChanged.OnNext(_currentDevice);
+            _currentDevice.Value = device;
         }
 
 

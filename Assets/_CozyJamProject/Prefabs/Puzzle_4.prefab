@@ -3424,6 +3424,10 @@ MonoBehaviour:
         <HideDuration>k__BackingField: 0.25
         <Force>k__BackingField: 0
         <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <Actor>k__BackingField:
+        <ActorAnimator>k__BackingField: {fileID: 0}
+        <AnimationPlayDelay>k__BackingField: 0
+        <AnimationSignal>k__BackingField: 
     <FadeInDuration>k__BackingField: 0
     <FadeOutDuration>k__BackingField: 0
   m_changeableEnvironment:

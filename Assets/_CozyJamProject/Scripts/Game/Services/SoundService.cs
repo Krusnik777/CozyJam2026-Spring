@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using CozySpringJam.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,7 +20,8 @@ namespace CozySpringJam.Game.Services
         private float _savedBackgroundMusicVolume;
         private float _savedLoopSoundVolume;
 
-        private string[] _playlist;
+        //private string[] _playlist;
+        private List<AudioClip> _bgmPlaylist;
         private int _currentTrackIndex;
         private Coroutine _playlistCoroutine;
 
@@ -274,7 +276,18 @@ namespace CozySpringJam.Game.Services
                 return;
             }
 
-            _playlist = trackNames;
+            _bgmPlaylist = new();
+
+            for (int i = 0; i < trackNames.Length; i++)
+            {
+                var trackName = trackNames[i];
+                var clip = Resources.Load<AudioClip>($"Sounds/{trackName}");
+
+                if (clip != null) _bgmPlaylist.Add(clip);
+            }
+
+            if (_bgmPlaylist.Count == 0) return;
+
             _currentTrackIndex = 0;
             //_backgroundSource.volume = 0.05f;
             _backgroundSource.volume = 0.1f;
@@ -289,22 +302,14 @@ namespace CozySpringJam.Game.Services
         {
             while (true)
             {
-                yield return PlayTrack(_playlist[_currentTrackIndex], withFade);
+                yield return PlayBGMTrackRoutine(_bgmPlaylist[_currentTrackIndex], withFade);
 
-                _currentTrackIndex = (_currentTrackIndex + 1) % _playlist.Length;
+                _currentTrackIndex = (_currentTrackIndex + 1) % _bgmPlaylist.Count;
             }
         }
         
-        private IEnumerator PlayTrack(string trackName, bool withFade)
+        private IEnumerator PlayBGMTrackRoutine(AudioClip clip, bool withFade)
         {
-            var clip = Resources.Load<AudioClip>($"Sounds/{trackName}");
-
-            if (clip == null)
-            {
-                Debug.LogWarning($"Track not found: {trackName}");
-                yield break;
-            }
-
             _backgroundSource.clip = clip;
             _backgroundSource.loop = false;
             _backgroundSource.volume = _savedBackgroundMusicVolume;
@@ -313,14 +318,19 @@ namespace CozySpringJam.Game.Services
             {
                 _backgroundSource.volume = 0f;
                 _backgroundSource.Play();
-                StartFadeBGM(_savedBackgroundMusicVolume, 1f, false);
+                StartFadeBGM(_savedBackgroundMusicVolume, 2f, false);
             }
             else
             {
                 _backgroundSource.Play();
             }
 
-            yield return new WaitForSeconds(clip.length);
+            //yield return new WaitForSeconds(clip.length);
+            yield return new WaitForSeconds(clip.length * 0.9f);
+
+            StartFadeBGM(0f, clip.length * 0.1f, false);
+
+            yield return new WaitForSeconds(clip.length * 0.1f);
         }
         
         public void StopPlaylist()

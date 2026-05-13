@@ -20,7 +20,7 @@ namespace CozySpringJam.Game.Objects
 
         private CompositeDisposable _disposables = new();
 
-        public Transform TryGetMovableTransform() => TryDetectMovableObject(Vector3.up, 2f);
+        public Transform TryGetMovableTransform() => TryDetectMovableObject(Vector3.up, 3f);
 
         private void Awake()
         {
@@ -37,7 +37,7 @@ namespace CozySpringJam.Game.Objects
 
         private Transform TryDetectMovableObject(Vector3 direction, float distance)
         {
-            var origin = transform.position - Vector3.up / 2;
+            var origin = transform.position - Vector3.up;
             Ray ray = new Ray(origin, direction.normalized);
             RaycastHit hit;
 
@@ -51,11 +51,9 @@ namespace CozySpringJam.Game.Objects
             {
                 if (hit.collider.TryGetComponent(out MovableObject movableObject))
                 {
+                    if (movableObject.IsMoving) return null;
+
                     return movableObject.transform;
-                }
-                else
-                {
-                    return null;
                 }
             }
 

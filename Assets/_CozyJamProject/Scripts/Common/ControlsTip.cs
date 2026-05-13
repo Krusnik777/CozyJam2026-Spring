@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using R3;
 using UnityEngine.UI;
+using CozySpringJam.Game.Services;
 
 namespace CozySpringJam
 {
@@ -20,7 +21,7 @@ namespace CozySpringJam
 
         public void Subscribe()
         {
-            disposable = ControlDevice.OnControlDeviceChanged.Subscribe(ChangeTipByDevice);
+            disposable = InputDeviceDetectService.CurrentControlDevice.Subscribe(ChangeTipByDevice);
         }
 
         public void Unsubscribe()
