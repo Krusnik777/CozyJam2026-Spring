@@ -7,7 +7,7 @@ Made on a three-day jam - Cozy Spring Jam 2026
   Walk through the memorable places to relive the spring moments captured in the photos. Meet an old friend to spend this beautiful spring together once again.
 
 
-### [Download](https://github.com/Krusnik777/CozyJam2026-Spring/releases/tag/1.0)
+### [Download](https://github.com/Krusnik777/CozyJam2026-Spring/releases/tag/1.1)
 
 <p align="center">
   <img width="1920" height="1080" alt="ApVJ6y" src="https://github.com/user-attachments/assets/107cbefe-1821-47e3-8038-5b4fc7596d27" />
